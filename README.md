@@ -10,6 +10,9 @@ There is substantial Linux enablement work behind these machines, particularly f
 
 The goal is to preserve as much of **stock Omarchy Quattro** as possible, contribute the Snapdragon-specific work back, and give the Omarchy team a practical basis for considering official support. This is currently an independent community effort; official Omarchy Snapdragon support has not been established.
 
+For architecture, kernel extraction, ARM packaging, testing and remaining work,
+see the [maintainer handoff](maintainer-handoff.md).
+
 ## What it installs
 
 A native ARM64 Omarchy desktop using **Arch Linux ARM userspace, Ubuntu's Snapdragon-capable kernel and firmware, and the stock-derived Quattro installer**. Quattro handles the installation flow, disk configuration, encryption, packages and user setup. This repository adds the hardware packages, early boot drivers and boot finalization needed for Snapdragon machines.
