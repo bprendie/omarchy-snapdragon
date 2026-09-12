@@ -35,6 +35,10 @@ sha256sum -c omarchy-snapdragon-v0.1.0.iso.sha256
 
 The combined v0.1.0 ISO reaches the Omarchy welcome screen in an ARM UEFI VM with zero failed services. The ThinkPad and HP confirmations come from preceding images carrying their respective fixes. A VM cannot establish ASUS hardware support or replace a physical installation test. Untested functions, including comprehensive suspend/resume and microphone/headset behavior, are not implied by a successful desktop boot.
 
+**HP NPU follow-up:** a small neural-network operation has now passed on the
+physical HP through Qualcomm's QNN HTP backend. The separately staged test
+runtime is not included in v0.1.0. See [NPU validation](docs/hp-npu-validation.md).
+
 ## Where the pieces come from
 
 | Source | Contribution to this project |
