@@ -30,7 +30,7 @@ sha256sum -c omarchy-snapdragon-v0.1.0.iso.sha256
 | Machine | Status | Known gaps |
 | --- | --- | --- |
 | Lenovo ThinkPad T14s Gen 6, Snapdragon X Elite, LCD | Physical installation, encrypted-disk unlock and Omarchy desktop confirmed; audio, Wi-Fi, Bluetooth and panel brightness work | Charging can require unplug/replug; TrackPoint workaround included, with remaining EC/button behavior unconfirmed |
-| HP EliteBook Ultra G1q 14, B13U7UT#ABA | Physical installation, graphical disk unlock and desktop confirmed; Wi-Fi, Bluetooth, touchpad, speaker audio and brightness widget work | Fn/media keys and keyboard backlight; one unexplained reset during keyboard investigation |
+| HP EliteBook Ultra G1q 14, B13U7UT#ABA | Physical installation, graphical disk unlock and desktop confirmed; Wi-Fi, Bluetooth, touchpad, speaker audio and brightness widget work; **NPU validated with a QNN HTP workload** (separate test runtime) | Fn/media keys and keyboard backlight; one unexplained reset during keyboard investigation |
 | ASUS Zenbook A14 UX3407RA, Snapdragon X Elite | Firmware and early OLED driver included; package and boot checks pass in an ARM VM | **No physical hardware test yet**; UX3407QA is outside this profile |
 
 The combined v0.1.0 ISO reaches the Omarchy welcome screen in an ARM UEFI VM with zero failed services. The ThinkPad and HP confirmations come from preceding images carrying their respective fixes. A VM cannot establish ASUS hardware support or replace a physical installation test. Untested functions, including comprehensive suspend/resume and microphone/headset behavior, are not implied by a successful desktop boot.
