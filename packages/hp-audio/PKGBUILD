@@ -1,0 +1,20 @@
+pkgname=oma-snap-audio-hp
+pkgver=0.1.0
+pkgrel=1
+pkgdesc='HP EliteBook Ultra G1q AudioReach topology and ALSA profile mapping'
+arch=('any')
+url='https://github.com/linux-msm/audioreach-topology'
+license=('BSD-3-Clause')
+depends=('alsa-ucm-conf' 'oma-snap-kernel-ubuntu=7.0.0.31.31-1')
+options=('!strip' '!debug')
+package() {
+  local name=X1E80100-HP-ELITEBOOK-ULTRA-G1Q
+  install -Dm644 "$startdir/$name-tplg.bin" \
+    "$pkgdir/usr/lib/firmware/7.0.0-31-generic/qcom/x1e80100/$name-tplg.bin"
+  local ucm="$pkgdir/usr/share/alsa/ucm2/conf.d/x1e80100"
+  install -dm755 "$ucm"
+  ln -s ../../Qualcomm/x1e80100/LENOVO-T14s.conf "$ucm/HP-HPEliteBookUltraG1q14inchNotebookAIPC-ConfigID-8CBE.conf"
+  ln -s ../../Qualcomm/x1e80100/LENOVO-T14s.conf "$ucm/$name.conf"
+  install -Dm644 "$startdir/LICENSE.BSD-3-Clause" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -Dm644 "$startdir/PROVENANCE.txt" "$pkgdir/usr/share/doc/$pkgname/PROVENANCE.txt"
+}

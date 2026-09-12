@@ -1,0 +1,25 @@
+#!/bin/bash
+# Build-time hook: include DT-probed Qualcomm prerequisites without HP autodetect.
+build() {
+  local tree
+  for tree in clk/qcom pinctrl/qcom soc/qcom regulator interconnect/qcom phy/qualcomm usb/dwc3 i2c/busses spmi remoteproc rpmsg power/domain/qcom; do
+    add_all_modules "/drivers/$tree/"
+  done
+  # DT links do not create module dependencies on msm. Include the LCD chain.
+  add_module panel_edp
+  # ASUS UX3407RA OLED panel must bind before encrypted-root unlock.
+  add_module panel_samsung_atna33xc20
+  add_module pwm_bl
+  add_module leds_qcom_lpg
+  # Display probe also waits for the GPU fuse and external DP bridge graph.
+  # SMEM/ADSP supplies the HPD bridge through PMIC GLINK before root unlock.
+  for module in nvmem_qfprom nvmem_qcom_spmi_sdam qcom_hwspinlock qrtr_smd ps883x gpio_shared_proxy reset_gpio display_connector simple_bridge; do
+    add_module "$module"
+  done
+  # HP EliteBook/Omnibook USB-C SBU routing gates the shared display graph.
+  add_module gpio_sbu_mux
+  add_full_dir /usr/lib/firmware/7.0.0-31-generic
+}
+help() {
+  echo 'Include Qualcomm platform modules and the versioned Ubuntu firmware set.'
+}

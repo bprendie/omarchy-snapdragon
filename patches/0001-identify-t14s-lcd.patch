@@ -1,0 +1,46 @@
+diff --git i/bin/omarchy-hw-platform w/bin/omarchy-hw-platform
+index 0d0c8dd..f915761 100755
+--- i/bin/omarchy-hw-platform
++++ w/bin/omarchy-hw-platform
+@@ -1,6 +1,6 @@
+ #!/bin/bash
+ 
+-# omarchy:summary=Print the hardware platform Omarchy is running on (apple-silicon, raspberry-pi-5, raspberry-pi, generic-aarch64 or x86_64).
++# omarchy:summary=Print the hardware platform Omarchy is running on.
+ # omarchy:examples=omarchy hw platform
+ 
+ # Detection reads the flattened device tree, which is where every aarch64
+@@ -23,6 +23,10 @@ model=""
+ [[ -r $devicetree/model ]] && model=$(tr -d '\0' <"$devicetree/model")
+ 
+ case "$compatible " in
++  *"lenovo,thinkpad-t14s-lcd "*)
++    echo "snapdragon-t14s-lcd"
++    exit 0
++    ;;
+   *"apple,arm-platform "*)
+     echo "apple-silicon"
+     exit 0
+diff --git i/install.sh w/install.sh
+index 97ffdb2..f3c0f34 100755
+--- i/install.sh
++++ w/install.sh
+@@ -59,7 +59,7 @@ Options:
+   --link             Point the target at this checkout with a symlink instead
+                      of copying it, for working on the fork itself
+   --profile NAME     Override hardware detection: apple-silicon,
+-                     raspberry-pi-5, raspberry-pi or generic-aarch64
++                     raspberry-pi-5, raspberry-pi, snapdragon-t14s-lcd or generic-aarch64
+   -h, --help         Show this message
+ USAGE
+ }
+@@ -190,6 +190,9 @@ else
+ fi
+ 
+ case "$platform" in
++  snapdragon-t14s-lcd)
++    ok "Platform: Snapdragon ThinkPad T14s LCD (oma_snap hardware bridge)"
++    ;;
+   apple-silicon)
+     ok "Platform: Apple Silicon Mac (Asahi)"
+     ;;

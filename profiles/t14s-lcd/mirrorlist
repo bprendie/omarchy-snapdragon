@@ -1,0 +1,2 @@
+# Repository payload signatures are mandatory in pacman.conf.
+Server = http://mirror.archlinuxarm.org/$arch/$repo

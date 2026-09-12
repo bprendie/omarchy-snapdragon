@@ -1,0 +1,7 @@
+# Explicit MVP differences from stock Quattro. Do not silently omit more packages.
+obsidian # Not available in selected ARM repositories; optional app packaging remains to resolve
+asdcontrol # Apple Studio Display hardware helper
+dotnet-runtime # Not available in selected ARM repositories; optional application runtime
+pinta # Not available in selected ARM repositories; optional image editor
+obs-studio # Not available in selected ARM repositories; optional recording application
+qemu-user-static-binfmt # Not available under this name; cross-architecture execution is not required by this laptop profile

@@ -1,0 +1,33 @@
+# Local build trees, downloads, source checkouts, and private target data.
+/build/
+/dist/
+/downloads/
+/sources/
+/private/
+
+# Generated disk images and VM state. Keep the root release ISO uploadable.
+*.iso
+*.img
+*.qcow
+*.qcow2
+*.vdi
+*.vmdk
+*.vhd
+*.vhdx
+*.nvram
+/vm/
+/vms/
+!/omarchy-snapdragon-v*.iso
+
+# Internal instructions, planning, and session checkpoints (retained locally).
+/btw.md
+/directive.md
+/weazl_ethos.md
+/weazl_skill.md
+/AGENTS.md
+/docs/boot-design.md
+/docs/checkpoint-*.md
+/docs/cleanup-*.md
+/docs/resume.md
+/docs/status.md
+/docs/upstream-support-roadmap.md

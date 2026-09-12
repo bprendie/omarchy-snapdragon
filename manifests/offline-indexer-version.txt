@@ -1,0 +1,6 @@
+repo-add (pacman) 7.1.0
+
+Copyright (c) 2006-2025 Pacman Development Team <pacman-dev@lists.archlinux.org>.
+
+This is free software; see the source for copying conditions.
+There is NO WARRANTY, to the extent permitted by law.

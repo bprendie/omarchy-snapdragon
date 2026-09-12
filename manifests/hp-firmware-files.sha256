@@ -1,0 +1,5 @@
+b11504cd6d202a605783be9689dc71469a606f5eddd4a2faec10c2025bb7fb15  build/hp-firmware-audit/extracted/src/Driver/qcdx8380/qcdxkmsuc8380.mbn
+ada5b3a4c5647b2d3abc4d47205b9e7eaec795c2658a8d63ba406c87acba7f43  build/hp-firmware-audit/extracted/src/Driver/1ADSP_7700_0711_hamoa/qcadsp8380.mbn
+4fdd33cc2d8b3640e7c7e80b4de62ac2ca7fadff82062430555889f24816877a  build/hp-firmware-audit/extracted/src/Driver/1ADSP_7700_0711_hamoa/adsp_dtbs.elf
+4387fa1a234aacbff50f8a215b96536d17c4b25b6b798392e15a162e4adcd7a0  build/hp-firmware-audit/extracted/src/Driver/1qcnspmcdm_ext_cdsp8380_7800/qccdsp8380.mbn
+1e0535bd2a8adcd14d6079ffa99f6fce5c6561d4759a60f6076dcfbaa4437f8a  build/hp-firmware-audit/extracted/src/Driver/1qcnspmcdm_ext_cdsp8380_7800/cdsp_dtbs.elf

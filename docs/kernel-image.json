@@ -1,0 +1,320 @@
+{
+  "architecture": "ARM64",
+  "device_trees": [
+    {
+      "model": "Lenovo Miix 630",
+      "compatible": [
+        "lenovo,miix-630",
+        "qcom,msm8998"
+      ],
+      "sha256": "59c46756fd9e9adfa2d0fbc99692a8fef469b1a7a14c780bd5bd8473c863e324"
+    },
+    {
+      "model": "Lenovo ThinkPad T14s Gen 6 (LCD)",
+      "compatible": [
+        "lenovo,thinkpad-t14s-lcd",
+        "lenovo,thinkpad-t14s",
+        "qcom,x1e78100",
+        "qcom,x1e80100"
+      ],
+      "sha256": "a60194373192f2046a2e0a1e3f03999502a356ad030a4051f9df28c074393377"
+    },
+    {
+      "model": "Acer Swift 14 AI (SF14-11)",
+      "compatible": [
+        "acer,swift-sf14-11",
+        "lenovo,thinkpad-t14s",
+        "qcom,x1p64100",
+        "qcom,x1e80100"
+      ],
+      "sha256": "058ad021cfc7f90b1c0cd745ce846fa4184b10790fdbc81d64f0c68eea318215"
+    },
+    {
+      "model": "Qualcomm Technologies, Inc. X1E80100 CRD",
+      "compatible": [
+        "qcom,x1e80100-crd",
+        "qcom,x1e80100"
+      ],
+      "sha256": "97df67ca37726d800c1732287f5eaf764904eef9a41111729ba26b5448a4fd85"
+    },
+    {
+      "model": "HP EliteBook 6 G1q 14 inch Notebook Next Gen AI PC",
+      "compatible": [
+        "hp,elitebook-6-g1q",
+        "qcom,x1p42100"
+      ],
+      "sha256": "2cb7fecb45302f8d6d1bd86916f734590c8415fb346cf4c8b9dc99731d3f9c4e"
+    },
+    {
+      "model": "ASUS Zenbook A14 (UX3407QA)",
+      "compatible": [
+        "asus,zenbook-a14-ux3407qa-oled",
+        "asus,zenbook-a14-ux3407qa",
+        "qcom,x1p42100"
+      ],
+      "sha256": "a5c4ba4b72650cc63ee315ec69ca388328564201041cf77f6d819c4205aad215"
+    },
+    {
+      "model": "Lenovo ThinkPad T14s Gen 6 (OLED)",
+      "compatible": [
+        "lenovo,thinkpad-t14s-oled",
+        "lenovo,thinkpad-t14s",
+        "qcom,x1e78100",
+        "qcom,x1e80100"
+      ],
+      "sha256": "15bd2e4e47257905e35e3480403cea0f6467bcee256c668dcc7f6c3db9038157"
+    },
+    {
+      "model": "ASUS Zenbook A14 (UX3407RA)",
+      "compatible": [
+        "asus,zenbook-a14-ux3407ra",
+        "qcom,x1e80100"
+      ],
+      "sha256": "eb14e4d0b9f157a30d75c66d573cad52f1778b1bad58fd2805ff7239ac9929c9"
+    },
+    {
+      "model": "Lenovo ThinkPad X13s",
+      "compatible": [
+        "lenovo,thinkpad-x13s",
+        "qcom,sc8280xp"
+      ],
+      "sha256": "ddf9c6d3b1f222dcc59b471c77205c3390eaecec73c43a8d1605cb2a5664a67e"
+    },
+    {
+      "model": "Microsoft Surface Pro 11th Edition (OLED)",
+      "compatible": [
+        "microsoft,denali-oled",
+        "microsoft,denali",
+        "qcom,x1e80100"
+      ],
+      "sha256": "e33c636d84db1dcc3418ffab40ad421dd73a95908d88113cfa5df46d1b02a80b"
+    },
+    {
+      "model": "ASUS Zenbook A14 (UX3407QA, LCD)",
+      "compatible": [
+        "asus,zenbook-a14-ux3407qa-lcd",
+        "asus,zenbook-a14-ux3407qa",
+        "qcom,x1p42100"
+      ],
+      "sha256": "0ab7b90521f228c34479cacca3d4cb97e1a5b85b39ae1bc3dea27ff92d31e363"
+    },
+    {
+      "model": "Windows Dev Kit 2023",
+      "compatible": [
+        "microsoft,blackrock",
+        "qcom,sc8280xp"
+      ],
+      "sha256": "47fc3730b3aa151a6505766f3c495ec674528e8cc36764d8bead609143e329d1"
+    },
+    {
+      "model": "Acer Aspire 1",
+      "compatible": [
+        "acer,aspire1",
+        "qcom,sc7180"
+      ],
+      "sha256": "403ec33c23334c77e1428e8fcaf2bf801d7b061061293a8c1aacb5fa978ebd07"
+    },
+    {
+      "model": "Lenovo Yoga Slim 7x",
+      "compatible": [
+        "lenovo,yoga-slim7x",
+        "qcom,x1e80100"
+      ],
+      "sha256": "ed8ddf1f0ba15fe7e2cbb959c0b1043e592a2e79c3b2f5994ccad1d38d4e78ff"
+    },
+    {
+      "model": "Qualcomm Technologies, Inc. X1E001DE Snapdragon Devkit for Windows",
+      "compatible": [
+        "qcom,x1e001de-devkit",
+        "qcom,x1e001de",
+        "qcom,x1e80100"
+      ],
+      "sha256": "f93759f9513e47c63dfeb9c4bf5553447c9a27c2954a4f9b725971362395168b"
+    },
+    {
+      "model": "Lenovo Flex 5G",
+      "compatible": [
+        "lenovo,flex-5g",
+        "qcom,sc8180x"
+      ],
+      "sha256": "58f004ebc466e351506178f969220702ce32f436888df742ab76a94ca5d3c3be"
+    },
+    {
+      "model": "Medion SPRCHRGD 14 S1",
+      "compatible": [
+        "medion,sprchrgd14s1",
+        "qcom,x1e78100",
+        "qcom,x1e80100"
+      ],
+      "sha256": "810a315cb3820d225bf20774cbfd0d66fada4cfcaa87afec15e01568bd8a02ba"
+    },
+    {
+      "model": "Microsoft Surface Pro 9 5G",
+      "compatible": [
+        "microsoft,arcata",
+        "qcom,sc8280xp"
+      ],
+      "sha256": "b568e070ba977d158f61b30e7af0efd0c3f2ec9269867908549b9eaa8b1505fc"
+    },
+    {
+      "model": "Lenovo Yoga C630",
+      "compatible": [
+        "lenovo,yoga-c630",
+        "qcom,sdm845"
+      ],
+      "sha256": "890456cb703147d56732e87817539f0d47ca46fa6f542ad6f3d9c6f8943618ca"
+    },
+    {
+      "model": "Dell Inspiron 14 Plus 7441",
+      "compatible": [
+        "dell,inspiron-14-plus-7441",
+        "qcom,x1e80100"
+      ],
+      "sha256": "ee5cf998429cd52598b16d9d699ab449e26de89313fdfef722cc5c2ab1bc5263"
+    },
+    {
+      "model": "HP EliteBook Ultra G1q",
+      "compatible": [
+        "hp,elitebook-ultra-g1q",
+        "qcom,x1e80100"
+      ],
+      "sha256": "3eed336eed8332fb4c79bd7b03b00cf53d2d63a5f7160cdaa58409d471032cf6"
+    },
+    {
+      "model": "Acer Swift Go 14 AI (SFG14-01)",
+      "compatible": [
+        "acer,swift-go14-01",
+        "lenovo,thinkpad-t14s",
+        "qcom,x1p42100",
+        "qcom,x1e80100"
+      ],
+      "sha256": "1e70c3301f398d8a02b50e2ba8c856093108276f8dc4137a4624ae4a15790052"
+    },
+    {
+      "model": "Microsoft Surface Laptop 7 (13.8 inch)",
+      "compatible": [
+        "microsoft,romulus13",
+        "qcom,x1e80100"
+      ],
+      "sha256": "cd40050e40b08f70939f71f396975435407637fb7c065f7ef50a291e50343582"
+    },
+    {
+      "model": "HP Omnibook X 14-fe0",
+      "compatible": [
+        "hp,omnibook-x14",
+        "qcom,x1e80100"
+      ],
+      "sha256": "1041410ced41f3db0ffdec8676714e23586f272bbcc2ad3f919d90370cd2d763"
+    },
+    {
+      "model": "Dell XPS 13 9345",
+      "compatible": [
+        "dell,xps13-9345",
+        "qcom,x1e80100"
+      ],
+      "sha256": "c6f45220a0450b46a33f468ab731b5ecd94538b3474f8d43054c92ab4ee57359"
+    },
+    {
+      "model": "ASUS Vivobook S 15",
+      "compatible": [
+        "asus,vivobook-s15",
+        "qcom,x1e80100"
+      ],
+      "sha256": "808c00049c4354b9203d35e014e4ac5ba39b4c2c9463772babe34a0fe34b3f00"
+    },
+    {
+      "model": "HP Omnibook X 14-fe1",
+      "compatible": [
+        "hp,omnibook-x14-fe1",
+        "qcom,x1p42100"
+      ],
+      "sha256": "619fcd964c9b4328f9a3c71513ed1b9f9116a6cd2fe332d5ecd9d6459ac737fa"
+    },
+    {
+      "model": "Lenovo ThinkBook 16 Gen 7 QOY",
+      "compatible": [
+        "lenovo,thinkbook-16",
+        "qcom,x1p42100"
+      ],
+      "sha256": "769a53d0bd6ab2559bd94b135d9a4f764b61637e3284b8225affb21f4cf061fc"
+    },
+    {
+      "model": "Matebook E Go",
+      "compatible": [
+        "huawei,gaokun3",
+        "qcom,sc8280xp"
+      ],
+      "sha256": "8276b660db614b0aa82a933d7e1c87b935531bc41ef810f1b054561e40bc88e6"
+    },
+    {
+      "model": "Dell Latitude 7455",
+      "compatible": [
+        "dell,latitude-7455",
+        "qcom,x1e80100"
+      ],
+      "sha256": "d6eaf16802273f97bf1ce55d197248877fdbfd2ebdeb4cfaae7460fc039d4197"
+    },
+    {
+      "model": "ASUS Vivobook S 15 X1P-42-100",
+      "compatible": [
+        "asus,vivobook-s15-x1p4",
+        "qcom,x1p42100"
+      ],
+      "sha256": "20b674eb710ef174ca85cb35da77b8853a1962b08f958a24356028038c72529d"
+    },
+    {
+      "model": "Microsoft Surface Laptop 7 (15 inch)",
+      "compatible": [
+        "microsoft,romulus15",
+        "qcom,x1e80100"
+      ],
+      "sha256": "5c1ab9b161ce05c4eb6e176cb4c0ef99e30c1439de9d3996bbd6c89cf5f23adc"
+    }
+  ],
+  "hwid_matching": "not validated on target",
+  "image": "../../build/ubuntu-casper/vmlinuz",
+  "sections": [
+    ".text",
+    ".rodata",
+    ".data",
+    ".reloc",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".dtbauto",
+    ".hwids",
+    ".uname",
+    ".linux",
+    ".sbat"
+  ],
+  "signature_validation": "not performed by this tool",
+  "t14s_lcd_embedded": true
+}

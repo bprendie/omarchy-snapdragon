@@ -1,0 +1,15 @@
+[Unit]
+Description=Save HP live diagnostics to the boot USB
+ConditionKernelCommandLine=oma_snap_diag=1
+After=local-fs.target NetworkManager.service
+Wants=NetworkManager.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/oma-snap-hp-diag
+TimeoutStartSec=6min
+StandardOutput=journal+console
+StandardError=journal+console
+
+[Install]
+WantedBy=multi-user.target

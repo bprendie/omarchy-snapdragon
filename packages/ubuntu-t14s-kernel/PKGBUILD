@@ -1,0 +1,22 @@
+# Inputs are extracted from authenticated, pinned Ubuntu ARM64 update packages.
+pkgname=oma-snap-kernel-ubuntu
+pkgver=7.0.0.31.31
+pkgrel=1
+pkgdesc='Ubuntu ARM64 kernel and matching modules, isolated oma_snap prototype'
+arch=('aarch64')
+url='https://cdimage.ubuntu.com/releases/26.04/release/'
+license=('GPL-2.0-only')
+depends=('kmod')
+options=('!strip' '!debug')
+_kernel_release=7.0.0-31-generic
+package() {
+  local input=/output/ubuntu-kernel-7.0.0-31
+  install -Dm644 "$input/boot/vmlinuz-$_kernel_release" "$pkgdir/usr/lib/oma-snap/$_kernel_release/vmlinuz.efi"
+  install -Dm644 "$input/boot/config-$_kernel_release" "$pkgdir/usr/lib/oma-snap/$_kernel_release/config"
+  install -Dm644 "$input/boot/System.map-$_kernel_release" "$pkgdir/usr/lib/oma-snap/$_kernel_release/System.map"
+  mkdir -p "$pkgdir/usr/lib/modules"
+  cp -a "$input/usr/lib/modules/$_kernel_release" "$pkgdir/usr/lib/modules/"
+  ln -s "../../oma-snap/$_kernel_release/vmlinuz.efi" "$pkgdir/usr/lib/modules/$_kernel_release/vmlinuz"
+  # These point into Ubuntu's headers; this package does not provide a build tree.
+  rm -f "$pkgdir/usr/lib/modules/$_kernel_release/build" "$pkgdir/usr/lib/modules/$_kernel_release/source"
+}

@@ -1,0 +1,426 @@
+diff --git i/bin/omarchy-provision-first-run w/bin/omarchy-provision-first-run
+index 11c2eb8..0ecf1cc 100755
+--- i/bin/omarchy-provision-first-run
++++ w/bin/omarchy-provision-first-run
+@@ -81,8 +81,7 @@ run_first_run_step "set GNOME theme" \
+   bash "$OMARCHY_PATH/install/user/first-run/gnome-theme.sh"
+ run_first_run_step "set GTK primary paste" \
+   bash "$OMARCHY_PATH/install/user/first-run/gtk-primary-paste.sh"
+-run_first_run_step "apply speaker tuning" \
+-  bash "$OMARCHY_PATH/install/user/first-run/audio-tuning.sh"
++# T14s speaker tuning awaits validation against the working Ubuntu baseline.
+ 
+ omarchy-notification-wait || log_first_run "Timed out waiting for notification service; continuing"
+ # Each send returns only once the server has taken the toast, so sending in
+diff --git i/bin/omarchy-snapshot w/bin/omarchy-snapshot
+index 34ac5cd..c884d61 100755
+--- i/bin/omarchy-snapshot
++++ w/bin/omarchy-snapshot
+@@ -41,9 +41,17 @@ create)
+     sudo snapper -c "$config" cleanup number
+   done
+ 
+-  echo "Snapshots can be selected during boot."
++  if omarchy-cmd-present oma-snap-boot-install; then
++    echo "Snapshot created. Automatic boot selection and restore are not supported by this Snapdragon MVP boot profile."
++  else
++    echo "Snapshots can be selected during boot."
++  fi
+   ;;
+ restore)
++  if omarchy-cmd-present oma-snap-boot-install; then
++    echo "Snapshot restore is not supported by this Snapdragon MVP boot profile. Use the installer USB and recovery instructions." >&2
++    exit 1
++  fi
+   sudo limine-snapper-restore
+   ;;
+ esac
+diff --git i/bin/omarchy-system-factory-reset w/bin/omarchy-system-factory-reset
+index 51eca40..4e38ce7 100755
+--- i/bin/omarchy-system-factory-reset
++++ w/bin/omarchy-system-factory-reset
+@@ -28,6 +28,11 @@
+ 
+ set -euo pipefail
+ 
++if omarchy-cmd-present oma-snap-boot-install; then
++  echo "Factory reset is not supported by this Snapdragon MVP boot profile. Use the installer USB and recovery instructions." >&2
++  exit 1
++fi
++
+ PROVISIONING_DIR=/var/lib/omarchy/provisioning
+ OMARCHY_PATH="${OMARCHY_PATH:-/usr/share/omarchy}"
+ TOP_MNT=/run/omarchy-system-factory-reset/top
+diff --git i/bin/omarchy-update-keyring w/bin/omarchy-update-keyring
+index d561e22..708f897 100755
+--- i/bin/omarchy-update-keyring
++++ w/bin/omarchy-update-keyring
+@@ -3,6 +3,8 @@
+ # omarchy:summary=Ensure the Omarchy and Arch keyring packages are installed and populated
+ # omarchy:requires-sudo=true
+
++set -e
++
+ if omarchy-pkg-missing omarchy-keyring || ! sudo pacman-key --list-keys 40DFB630FF42BCFFB047046CF0134EE680CAC571 &>/dev/null; then
+   sudo pacman-key --recv-keys 40DFB630FF42BCFFB047046CF0134EE680CAC571 --keyserver keys.openpgp.org
+   sudo pacman-key --lsign-key 40DFB630FF42BCFFB047046CF0134EE680CAC571
+@@ -19,4 +21,8 @@ fi
+ # Always reinstall, as the keyring can be updated without a package version bump.
+ echo -e "\e[32m\nUpdate Arch signing keys\e[0m"
+ sudo pacman -Sy --noconfirm archlinux-keyring >/dev/null 2> >(grep -vE '^warning: archlinux-keyring-[^ ]+ is up to date -- reinstalling$' >&2)
++if [[ $(uname -m) == "aarch64" ]]; then
++  sudo pacman -S --noconfirm archlinuxarm-keyring
++  sudo pacman-key --populate archlinuxarm
++fi
+ echo "Keys are correct"
+diff --git i/default/pacman/mirrorlist-edge w/default/pacman/mirrorlist-edge
+index 914c1fa..b69cb1c 100644
+--- i/default/pacman/mirrorlist-edge
++++ w/default/pacman/mirrorlist-edge
+@@ -1 +1,2 @@
+-Server = https://mirror.omarchy.org/$repo/os/$arch
++# Repository payload signatures are mandatory in pacman.conf.
++Server = http://mirror.archlinuxarm.org/$arch/$repo
+diff --git i/default/pacman/mirrorlist-rc w/default/pacman/mirrorlist-rc
+index 0692a0a..b69cb1c 100644
+--- i/default/pacman/mirrorlist-rc
++++ w/default/pacman/mirrorlist-rc
+@@ -1 +1,2 @@
+-Server = https://rc-mirror.omarchy.org/$repo/os/$arch
++# Repository payload signatures are mandatory in pacman.conf.
++Server = http://mirror.archlinuxarm.org/$arch/$repo
+diff --git i/default/pacman/mirrorlist-stable w/default/pacman/mirrorlist-stable
+index 1c2dc11..b69cb1c 100644
+--- i/default/pacman/mirrorlist-stable
++++ w/default/pacman/mirrorlist-stable
+@@ -1 +1,2 @@
+-Server = https://stable-mirror.omarchy.org/$repo/os/$arch
++# Repository payload signatures are mandatory in pacman.conf.
++Server = http://mirror.archlinuxarm.org/$arch/$repo
+diff --git i/default/pacman/pacman-edge.conf w/default/pacman/pacman-edge.conf
+index a968d26..5ec6a8d 100644
+--- i/default/pacman/pacman-edge.conf
++++ w/default/pacman/pacman-edge.conf
+@@ -1,44 +1,23 @@
+-# See the pacman.conf(5) manpage for option and repository directives
+-
+ [options]
+-Color
+-ILoveCandy
+-VerbosePkgLists
+-HoldPkg = pacman glibc
+ Architecture = auto
++HoldPkg = pacman glibc
+ CheckSpace
+ ParallelDownloads = 5
+-DownloadUser = alpm
+-
+-# By default, pacman accepts packages signed by keys that its local keyring
+-# trusts (see pacman-key and its man page), as well as unsigned packages.
+ SigLevel = Required DatabaseOptional
+ LocalFileSigLevel = Optional
++# MVP stack is held until the coordinated update/recovery path is validated.
++IgnorePkg = omarchy omarchy-settings hyprland hyprtoolkit hyprland-guiutils
+ 
+-# pacman searches repositories in the order defined here
+ [core]
+ Include = /etc/pacman.d/mirrorlist
+ 
+ [extra]
+ Include = /etc/pacman.d/mirrorlist
+ 
+-[multilib]
++[alarm]
+ Include = /etc/pacman.d/mirrorlist
+ 
+ [omarchy]
++Usage = Sync Search Install
++SigLevel = Required DatabaseOptional
+ Server = https://pkgs.omarchy.org/edge/$arch
+-
+-# Repositories for debug symbol packages.
+-#
+-# These upstream debug packages will only match core/extra/multilib packages from the Omarchy edge
+-# channel. Also note that you may not need to enable these repositories for many debugging tools --
+-# debuginfod will work fine if you're on Omarchy edge.
+-#
+-# [core-debug]
+-# Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch
+-#
+-# [extra-debug]
+-# Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch
+-#
+-# [multilib-debug]
+-# Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch
+diff --git i/default/pacman/pacman-rc.conf w/default/pacman/pacman-rc.conf
+index 66ad3fb..5ec6a8d 100644
+--- i/default/pacman/pacman-rc.conf
++++ w/default/pacman/pacman-rc.conf
+@@ -1,29 +1,23 @@
+-# See the pacman.conf(5) manpage for option and repository directives
+-
+ [options]
+-Color
+-ILoveCandy
+-VerbosePkgLists
+-HoldPkg = pacman glibc
+ Architecture = auto
++HoldPkg = pacman glibc
+ CheckSpace
+ ParallelDownloads = 5
+-DownloadUser = alpm
+-
+-# By default, pacman accepts packages signed by keys that its local keyring
+-# trusts (see pacman-key and its man page), as well as unsigned packages.
+ SigLevel = Required DatabaseOptional
+ LocalFileSigLevel = Optional
++# MVP stack is held until the coordinated update/recovery path is validated.
++IgnorePkg = omarchy omarchy-settings hyprland hyprtoolkit hyprland-guiutils
+ 
+-# pacman searches repositories in the order defined here
+ [core]
+ Include = /etc/pacman.d/mirrorlist
+ 
+ [extra]
+ Include = /etc/pacman.d/mirrorlist
+ 
+-[multilib]
++[alarm]
+ Include = /etc/pacman.d/mirrorlist
+ 
+ [omarchy]
+-Server = https://pkgs.omarchy.org/rc/$arch
++Usage = Sync Search Install
++SigLevel = Required DatabaseOptional
++Server = https://pkgs.omarchy.org/edge/$arch
+diff --git i/default/pacman/pacman-stable.conf w/default/pacman/pacman-stable.conf
+index 7e4b553..5ec6a8d 100644
+--- i/default/pacman/pacman-stable.conf
++++ w/default/pacman/pacman-stable.conf
+@@ -1,29 +1,23 @@
+-# See the pacman.conf(5) manpage for option and repository directives
+-
+ [options]
+-Color
+-ILoveCandy
+-VerbosePkgLists
+-HoldPkg = pacman glibc
+ Architecture = auto
++HoldPkg = pacman glibc
+ CheckSpace
+ ParallelDownloads = 5
+-DownloadUser = alpm
+-
+-# By default, pacman accepts packages signed by keys that its local keyring
+-# trusts (see pacman-key and its man page), as well as unsigned packages.
+ SigLevel = Required DatabaseOptional
+ LocalFileSigLevel = Optional
++# MVP stack is held until the coordinated update/recovery path is validated.
++IgnorePkg = omarchy omarchy-settings hyprland hyprtoolkit hyprland-guiutils
+ 
+-# pacman searches repositories in the order defined here
+ [core]
+ Include = /etc/pacman.d/mirrorlist
+ 
+ [extra]
+ Include = /etc/pacman.d/mirrorlist
+ 
+-[multilib]
++[alarm]
+ Include = /etc/pacman.d/mirrorlist
+ 
+ [omarchy]
+-Server = https://pkgs.omarchy.org/stable/$arch
++Usage = Sync Search Install
++SigLevel = Required DatabaseOptional
++Server = https://pkgs.omarchy.org/edge/$arch
+diff --git i/install/hardware/all.sh w/install/hardware/all.sh
+index d17cf2d..c5d5e3e 100644
+--- i/install/hardware/all.sh
++++ w/install/hardware/all.sh
+@@ -42,5 +42,5 @@ run_logged "$OMARCHY_INSTALL/hardware/fix-bcm43xx.sh"
+ run_logged "$OMARCHY_INSTALL/hardware/fix-surface-keyboard.sh"
+ run_logged "$OMARCHY_INSTALL/hardware/fix-yt6801-ethernet-adapter.sh"
+ run_logged "$OMARCHY_INSTALL/hardware/fix-tuxedo-backlight.sh"
+-run_logged "$OMARCHY_INSTALL/hardware/speaker-tuning.sh"
++# Speaker tuning is deferred until the T14s audio baseline is verified.
+ run_logged "$OMARCHY_INSTALL/hardware/pacman.sh"
+diff --git i/install/omarchy-base.packages w/install/omarchy-base.packages
+index c5013ba..9afefc0 100644
+--- i/install/omarchy-base.packages
++++ w/install/omarchy-base.packages
+@@ -1,9 +1,5 @@
+-# Omarchy core package list pacstrapped by the ISO.
+-# The ISO builder also reads this file when constructing the offline mirror.
+-
+ aether
+ alsa-utils
+-asdcontrol
+ avahi
+ bash-completion
+ bat
+@@ -24,7 +20,6 @@ docker
+ docker-buildx
+ docker-compose
+ dosfstools
+-dotnet-runtime
+ dua-cli
+ evince
+ exfatprogs
+@@ -88,16 +83,13 @@ noto-fonts
+ noto-fonts-cjk
+ noto-fonts-emoji
+ nss-mdns
+-nvim
+-obs-studio
+-obsidian
++neovim
+ omacalc
+ omacut
+ omawrite
+ omarchy-nvim
+ pacman-contrib
+ pamixer
+-pinta
+ plocate
+ plymouth
+ postgresql-libs
+@@ -105,7 +97,6 @@ power-profiles-daemon
+ python-gobject
+ python-poetry-core
+ ttfx
+-qemu-user-static-binfmt
+ qrencode
+ qt6-imageformats
+ quickshell
+@@ -148,3 +139,21 @@ yay
+ yt-dlp
+ zbar
+ zoxide
++alsa-ucm-conf
++archlinuxarm-keyring
++archinstall
++arch-install-scripts
++btrfs-progs
++cryptsetup
++efibootmgr
++grub
++hyprtoolkit
++mesa
++nodejs
++omarchy-keyring
++pipewire
++pipewire-alsa
++pipewire-pulse
++python
++snapper
++vulkan-freedreno
+diff --git i/install/user/all.sh w/install/user/all.sh
+index 39d98ea..5c77ae3 100644
+--- i/install/user/all.sh
++++ w/install/user/all.sh
+@@ -8,6 +8,7 @@ run_logged "$OMARCHY_INSTALL/user/hardware/asus/fix-audio-mixer.sh"
+ run_logged "$OMARCHY_INSTALL/user/hardware/asus/fix-mic.sh"
+ run_logged "$OMARCHY_INSTALL/user/hardware/framework/fix-f13-amd-audio-input.sh"
+ run_logged "$OMARCHY_INSTALL/user/hardware/dell/xps13-text-scaling.sh"
++run_logged "$OMARCHY_INSTALL/user/hardware/lenovo/t14s-trackpoint.sh"
+ run_logged "$OMARCHY_INSTALL/user/hardware/fix-nouveau-cursor.sh"
+
+ run_logged "$OMARCHY_INSTALL/user/default-keyring.sh"
+diff --git i/install/user/hardware/lenovo/t14s-trackpoint.sh w/install/user/hardware/lenovo/t14s-trackpoint.sh
+new file mode 100644
+index 0000000..e1ed1f1
+--- /dev/null
++++ w/install/user/hardware/lenovo/t14s-trackpoint.sh
+@@ -0,0 +1,24 @@
++# User-authorized workaround for this project's affected LCD ThinkPad.
++# Right/middle button transitions and the suspected EC fault remain unresolved.
++if [[ $(uname -m) == "aarch64" ]] && omarchy-hw-match '^21N10000US$'; then
++  trackpoint_config="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/input.lua"
++  if ! grep -qF -- '-- BEGIN oma-snap TrackPoint workaround' "$trackpoint_config" 2>/dev/null; then
++    mkdir -p "$(dirname "$trackpoint_config")"
++    if [[ -f $trackpoint_config && ! -e $trackpoint_config.bak.oma-snap-trackpoint ]]; then
++      cp -p "$trackpoint_config" "$trackpoint_config.bak.oma-snap-trackpoint"
++    fi
++    cat >> "$trackpoint_config" <<'LUA'
++
++-- BEGIN oma-snap TrackPoint workaround
++-- Disable stuck-button scrolling on this mouse only; touchpad is unaffected.
++-- Physical right/middle button problems remain unresolved.
++hl.device({
++  name = "hid-over-i2c-04f3:000d-mouse",
++  scroll_method = "no_scroll",
++  scroll_button_lock = false,
++})
++-- END oma-snap TrackPoint workaround
++LUA
++  fi
++  unset trackpoint_config
++fi
+diff --git i/install/user/mise-work.sh w/install/user/mise-work.sh
+index f77d556..d9d8a94 100644
+--- i/install/user/mise-work.sh
++++ w/install/user/mise-work.sh
+@@ -18,8 +18,14 @@ case ${OMARCHY_SETUP_CONTEXT:-runtime} in
+   *) NODE_PACKAGE_DIR="" ;;
+ esac
+ 
++case $(uname -m) in
++  aarch64) NODE_ARCH=arm64 ;;
++  x86_64) NODE_ARCH=x64 ;;
++  *) echo "Unsupported Node architecture: $(uname -m)" >&2; exit 1 ;;
++esac
++
+ if [[ -n $NODE_PACKAGE_DIR ]]; then
+-  NODE_TARBALL=$(find "$NODE_PACKAGE_DIR" -name "node-v*-linux-x64.tar.gz" -type f 2>/dev/null | head -n1)
++  NODE_TARBALL=$(find "$NODE_PACKAGE_DIR" -name "node-v*-linux-${NODE_ARCH}.tar.gz" -type f 2>/dev/null | head -n1)
+   if [[ -z $NODE_TARBALL ]]; then
+     if [[ ${OMARCHY_SETUP_CONTEXT:-} == "provision-owner" ]]; then
+       # A factory snapshot predating the bundled tarball may not have it staged.
+@@ -31,7 +37,7 @@ if [[ -n $NODE_PACKAGE_DIR ]]; then
+       exit 1
+     fi
+   else
+-    NODE_VERSION=$(basename "$NODE_TARBALL" | sed 's/node-v\(.*\)-linux-x64.tar.gz/\1/')
++    NODE_VERSION=$(basename "$NODE_TARBALL" | sed "s/node-v\(.*\)-linux-${NODE_ARCH}.tar.gz/\1/")
+     NODE_INSTALL_DIR="$HOME/.local/share/mise/installs/node/$NODE_VERSION"
+ 
+     mkdir -p "$NODE_INSTALL_DIR"
+diff --git i/test/shell.d/snapdragon-recovery-test.sh w/test/shell.d/snapdragon-recovery-test.sh
+new file mode 100644
+index 0000000..1cf2d06
+--- /dev/null
++++ w/test/shell.d/snapdragon-recovery-test.sh
+@@ -0,0 +1,32 @@
++#!/bin/bash
++set -euo pipefail
++source "$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)/base-test.sh"
++
++test_tmp=$(mktemp -d)
++trap 'rm -rf "$test_tmp"' EXIT
++mkdir "$test_tmp/bin"
++cat >"$test_tmp/bin/oma-snap-boot-install" <<'STUB'
++#!/bin/bash
++exit 99
++STUB
++cat >"$test_tmp/bin/snapper" <<'STUB'
++#!/bin/bash
++exit 99
++STUB
++cat >"$test_tmp/bin/sudo" <<'STUB'
++#!/bin/bash
++echo unexpected-sudo >&2
++exit 99
++STUB
++chmod +x "$test_tmp/bin/"*
++
++# Both paths must stop before escalation, prompting, or boot/disk mutations.
++for command in omarchy-system-factory-reset omarchy-snapshot; do
++  status=0
++  output=$(PATH="$test_tmp/bin:$ROOT/bin:$PATH" bash "$ROOT/bin/$command" restore 2>&1) || status=$?
++  (( status == 1 )) || fail "$command rejects unsupported recovery" "$output"
++  [[ $output == *"not supported by this Snapdragon MVP boot profile"* ]] ||
++    fail "$command explains the unsupported boot profile" "$output"
++  [[ $output != *unexpected-sudo* ]] || fail "$command stops before elevation"
++  pass "$command stops unsupported Snapdragon recovery before mutations"
++done

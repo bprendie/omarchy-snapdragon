@@ -1,0 +1,1259 @@
+[
+  {
+    "requested": "aether",
+    "package": "aether",
+    "status": "AUR recipe claim only; build unverified",
+    "reason": "packages.aur"
+  },
+  {
+    "requested": "alsa-utils",
+    "package": "alsa-utils",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.2.16-1",
+    "file": "alsa-utils-1.2.16-1-aarch64.pkg.tar.xz",
+    "sha256": "ba6875257005961276b969f12cea44ccd828841254b009d9f4a3eba4c44df9d6"
+  },
+  {
+    "requested": "asdcontrol",
+    "package": "asdcontrol",
+    "status": "excluded by local profile",
+    "reason": "Apple Studio Display helper"
+  },
+  {
+    "requested": "avahi",
+    "package": "avahi",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1:0.9rc5-1",
+    "file": "avahi-1:0.9rc5-1-aarch64.pkg.tar.xz",
+    "sha256": "cc5397663792b8a6aeeb8879d44020e21f7dc8f3889e4bcab25cb976b0033481"
+  },
+  {
+    "requested": "bash-completion",
+    "package": "bash-completion",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "2.18.0-1",
+    "file": "bash-completion-2.18.0-1-any.pkg.tar.xz",
+    "sha256": "82716e3508156d038fe80af85bb4693b6eb80e14fb3766e726d8ff689af0d593"
+  },
+  {
+    "requested": "bat",
+    "package": "bat",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.26.1-2",
+    "file": "bat-0.26.1-2-aarch64.pkg.tar.xz",
+    "sha256": "483299de3efcc27c1bac4f9593c298138e014c02c9307ead24255862733edca6"
+  },
+  {
+    "requested": "bluez",
+    "package": "bluez",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "5.87-2",
+    "file": "bluez-5.87-2-aarch64.pkg.tar.xz",
+    "sha256": "432c08e4a54eadc521b8dac10e4e4031e3fa4a4e2fd4eb4ac947ca89bc58cd40"
+  },
+  {
+    "requested": "bluez-tools",
+    "package": "bluez-tools",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.2.0-6",
+    "file": "bluez-tools-0.2.0-6-aarch64.pkg.tar.xz",
+    "sha256": "293c2a9cefc23ca18e4ef373b04f838a383af5704883f2647a85c60d7f1250ab"
+  },
+  {
+    "requested": "bluez-utils",
+    "package": "bluez-utils",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "5.87-2",
+    "file": "bluez-utils-5.87-2-aarch64.pkg.tar.xz",
+    "sha256": "87bcd79e63ad7867a5ca19fa53b7b7989efc90657ddafb67c82a6359a2429d3b"
+  },
+  {
+    "requested": "bolt",
+    "package": "bolt",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.9.11-3",
+    "file": "bolt-0.9.11-3-aarch64.pkg.tar.xz",
+    "sha256": "1ff10615a51a4b427af1599770c587dba1400e2ca0ceaecb11598f415b1d5afd"
+  },
+  {
+    "requested": "brightnessctl",
+    "package": "brightnessctl",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.5.1-3",
+    "file": "brightnessctl-0.5.1-3-aarch64.pkg.tar.xz",
+    "sha256": "f2a4f173cc826dc2917402e4ea40dac4ae0d44557dfdd6a59a2e1a45b88edb48"
+  },
+  {
+    "requested": "btop",
+    "package": "btop",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.4.7-1",
+    "file": "btop-1.4.7-1-aarch64.pkg.tar.xz",
+    "sha256": "3b936e337ddb726c2606e229bdbe77cbdd0d099f83ac88f28dc90e44edeb8007"
+  },
+  {
+    "requested": "chromium",
+    "package": "chromium",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "152.0.7977.75-1",
+    "file": "chromium-152.0.7977.75-1-aarch64.pkg.tar.xz",
+    "sha256": "d05a3af7973d60ed6bd7faa7a546f2d20dd5c006cc1ea4f7b7a28a01869249ec"
+  },
+  {
+    "requested": "clang",
+    "package": "clang",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "22.1.8-1",
+    "file": "clang-22.1.8-1-aarch64.pkg.tar.xz",
+    "sha256": "b5105c12d606bbd92d69af34d37400e3479b2ee7ff528b1bb97023271402ef3b"
+  },
+  {
+    "requested": "cliamp",
+    "package": "cliamp",
+    "status": "AUR recipe claim only; build unverified",
+    "reason": "packages.aur"
+  },
+  {
+    "requested": "cups",
+    "package": "cups",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "2:2.4.19-1",
+    "file": "cups-2:2.4.19-1-aarch64.pkg.tar.xz",
+    "sha256": "4aa838e007f88b167fba59cfe6c5d6ccf315e9ca619366c23f4d11a1d6788487"
+  },
+  {
+    "requested": "cups-browsed",
+    "package": "cups-browsed",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "2.1.1-1",
+    "file": "cups-browsed-2.1.1-1-aarch64.pkg.tar.xz",
+    "sha256": "eecaf64b09464fdc91c3abded997e225153a773e3b8ff77f7d200886012f697b"
+  },
+  {
+    "requested": "cups-filters",
+    "package": "cups-filters",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "2.0.1-3",
+    "file": "cups-filters-2.0.1-3-aarch64.pkg.tar.xz",
+    "sha256": "f700e57990c2c8d7be5e4e0d2c3e1015fab980098ee32c565d2ac4ae628a89dc"
+  },
+  {
+    "requested": "cups-pdf",
+    "package": "cups-pdf",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "3.0.3-1",
+    "file": "cups-pdf-3.0.3-1-aarch64.pkg.tar.xz",
+    "sha256": "4dce4a292037662374ec5d460f894881455950896cff4ca3528dedc823b7b9b4"
+  },
+  {
+    "requested": "ddcutil",
+    "package": "ddcutil",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "2.2.7-1",
+    "file": "ddcutil-2.2.7-1-aarch64.pkg.tar.xz",
+    "sha256": "9a573713503ad9b73c4e62b177c4be9377f9d77fe4858bdccf85c35e894bd835"
+  },
+  {
+    "requested": "docker",
+    "package": "docker",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1:29.7.2-1",
+    "file": "docker-1:29.7.2-1-aarch64.pkg.tar.xz",
+    "sha256": "ac0dc6449c4a8bee07724f92f645d09bc503c8d87430faba35fe4db80190dcb4"
+  },
+  {
+    "requested": "docker-buildx",
+    "package": "docker-buildx",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.37.1-1",
+    "file": "docker-buildx-0.37.1-1-aarch64.pkg.tar.xz",
+    "sha256": "cda116e26f023d9236d2145442707e1da626f1d4ddbbc7ddcb049edc03efd131"
+  },
+  {
+    "requested": "docker-compose",
+    "package": "docker-compose",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "5.5.1-1",
+    "file": "docker-compose-5.5.1-1-aarch64.pkg.tar.xz",
+    "sha256": "b7dad8fff4c64043c5215c79a2bf6e80c151fff4a50352d87238b1fbcbdb01c5"
+  },
+  {
+    "requested": "dosfstools",
+    "package": "dosfstools",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "core",
+    "version": "4.2-5",
+    "file": "dosfstools-4.2-5-aarch64.pkg.tar.xz",
+    "sha256": "c41120c6c89469f259d5248ea2ed0a7bea19f8a38d493682f7ff82037a862c21"
+  },
+  {
+    "requested": "dotnet-runtime",
+    "package": "dotnet-runtime",
+    "status": "unresolved",
+    "reason": "packages.unavailable"
+  },
+  {
+    "requested": "dua-cli",
+    "package": "dua-cli",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "2.44.0-1",
+    "file": "dua-cli-2.44.0-1-aarch64.pkg.tar.xz",
+    "sha256": "8f0bf35921a12966db1720804168d4954bdc68fad07abdad6d5770dca3f74e24"
+  },
+  {
+    "requested": "evince",
+    "package": "evince",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1:48.4-1",
+    "file": "evince-1:48.4-1-aarch64.pkg.tar.xz",
+    "sha256": "dceac4f7fca4bdde91fb58028c2949c24acf7c155b7b471b482548b68f92d009"
+  },
+  {
+    "requested": "exfatprogs",
+    "package": "exfatprogs",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.4.3-1",
+    "file": "exfatprogs-1.4.3-1-aarch64.pkg.tar.xz",
+    "sha256": "6a7d316912d41a351c8be60f28f113c832f1ebabf59cf7ae0d7c3ae889636496"
+  },
+  {
+    "requested": "expac",
+    "package": "expac",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "10-13",
+    "file": "expac-10-13-aarch64.pkg.tar.xz",
+    "sha256": "a232c0147ae36876841bf4f2cb71fcf6ab6b7f515ed9ec6afcdf20bb82b70e74"
+  },
+  {
+    "requested": "eza",
+    "package": "eza",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.23.5-2",
+    "file": "eza-0.23.5-2-aarch64.pkg.tar.xz",
+    "sha256": "007328c2870c274b6a2124e07a71cfca80ac33006fa4edd36b3abe78b8f1516c"
+  },
+  {
+    "requested": "fakeroot",
+    "package": "fakeroot",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "core",
+    "version": "1:1.37.2-3",
+    "file": "fakeroot-1:1.37.2-3-aarch64.pkg.tar.xz",
+    "sha256": "ae7a1e0df8abd196f5d54f8206db363e3f9ad0b7157fca026729698ccf866ad0"
+  },
+  {
+    "requested": "fastfetch",
+    "package": "fastfetch",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "2.68.1-1",
+    "file": "fastfetch-2.68.1-1-aarch64.pkg.tar.xz",
+    "sha256": "96455c22d4a0f4e8d665f7b57e2cc4958f42df33f12e8f2c30727128d6a5e17b"
+  },
+  {
+    "requested": "fcitx5",
+    "package": "fcitx5",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "5.1.22-1",
+    "file": "fcitx5-5.1.22-1-aarch64.pkg.tar.xz",
+    "sha256": "7b124f02a532f03a95263a51034073f04f2c5634c4d88e70b9b95a12cb2f0f52"
+  },
+  {
+    "requested": "fcitx5-gtk",
+    "package": "fcitx5-gtk",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "5.1.7-1",
+    "file": "fcitx5-gtk-5.1.7-1-aarch64.pkg.tar.xz",
+    "sha256": "385425465f3d44fb92d46ffc522b00d96ab31bdb342f94b48a25f946fd140dab"
+  },
+  {
+    "requested": "fcitx5-qt",
+    "package": "fcitx5-qt",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "5.1.15-1",
+    "file": "fcitx5-qt-5.1.15-1-aarch64.pkg.tar.xz",
+    "sha256": "c37dc32135150f98cee65807330872ed037b4ef8823a4393217ecc6f5882e666"
+  },
+  {
+    "requested": "fd",
+    "package": "fd",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "10.5.0-3",
+    "file": "fd-10.5.0-3-aarch64.pkg.tar.xz",
+    "sha256": "2bfd85ad6f6331f5537c7afbf3ff18440e2dd71442707e2be1ec4a8bd4787d7d"
+  },
+  {
+    "requested": "ffmpegthumbnailer",
+    "package": "ffmpegthumbnailer",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "2.3.1-1",
+    "file": "ffmpegthumbnailer-2.3.1-1-aarch64.pkg.tar.xz",
+    "sha256": "1a56f501c889a02601e22bcddf726b91d748355a7a11450832e86c2f1de9d22d"
+  },
+  {
+    "requested": "fontconfig",
+    "package": "fontconfig",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "2:2.18.3-2",
+    "file": "fontconfig-2:2.18.3-2-aarch64.pkg.tar.xz",
+    "sha256": "8f3bf0609eb73b15526179357e139441bf1a9a502c3b948f0925e9b1b586129a"
+  },
+  {
+    "requested": "foot",
+    "package": "foot",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.28.0-2",
+    "file": "foot-1.28.0-2-aarch64.pkg.tar.xz",
+    "sha256": "f941e7955c4ac814e99c3f2f91179c64c9de0c8fe26e3ab341e911e8cdbd83b6"
+  },
+  {
+    "requested": "fzf",
+    "package": "fzf",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.74.3-1",
+    "file": "fzf-0.74.3-1-aarch64.pkg.tar.xz",
+    "sha256": "4807ce758ac71f403236d20bd87c6f3cf8fc36e3a0e23d18e04ae53f74a7534e"
+  },
+  {
+    "requested": "git",
+    "package": "git",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "2.55.0-1",
+    "file": "git-2.55.0-1-aarch64.pkg.tar.xz",
+    "sha256": "fb1f7b2598b96c7ce5ea41d23977243e5a67189eda1826dd7690977fd652c11a"
+  },
+  {
+    "requested": "gnome-keyring",
+    "package": "gnome-keyring",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1:50.0-1",
+    "file": "gnome-keyring-1:50.0-1-aarch64.pkg.tar.xz",
+    "sha256": "482f6af68a4cee4063041183865d538d60f1bff1b6c0c54fc20fbc407668e5c4"
+  },
+  {
+    "requested": "gnome-themes-extra",
+    "package": "gnome-themes-extra",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1:3.28-1",
+    "file": "gnome-themes-extra-1:3.28-1-any.pkg.tar.xz",
+    "sha256": "e776b2489af4ace17ba4b343b51892cfbc8babde8e03d5a569b68a0b0e65fd01"
+  },
+  {
+    "requested": "grim",
+    "package": "grim",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.5.0-2",
+    "file": "grim-1.5.0-2-aarch64.pkg.tar.xz",
+    "sha256": "d4acbdb9a4001587f6edb5f8019908cc8ea3290926862509b445b46286d24b77"
+  },
+  {
+    "requested": "gpu-screen-recorder",
+    "package": "gpu-screen-recorder",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "6.1.1-1",
+    "file": "gpu-screen-recorder-6.1.1-1-aarch64.pkg.tar.xz",
+    "sha256": "7fce966fec9c361a0c5e856e782ae68d526007c9b816842a8f9f6fcb48fb5de2"
+  },
+  {
+    "requested": "gum",
+    "package": "gum",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "2.0.1-1",
+    "file": "gum-2.0.1-1-aarch64.pkg.tar.xz",
+    "sha256": "a42dfa4555670b762c5e66fda00d32ee7903278531a07d7eede739e0c999ef57"
+  },
+  {
+    "requested": "gvfs-mtp",
+    "package": "gvfs-mtp",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.60.2-4",
+    "file": "gvfs-mtp-1.60.2-4-aarch64.pkg.tar.xz",
+    "sha256": "fe4ec9a976c572635d7c2288c5925f6e9a2998e5f70c26c044112c0e10a25e01"
+  },
+  {
+    "requested": "gvfs-nfs",
+    "package": "gvfs-nfs",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.60.2-4",
+    "file": "gvfs-nfs-1.60.2-4-aarch64.pkg.tar.xz",
+    "sha256": "842a5782d34121a3eaec5fd4a3739cb780943fb681ee666b6c68d3f59f6870f5"
+  },
+  {
+    "requested": "gvfs-smb",
+    "package": "gvfs-smb",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.60.2-4",
+    "file": "gvfs-smb-1.60.2-4-aarch64.pkg.tar.xz",
+    "sha256": "c9dff0aba98686e3040ea1f1ddabf12a541c8acfca82daea4acc4abdab936242"
+  },
+  {
+    "requested": "herdr",
+    "package": "herdr",
+    "status": "AUR recipe claim only; build unverified",
+    "reason": "packages.aur"
+  },
+  {
+    "requested": "hyprland",
+    "package": "hyprland",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.56.1-3",
+    "file": "hyprland-0.56.1-3-aarch64.pkg.tar.xz",
+    "sha256": "4fcb1b5efe019e184a85b234f75151e68fd8f60ace9b06ff59e7ffbd8a280f7a"
+  },
+  {
+    "requested": "hyprland-guiutils",
+    "package": "hyprland-guiutils",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.2.2-2",
+    "file": "hyprland-guiutils-0.2.2-2-aarch64.pkg.tar.xz",
+    "sha256": "b94b336315535e66eeaab2740f3a40e63e9f1909259601ae29119e8869aa5e8d"
+  },
+  {
+    "requested": "hyprland-preview-share-picker",
+    "package": "hyprland-preview-share-picker",
+    "status": "unresolved",
+    "reason": "packages.unavailable"
+  },
+  {
+    "requested": "hyprpicker",
+    "package": "hyprpicker",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.4.7-4",
+    "file": "hyprpicker-0.4.7-4-aarch64.pkg.tar.xz",
+    "sha256": "0a5b8792cd28e91b08f3a37a1b26ca4588c722e0e9d5250effe0f435a793bccf"
+  },
+  {
+    "requested": "hyprsunset",
+    "package": "hyprsunset",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.4.0-3",
+    "file": "hyprsunset-0.4.0-3-aarch64.pkg.tar.xz",
+    "sha256": "115707a577a76ed8b0b24e47c3dae86d85faa80c605b7708e798d3ca5b6b9067"
+  },
+  {
+    "requested": "imagemagick",
+    "package": "imagemagick",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "7.1.2.31-1",
+    "file": "imagemagick-7.1.2.31-1-aarch64.pkg.tar.xz",
+    "sha256": "ba452d38d55b18645c49a75107c83b9a6a98959dc6696deaf5d75f60b6b2d3cc"
+  },
+  {
+    "requested": "imv",
+    "package": "imv",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "5.0.1-2",
+    "file": "imv-5.0.1-2-aarch64.pkg.tar.xz",
+    "sha256": "4fa4de032dd0bc6cdce9f30db2f182fb5f6d7099a3317639153515aa003a53ee"
+  },
+  {
+    "requested": "inetutils",
+    "package": "inetutils",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "core",
+    "version": "2.8-1",
+    "file": "inetutils-2.8-1-aarch64.pkg.tar.xz",
+    "sha256": "1a9411fd81582e4ae004ea2fb813742ce9cffd0a93565645c52143b9a2777729"
+  },
+  {
+    "requested": "inotify-tools",
+    "package": "inotify-tools",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "4.25.9.0-1",
+    "file": "inotify-tools-4.25.9.0-1-aarch64.pkg.tar.xz",
+    "sha256": "9b73d4618d3e010b49d0fadcad0d1313dd5bc08552b383adf4be2f55dd3eb79b"
+  },
+  {
+    "requested": "inxi",
+    "package": "inxi",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "3.3.41.1-1",
+    "file": "inxi-3.3.41.1-1-any.pkg.tar.xz",
+    "sha256": "9e27869ad78593f9b709d45deff7213cbb21ba8e70f2e8e8b5babca588caaaf5"
+  },
+  {
+    "requested": "networkmanager",
+    "package": "networkmanager",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.58.1-1",
+    "file": "networkmanager-1.58.1-1-aarch64.pkg.tar.xz",
+    "sha256": "5f88ab112b7e2aa714ed000dd1db0fe4b972b7f91f1450ece1481bc7c3207093"
+  },
+  {
+    "requested": "jq",
+    "package": "jq",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.8.2-1",
+    "file": "jq-1.8.2-1-aarch64.pkg.tar.xz",
+    "sha256": "a785a170c28f88b03c1190bd8898c4b2f2ca97839d5b277396e86f2cb107041a"
+  },
+  {
+    "requested": "kdenlive",
+    "package": "kdenlive",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "26.08.1-1",
+    "file": "kdenlive-26.08.1-1-aarch64.pkg.tar.xz",
+    "sha256": "f1236eda095dd78b3e68eedab5015f7e4817011f1f355c90da32458fe2eb3afb"
+  },
+  {
+    "requested": "kernel-modules-hook",
+    "package": "kernel-modules-hook",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.1.7-3",
+    "file": "kernel-modules-hook-0.1.7-3-any.pkg.tar.xz",
+    "sha256": "4afbb26c3b3013d697975c842fe621a987ae5873b9cd73d4a03c33aac754d612"
+  },
+  {
+    "requested": "lazydocker",
+    "package": "lazydocker",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.25.2-1",
+    "file": "lazydocker-0.25.2-1-aarch64.pkg.tar.xz",
+    "sha256": "f40e4cb8345b0defc3ad303dce4db14a812ed2875db314d904e330268a2c87e3"
+  },
+  {
+    "requested": "lazygit",
+    "package": "lazygit",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.65.0-1",
+    "file": "lazygit-0.65.0-1-aarch64.pkg.tar.xz",
+    "sha256": "58684244c70f9d3edfa5bd300644b6e3a70044caa77276a45f52ee6366a81209"
+  },
+  {
+    "requested": "less",
+    "package": "less",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "core",
+    "version": "1:704-1",
+    "file": "less-1:704-1-aarch64.pkg.tar.xz",
+    "sha256": "77de77dcd1371ffed620da4f8d1e31bdbd90cb97a75f50eaa90666db9ccf6ccb"
+  },
+  {
+    "requested": "libsecret",
+    "package": "libsecret",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "core",
+    "version": "0.21.7-1",
+    "file": "libsecret-0.21.7-1-aarch64.pkg.tar.xz",
+    "sha256": "bef9f872678d8ecfff10723f17471dcf8c815d5efb393b8aa5a4c634bfa4c91f"
+  },
+  {
+    "requested": "libvips",
+    "package": "libvips",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "8.18.6-1",
+    "file": "libvips-8.18.6-1-aarch64.pkg.tar.xz",
+    "sha256": "3c17c935dee4f491b60248fe67110bc5ada2b5498c737139d7a7efe73cde4075"
+  },
+  {
+    "requested": "libyaml",
+    "package": "libyaml",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.2.5-3",
+    "file": "libyaml-0.2.5-3-aarch64.pkg.tar.xz",
+    "sha256": "f96d25c8898b27d3364034336630363bcf48eb968c90d5d5c240e4b237ae153b"
+  },
+  {
+    "requested": "libreoffice-fresh",
+    "package": "libreoffice-fresh",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "26.8.0-2",
+    "file": "libreoffice-fresh-26.8.0-2-aarch64.pkg.tar.xz",
+    "sha256": "ff2589e80e37ef6b05be4992ec06c35f7559dd4c914ee068c210784c86c9a516"
+  },
+  {
+    "requested": "llvm",
+    "package": "llvm",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "22.1.8-2",
+    "file": "llvm-22.1.8-2-aarch64.pkg.tar.xz",
+    "sha256": "d90cba6af18e5c67067ecf88cf9fbe8364d444bb6573caa5e907d1ea0abdac0b"
+  },
+  {
+    "requested": "localsend",
+    "package": "localsend",
+    "status": "AUR recipe claim only; build unverified",
+    "reason": "packages.aur"
+  },
+  {
+    "requested": "lua51",
+    "package": "lua51",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "5.1.5-13",
+    "file": "lua51-5.1.5-13-aarch64.pkg.tar.xz",
+    "sha256": "d0159f00c22560df847bed5a63d323031523ee5c1c8878f10ffae822178b63ed"
+  },
+  {
+    "requested": "luarocks",
+    "package": "luarocks",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "3.13.0-5",
+    "file": "luarocks-3.13.0-5-any.pkg.tar.xz",
+    "sha256": "b71b7a0b6573f165edf5ef0bffa1f50c6e5085f152e5127ca341982a34766c97"
+  },
+  {
+    "requested": "man-db",
+    "package": "man-db",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "core",
+    "version": "2.13.1-2",
+    "file": "man-db-2.13.1-2-aarch64.pkg.tar.xz",
+    "sha256": "67515751f848717e1f6d3470f57ad2ea6900ee07618fd2726b6fcaa695687e80"
+  },
+  {
+    "requested": "mariadb-libs",
+    "package": "mariadb-libs",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "12.3.3-2",
+    "file": "mariadb-libs-12.3.3-2-aarch64.pkg.tar.xz",
+    "sha256": "56527e81d38494a963509d4a2ad0fdccdc1270e96fe7d2e83fb80ba3e2671fde"
+  },
+  {
+    "requested": "mise-bin",
+    "package": "mise-bin",
+    "status": "AUR recipe claim only; build unverified",
+    "reason": "packages.aur-required"
+  },
+  {
+    "requested": "moonlight-qt",
+    "package": "moonlight-qt",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "6.1.0-7",
+    "file": "moonlight-qt-6.1.0-7-aarch64.pkg.tar.xz",
+    "sha256": "d58befe5f2f111af733d5100fbe80e69b35c2df663bb6abbc3a42c5be995a05f"
+  },
+  {
+    "requested": "mpv",
+    "package": "mpv",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1:0.41.0-6",
+    "file": "mpv-1:0.41.0-6-aarch64.pkg.tar.xz",
+    "sha256": "6c89d00736820210a3c7f32af4cf95d155191d463f9df8bd22137c45f30a554a"
+  },
+  {
+    "requested": "mpv-mpris",
+    "package": "mpv-mpris",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.2-2",
+    "file": "mpv-mpris-1.2-2-aarch64.pkg.tar.xz",
+    "sha256": "4c092688bd3f127320c78022e1b00e70e697de3d5345774e606534118c8fb6bd"
+  },
+  {
+    "requested": "nautilus",
+    "package": "nautilus",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "50.3.1-1",
+    "file": "nautilus-50.3.1-1-aarch64.pkg.tar.xz",
+    "sha256": "4ddb3764d81a0e24549405ba080e8133dbd41265cfe05774c9c0fa93fcc64462"
+  },
+  {
+    "requested": "nautilus-python",
+    "package": "nautilus-python",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "4.1.0-3",
+    "file": "nautilus-python-4.1.0-3-aarch64.pkg.tar.xz",
+    "sha256": "a482511bb6cf88206c76494c8fa3155943f49e2ad68d5ea451f5f0e536b72938"
+  },
+  {
+    "requested": "gnome-disk-utility",
+    "package": "gnome-disk-utility",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "46.1-3",
+    "file": "gnome-disk-utility-46.1-3-aarch64.pkg.tar.xz",
+    "sha256": "2b37efb6e090d5272fec8706321cdfe667ac9166c93c302a597bdf2ce4eef18b"
+  },
+  {
+    "requested": "noto-fonts",
+    "package": "noto-fonts",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1:2026.09.01-1",
+    "file": "noto-fonts-1:2026.09.01-1-any.pkg.tar.xz",
+    "sha256": "5ae4c422660ef26f5b24a02ee3bc986e5ebc592548c6d5e2ce52e7df6d3b8107"
+  },
+  {
+    "requested": "noto-fonts-cjk",
+    "package": "noto-fonts-cjk",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "20240730-1",
+    "file": "noto-fonts-cjk-20240730-1-any.pkg.tar.xz",
+    "sha256": "e708a9a6cc94a6a5b8f297b47631e839e4217100cce5a097992e533628eb8f2c"
+  },
+  {
+    "requested": "noto-fonts-emoji",
+    "package": "noto-fonts-emoji",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1:2.051-1",
+    "file": "noto-fonts-emoji-1:2.051-1-any.pkg.tar.xz",
+    "sha256": "082ff807f21b7dd55538a6b202eea32dc3fd0792ac78d908e30631cc7951e552"
+  },
+  {
+    "requested": "nss-mdns",
+    "package": "nss-mdns",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.15.1-2",
+    "file": "nss-mdns-0.15.1-2-aarch64.pkg.tar.xz",
+    "sha256": "fb16c7dd03eecd1cff88d47cf883bc2840f933f9e6d7febf35c2c8f9135ef310"
+  },
+  {
+    "requested": "nvim",
+    "package": "neovim",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.12.5-1",
+    "file": "neovim-0.12.5-1-aarch64.pkg.tar.xz",
+    "sha256": "36c33d71ce98c981e63e6c5e50c2c2f6bafb57a541184186a79817451afeca5e"
+  },
+  {
+    "requested": "obs-studio",
+    "package": "obs-studio",
+    "status": "unresolved",
+    "reason": "packages.unavailable"
+  },
+  {
+    "requested": "obsidian",
+    "package": "obsidian",
+    "status": "unresolved",
+    "reason": "packages.unavailable"
+  },
+  {
+    "requested": "omacalc",
+    "package": "omacalc",
+    "status": "unresolved",
+    "reason": "packages.unavailable"
+  },
+  {
+    "requested": "omacut",
+    "package": "omacut",
+    "status": "unresolved",
+    "reason": "packages.unavailable"
+  },
+  {
+    "requested": "omawrite",
+    "package": "omawrite",
+    "status": "unresolved",
+    "reason": "packages.unavailable"
+  },
+  {
+    "requested": "omarchy-nvim",
+    "package": "omarchy-nvim",
+    "status": "unresolved",
+    "reason": "packages.unavailable"
+  },
+  {
+    "requested": "pacman-contrib",
+    "package": "pacman-contrib",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.13.1-1",
+    "file": "pacman-contrib-1.13.1-1-aarch64.pkg.tar.xz",
+    "sha256": "7f89d02bae727950f543ec969145212b93abea947675de27280c6978cfe9b946"
+  },
+  {
+    "requested": "pamixer",
+    "package": "pamixer",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.6-3",
+    "file": "pamixer-1.6-3-aarch64.pkg.tar.xz",
+    "sha256": "b5acc44040cf7b55d32ec3be63139da11167201e544b93f570b807a486ae5486"
+  },
+  {
+    "requested": "pinta",
+    "package": "pinta",
+    "status": "unresolved",
+    "reason": "packages.unavailable"
+  },
+  {
+    "requested": "plocate",
+    "package": "plocate",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.1.25-1",
+    "file": "plocate-1.1.25-1-aarch64.pkg.tar.xz",
+    "sha256": "37e11fae8899905932d784c16607a95dcd6672de5297190dcb7d23956a220ac9"
+  },
+  {
+    "requested": "plymouth",
+    "package": "plymouth",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "26.134.222-2",
+    "file": "plymouth-26.134.222-2-aarch64.pkg.tar.xz",
+    "sha256": "f1ff469b87b1421487c77f3247b725dbc8c41ce06a604f738109755e96b72368"
+  },
+  {
+    "requested": "postgresql-libs",
+    "package": "postgresql-libs",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "18.6-1",
+    "file": "postgresql-libs-18.6-1-aarch64.pkg.tar.xz",
+    "sha256": "54540ae07449cf0ef58b97d5a4292801c89d809f3336b95db9c5c371f2bb9dff"
+  },
+  {
+    "requested": "power-profiles-daemon",
+    "package": "power-profiles-daemon",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.30-1",
+    "file": "power-profiles-daemon-0.30-1-aarch64.pkg.tar.xz",
+    "sha256": "c1fe5080a573c73ed200217bbde3e11ba115568f810e260f004476929b3c7e64"
+  },
+  {
+    "requested": "python-gobject",
+    "package": "python-gobject",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "3.56.3-1",
+    "file": "python-gobject-3.56.3-1-aarch64.pkg.tar.xz",
+    "sha256": "f6e700bdca2cbe33c4f39240a741a27dad0b965fc0f2542655280112affb79c9"
+  },
+  {
+    "requested": "python-poetry-core",
+    "package": "python-poetry-core",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "2.4.1-1",
+    "file": "python-poetry-core-2.4.1-1-any.pkg.tar.xz",
+    "sha256": "8b44ea122ded3a4bbd91b71b53b28d7dc7d60b81d18d36b85cb7d01db0c62529"
+  },
+  {
+    "requested": "ttfx",
+    "package": "ttfx",
+    "status": "unresolved",
+    "reason": "packages.unavailable"
+  },
+  {
+    "requested": "qemu-user-static-binfmt",
+    "package": "qemu-user-static-binfmt",
+    "status": "unresolved",
+    "reason": "packages.unavailable"
+  },
+  {
+    "requested": "qrencode",
+    "package": "qrencode",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "4.1.1-4",
+    "file": "qrencode-4.1.1-4-aarch64.pkg.tar.xz",
+    "sha256": "dd4fdce79fc61dd0271714c5e2cac90bc4967121556fa4af132ee835f097713a"
+  },
+  {
+    "requested": "qt6-imageformats",
+    "package": "qt6-imageformats",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "6.11.2-1",
+    "file": "qt6-imageformats-6.11.2-1-aarch64.pkg.tar.xz",
+    "sha256": "cc95e1fa8a34f402bc6158f456cdde5a4a6352500a264c918afcbef092c1bc54"
+  },
+  {
+    "requested": "quickshell",
+    "package": "quickshell",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.3.1-1",
+    "file": "quickshell-0.3.1-1-aarch64.pkg.tar.xz",
+    "sha256": "03706324819168b9a25370cd394c8442fad7230c1948f680540f11377d5e0f8a"
+  },
+  {
+    "requested": "ripgrep",
+    "package": "ripgrep",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "15.2.0-1",
+    "file": "ripgrep-15.2.0-1-aarch64.pkg.tar.xz",
+    "sha256": "458f1c725cc64502616bfeed1d795cbce4f5479321b06d4b8fd91fa3b125b628"
+  },
+  {
+    "requested": "ruby",
+    "package": "ruby",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "3.4.10-1",
+    "file": "ruby-3.4.10-1-aarch64.pkg.tar.xz",
+    "sha256": "f4dfaecadb625c52d390fcf0ddfb42c3b26c00151bf8016cc711d2973d8b5bbc"
+  },
+  {
+    "requested": "tensaku",
+    "package": "tensaku",
+    "status": "AUR recipe claim only; build unverified",
+    "reason": "packages.aur"
+  },
+  {
+    "requested": "sddm",
+    "package": "sddm",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.21.0-7",
+    "file": "sddm-0.21.0-7-aarch64.pkg.tar.xz",
+    "sha256": "637f0b1dd727a695719b3e57102a9c071ce9eaf033a0fb0bb8f850bbec7e706c"
+  },
+  {
+    "requested": "slurp",
+    "package": "slurp",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.5.0-2",
+    "file": "slurp-1.5.0-2-aarch64.pkg.tar.xz",
+    "sha256": "5e7e6703e417e21150a66bae292bf66a6b4a76a8b08e4c7ab7622fd9c26cda50"
+  },
+  {
+    "requested": "socat",
+    "package": "socat",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.8.1.3-1",
+    "file": "socat-1.8.1.3-1-aarch64.pkg.tar.xz",
+    "sha256": "04da7ec6343f3497629e3774fe8ede99b06003ec319cae01c32348d17c839747"
+  },
+  {
+    "requested": "starship",
+    "package": "starship",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.26.0-1",
+    "file": "starship-1.26.0-1-aarch64.pkg.tar.xz",
+    "sha256": "66fb3d33fe8517c67f5b8890ed09a10f321b9ff9e1cc8c833335d52422a28584"
+  },
+  {
+    "requested": "sushi",
+    "package": "sushi",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "50.0-1",
+    "file": "sushi-50.0-1-aarch64.pkg.tar.xz",
+    "sha256": "88d037c11853cee64f5fede01fe3a06dff055c553034715666a5770008f84619"
+  },
+  {
+    "requested": "system-config-printer",
+    "package": "system-config-printer",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.5.18-7",
+    "file": "system-config-printer-1.5.18-7-aarch64.pkg.tar.xz",
+    "sha256": "c99c6b8dfbcf2257cb1a362a78b46d6165cbfe8bcf968ecdea0ab0981ef87565"
+  },
+  {
+    "requested": "tesseract",
+    "package": "tesseract",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "5.5.3-1",
+    "file": "tesseract-5.5.3-1-aarch64.pkg.tar.xz",
+    "sha256": "01c5b92363e92a1110123d49f166328ea15ffc2f05aa4d6152aee078986e0770"
+  },
+  {
+    "requested": "tesseract-data-eng",
+    "package": "tesseract-data-eng",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "2:4.1.0-5",
+    "file": "tesseract-data-eng-2:4.1.0-5-any.pkg.tar.xz",
+    "sha256": "59b243e4d0400d10d1ebca4e065e2d62e8409e7ca9e29fcccf9577d42b5c23f4"
+  },
+  {
+    "requested": "tldr",
+    "package": "tldr",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "3.4.4-1",
+    "file": "tldr-3.4.4-1-any.pkg.tar.xz",
+    "sha256": "bc1015b843eaa3e750b585ca76e602796a630604ea2be2c2e38fdcb0b8a66748"
+  },
+  {
+    "requested": "tree-sitter-cli",
+    "package": "tree-sitter-cli",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.26.9-1",
+    "file": "tree-sitter-cli-0.26.9-1-aarch64.pkg.tar.xz",
+    "sha256": "757d04113b1c7713760ae0cd45ad7c30d5d8e618cda7d961a3cdec15564c5c46"
+  },
+  {
+    "requested": "tmux",
+    "package": "tmux",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "3.7_c-1",
+    "file": "tmux-3.7_c-1-aarch64.pkg.tar.xz",
+    "sha256": "9a788f36af14ad0176097a17ee27452a8b8f647cdf3e91b302473fd54d48b49a"
+  },
+  {
+    "requested": "tobi-try",
+    "package": "tobi-try",
+    "status": "unresolved",
+    "reason": "packages.unavailable"
+  },
+  {
+    "requested": "ttf-ia-writer",
+    "package": "ttf-ia-writer",
+    "status": "AUR recipe claim only; build unverified",
+    "reason": "packages.aur"
+  },
+  {
+    "requested": "ttf-jetbrains-mono-nerd-basic",
+    "package": "ttf-jetbrains-mono-nerd",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "3.5.1-2",
+    "file": "ttf-jetbrains-mono-nerd-3.5.1-2-any.pkg.tar.xz",
+    "sha256": "967fcc3690a1a71a3947de30e46a1be3f01d18250ad63f21dfde5de4d454d033"
+  },
+  {
+    "requested": "tzupdate",
+    "package": "tzupdate",
+    "status": "AUR recipe claim only; build unverified",
+    "reason": "packages.aur"
+  },
+  {
+    "requested": "udiskie",
+    "package": "udiskie",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "2.7.0-2",
+    "file": "udiskie-2.7.0-2-any.pkg.tar.xz",
+    "sha256": "d7b7d12ea1b4fab88dfe167b6d55830f5d964a318a630c4f379e1a7bf730a72c"
+  },
+  {
+    "requested": "ufw",
+    "package": "ufw",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.36.2-7",
+    "file": "ufw-0.36.2-7-any.pkg.tar.xz",
+    "sha256": "aeba6b164cf9bc6eb265e996401880156b9c4f8344881a179f2ea87b7cecc0fb"
+  },
+  {
+    "requested": "ufw-docker",
+    "package": "ufw-docker",
+    "status": "AUR recipe claim only; build unverified",
+    "reason": "packages.aur-required"
+  },
+  {
+    "requested": "unzip",
+    "package": "unzip",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "6.0-23",
+    "file": "unzip-6.0-23-aarch64.pkg.tar.xz",
+    "sha256": "edc91c7e4e400f20345439744262d1ceded104c78d940659a6b9876076ef33fc"
+  },
+  {
+    "requested": "usage",
+    "package": "usage",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "5.1.0-1",
+    "file": "usage-5.1.0-1-aarch64.pkg.tar.xz",
+    "sha256": "73a4746aa90256ae0e86a7cb6acf602b7875b4b42a71a1075f646664325158dc"
+  },
+  {
+    "requested": "uwsm",
+    "package": "uwsm",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.26.7-1",
+    "file": "uwsm-0.26.7-1-any.pkg.tar.xz",
+    "sha256": "504ae979785d9c8ea78709ae56b2ee21dfc88002ebd0e229bedc27dd19f3e598"
+  },
+  {
+    "requested": "whois",
+    "package": "whois",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "5.6.6-1",
+    "file": "whois-5.6.6-1-aarch64.pkg.tar.xz",
+    "sha256": "6adbfbba76b1f1adebcd31b94ade38db1add859dbc697cbd0a0f1a56af14ce2c"
+  },
+  {
+    "requested": "wireless-regdb",
+    "package": "wireless-regdb",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "core",
+    "version": "2026.09.03-1",
+    "file": "wireless-regdb-2026.09.03-1-any.pkg.tar.xz",
+    "sha256": "a9c4c44dc6aa478ef2b6e6d82a78934134d46df4ae7b66ba84e0cbf2ee06fd47"
+  },
+  {
+    "requested": "wireplumber",
+    "package": "wireplumber",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.5.17-1",
+    "file": "wireplumber-0.5.17-1-aarch64.pkg.tar.xz",
+    "sha256": "3a3c967723e325130aeecec1f6d26f70aa5dec0857f60da24160e560caf57383"
+  },
+  {
+    "requested": "wl-clipboard",
+    "package": "wl-clipboard",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1:2.3.0-1",
+    "file": "wl-clipboard-1:2.3.0-1-aarch64.pkg.tar.xz",
+    "sha256": "723a63b140e00085a533ebb1ec36fa9305b5e6cbd8fb80c0521fbeff77a72982"
+  },
+  {
+    "requested": "wtype",
+    "package": "wtype",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.4-2",
+    "file": "wtype-0.4-2-aarch64.pkg.tar.xz",
+    "sha256": "ceb69e175f46786e6e86d3b947eb482a150c19f3d68822b8b77b5dc02d470f79"
+  },
+  {
+    "requested": "woff2-font-awesome",
+    "package": "woff2-font-awesome",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "7.3.1-1",
+    "file": "woff2-font-awesome-7.3.1-1-any.pkg.tar.xz",
+    "sha256": "6f491cad5b344b490315ce5a0e0eb409fc7e8f0a3066f9fbb73cd67968b26e65"
+  },
+  {
+    "requested": "xdg-desktop-portal-gtk",
+    "package": "xdg-desktop-portal-gtk",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.15.3-1",
+    "file": "xdg-desktop-portal-gtk-1.15.3-1-aarch64.pkg.tar.xz",
+    "sha256": "67dc11eed1288b37ff3afdf8ed590f2ac4ec75ad3fb740f4984d93fd3c0628a7"
+  },
+  {
+    "requested": "xdg-desktop-portal-hyprland",
+    "package": "xdg-desktop-portal-hyprland",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.4.1-2",
+    "file": "xdg-desktop-portal-hyprland-1.4.1-2-aarch64.pkg.tar.xz",
+    "sha256": "afbe5116a25a58093d72f20640ad81a10140e363f7caedd300d110e9232ab006"
+  },
+  {
+    "requested": "xdg-terminal-exec",
+    "package": "xdg-terminal-exec",
+    "status": "AUR recipe claim only; build unverified",
+    "reason": "packages.aur-required"
+  },
+  {
+    "requested": "xournalpp",
+    "package": "xournalpp",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "1.3.7-1",
+    "file": "xournalpp-1.3.7-1-aarch64.pkg.tar.xz",
+    "sha256": "9e4b9315e6820afd9a7abcf62a91e3439b5b6bb06f079a67e73e30aa68d69834"
+  },
+  {
+    "requested": "yaru-icon-theme",
+    "package": "yaru-icon-theme",
+    "status": "AUR recipe claim only; build unverified",
+    "reason": "packages.aur"
+  },
+  {
+    "requested": "yay",
+    "package": "yay",
+    "status": "unresolved",
+    "reason": "packages.exclude"
+  },
+  {
+    "requested": "yt-dlp",
+    "package": "yt-dlp",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "2025.12.08-2",
+    "file": "yt-dlp-2025.12.08-2-any.pkg.tar.xz",
+    "sha256": "f966248f6e698a49cb30be5276f3dcb00e66f63e4662f6e127dbafb93ccef1b0"
+  },
+  {
+    "requested": "zbar",
+    "package": "zbar",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.23.93-7",
+    "file": "zbar-0.23.93-7-aarch64.pkg.tar.xz",
+    "sha256": "148431961613de6fe63a5dc744674cab6c829d07080fa4b0986a1f974a71f334"
+  },
+  {
+    "requested": "zoxide",
+    "package": "zoxide",
+    "status": "repository metadata (signature/build not checked by this tool)",
+    "repository": "extra",
+    "version": "0.10.0-1",
+    "file": "zoxide-0.10.0-1-aarch64.pkg.tar.xz",
+    "sha256": "fbc929938564d0973942b0144b2bcbc7bd8f9a4f5ac23bb37f039e2006469ee7"
+  }
+]

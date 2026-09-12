@@ -1,0 +1,10 @@
+AudioReach topology source: https://github.com/linux-msm/audioreach-topology
+Revision: e7b20b2b16cdda18eb8ae143c8d95c4815c0288e
+License: BSD-3-Clause (included).
+Input: X1E80100-LENOVO-Thinkpad-T14s.m4, also used by upstream for HP Omnibook X14.
+The upstream EliteBook DT inherits Omnibook audio wiring and changes the model.
+Built with m4 and alsatplg; EliteBook output name satisfies kernel31's request.
+ALSA mapping reuses the installed alsa-ucm-conf two-speaker T14s profile.
+Physical EliteBook Ultra G1q, board 8CBE: speakers audible, card and microphone
+nodes enumerate. Microphone recording and headset playback are not yet tested.
+This open-source topology is separate from proprietary HP GPU/DSP firmware.

@@ -1,0 +1,10 @@
+https://github.com/alexisraitano-myffu/omarchy-arm.git
+579f15c699dab01e2b3b12e2c4d2503873359be9
+https://github.com/ubuntu/stubble.git
+660a627a3d7c1d900c84aa24e244c319b8b58371
+https://github.com/archlinuxarm/archlinuxarm-keyring.git
+91e6b11698f8df66042d56aaa56fbe9c9263847d
+https://github.com/archlinux/archiso.git
+0270567a2914330ff236ccd7d4f40eaee7b8e708
+https://github.com/hyprwm/aquamarine.git
+a79fb21b2e2a82dd061a6d071802bcf38bd5c383

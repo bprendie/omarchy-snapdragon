@@ -1,0 +1,12 @@
+Source: https://ftp.hp.com/pub/softpaq/sp162501-163000/sp162865.exe
+Metadata: https://ftp.hp.com/pub/softpaq/sp162501-163000/sp162865.cva
+HP Qualcomm Driver Pack 7700.1 revision E pass 5, board 0x8CBE.
+Downloaded 2026-09-12; SHA-256 matches HP's HTTPS-served CVA:
+215ec14bef7090660a5e868f22e84fbeea2ee1139706a0615bfda62948417e08
+Only five device-tree-requested GPU/DSP files are packaged. No BIOS capsule,
+Windows driver executable or installer is run or installed.
+Copyright (c) 2025 HP Development Company, L.P.; vendor firmware rights remain
+with their owners. This package is a local hardware-test artifact. The upstream
+handoff should provide extraction instructions; redistribution permission for
+these vendor binaries has not been established. The CVA is provenance, not a
+redistribution license. No claim is made that this is the latest driver pack.

@@ -1,0 +1,21 @@
+pkgname=oma-snap-firmware-asus-a14
+pkgver=1.312.8100.0
+pkgrel=1
+pkgdesc='ASUS Zenbook A14 UX3407RA GPU/DSP firmware for preliminary local testing'
+arch=('any')
+url='https://www.asus.com/us/supportonly/ux3407ra/helpdesk_download/'
+license=('custom:ASUS-Qualcomm')
+depends=('oma-snap-firmware-ubuntu=20260319.217ca6e4-2')
+options=('!strip' '!debug')
+package() {
+  local input=/output/asus-a14-audit/extracted/QualcommBSP
+  local fw="$pkgdir/usr/lib/firmware/7.0.0-31-generic/qcom/x1e80100/ASUSTeK/zenbook-a14"
+  install -Dm644 "$input/qcdx8380/qcdxkmsuc8380.mbn" "$fw/qcdxkmsuc8380.mbn"
+  for name in qcadsp8380.mbn adsp_dtbs.elf; do
+    install -Dm644 "$input/qcsubsys_ext_adsp8380/$name" "$fw/$name"
+  done
+  for name in qccdsp8380.mbn cdsp_dtbs.elf; do
+    install -Dm644 "$input/qcnspmcdm_ext_cdsp8380/$name" "$fw/$name"
+  done
+  install -Dm644 "$startdir/PROVENANCE.txt" "$pkgdir/usr/share/doc/$pkgname/PROVENANCE.txt"
+}

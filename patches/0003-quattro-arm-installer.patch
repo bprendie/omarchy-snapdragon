@@ -1,0 +1,318 @@
+diff --git i/configs/airootfs/root/configurator w/configs/airootfs/root/configurator
+index 007b933..ced4576 100644
+--- i/configs/airootfs/root/configurator
++++ w/configs/airootfs/root/configurator
+@@ -8,6 +8,14 @@ OMARCHY_RUNTIME_PACKAGE="${OMARCHY_RUNTIME_PACKAGE:-omarchy}"
+ OMARCHY_SETTINGS_PACKAGE="${OMARCHY_SETTINGS_PACKAGE:-omarchy-settings}"
+ 
+ LOGO_PATH="$OMARCHY_PATH/logo.txt"
++BOOTLOADER=Limine
++ESP_PATH=/EFI/limine
++EFI_BINARY=limine_x64.efi
++if [[ $(uname -m) == aarch64 ]]; then
++  BOOTLOADER=Grub
++  ESP_PATH=/EFI/oma-snap
++  EFI_BINARY=grubaa64.efi
++fi
+ 
+ # The setup form — keyboard, account, hostname, and timezone questions, plus the
+ # rules their answers are checked against — shared verbatim with the first-boot
+@@ -412,7 +420,9 @@ to_gb() {
+ 
+ # T2 Macs need their own kernel for keyboard/wifi drivers.
+ detect_kernel() {
+-  if lspci -nn 2>/dev/null | grep -q "106b:180[12]"; then
++  if [[ $(uname -m) == aarch64 ]]; then
++    echo "oma-snap-kernel-ubuntu"
++  elif lspci -nn 2>/dev/null | grep -q "106b:180[12]"; then
+     echo "linux-t2"
+   else
+     echo "linux"
+@@ -797,15 +807,15 @@ run_partition_execute() {
+     "archinstall-language": "English",
+     "auth_config": {},
+     "audio_config": { "audio": "pipewire" },
+-    "bootloader_config": { "bootloader": "Limine", "uki": false, "removable": false },
++    "bootloader_config": { "bootloader": "$BOOTLOADER", "uki": false, "removable": false },
+     "custom_commands": [],
+     "omarchy_install": {
+         "mode": "protected",
+         "target_mount": "/mnt",
+         "boot": {
+             "esp_mount": "$esp_mount_in_target",
+-            "esp_path": "/EFI/limine",
+-            "efi_binary": "limine_x64.efi",
++            "esp_path": "$ESP_PATH",
++            "efi_binary": "$EFI_BINARY",
+             "enable_fallback": false
+         },
+         "storage": {
+@@ -1135,7 +1145,7 @@ cat <<-_EOF_ >user_configuration.json
+     "archinstall-language": "English",
+     "auth_config": {},
+     "audio_config": { "audio": "pipewire" },
+-    "bootloader_config": { "bootloader": "Limine", "uki": false, "removable": false },
++    "bootloader_config": { "bootloader": "$BOOTLOADER", "uki": false, "removable": false },
+     "custom_commands": [],
+     "omarchy_install": {
+         "mode": "full_disk",
+@@ -1143,8 +1153,8 @@ cat <<-_EOF_ >user_configuration.json
+         "target_mount": "/mnt",
+         "boot": {
+             "esp_mount": "/boot",
+-            "esp_path": "/EFI/limine",
+-            "efi_binary": "limine_x64.efi",
++            "esp_path": "$ESP_PATH",
++            "efi_binary": "$EFI_BINARY",
+             "enable_fallback": true
+         },
+         "storage": {
+diff --git i/configs/airootfs/usr/share/omarchy-iso/orchestrator/main.py w/configs/airootfs/usr/share/omarchy-iso/orchestrator/main.py
+index 9b6ebf5..c2865b1 100644
+--- i/configs/airootfs/usr/share/omarchy-iso/orchestrator/main.py
++++ w/configs/airootfs/usr/share/omarchy-iso/orchestrator/main.py
+@@ -54,7 +54,7 @@ def build_phases(ctx: InstallContext):
+         # Before finalize_limine_boot: the deferred-provisioning cryptkey drop-in and keyfile
+         # must be in place for the final UKI build.
+         ("Staging provisioning",          stage_provisioning_state),
+-        ("Finalizing Limine boot",     finalize_limine_boot),
++        ("Finalizing boot setup",      finalize_limine_boot),
+         ("Finalizing user",            run_chroot_finalizer),
+         ("Configuring login",          configure_login),
+         ("Configuring SSH access",     configure_ssh_access),
+diff --git i/configs/airootfs/usr/share/omarchy-iso/orchestrator/phases_impl.py w/configs/airootfs/usr/share/omarchy-iso/orchestrator/phases_impl.py
+index 6d48624..9dea92f 100644
+--- i/configs/airootfs/usr/share/omarchy-iso/orchestrator/phases_impl.py
++++ w/configs/airootfs/usr/share/omarchy-iso/orchestrator/phases_impl.py
+@@ -24,6 +24,7 @@ from __future__ import annotations
+ 
+ import hashlib
+ import os
++import platform
+ import re
+ import shutil
+ import subprocess
+@@ -142,7 +143,11 @@ EARLY_LUAROCKS_PACKAGES = [
+ 
+ 
+ def _early_bootstrap_packages() -> list[str]:
+-    return [*EARLY_BOOTSTRAP_BASE_PACKAGES, _omarchy_settings_package()]
++    packages = [*EARLY_BOOTSTRAP_BASE_PACKAGES, _omarchy_settings_package()]
++    if platform.machine() == "aarch64":
++        packages.remove("limine")
++        packages += ["grub", "oma-snap-boot", "archlinuxarm-keyring"]
++    return packages
+ 
+ 
+ def _early_user_seed_packages() -> list[str]:
+@@ -176,6 +181,8 @@ def _early_packages() -> list[str]:
+ # ─────────────────────────────────────────────────────────────────────────────
+ 
+ def prepare_live(ctx: InstallContext) -> None:
++    if _uses_snapdragon_boot(ctx) and ctx.defer_provisioning and ctx.encrypt:
++        raise RuntimeError("Encrypted deferred provisioning is not yet supported by the Snapdragon boot adapter; use normal owner setup")
+     if ctx.is_protected:
+         info("› protected mode: skipping whole-disk cleanup")
+     else:
+@@ -250,7 +257,7 @@ def arch_install_system(ctx: InstallContext) -> None:
+         _mount_offline_package_cache(ctx)
+         _mask_mkinitcpio_pacman_hooks(ctx)
+         try:
+-            info("› installing base system (mkinitcpio deferred to final Limine UKI build)")
++            info("› installing base system (mkinitcpio deferred to boot finalization)")
+             # An empty kb_layout makes archinstall's set_keyboard_language skip
+             # booting the target in a container just to run localectl; the
+             # keymap is configured offline right after instead.
+@@ -318,7 +325,24 @@ def arch_install_system(ctx: InstallContext) -> None:
+             installer.genfstab()
+ 
+ 
++def _uses_snapdragon_boot(ctx: InstallContext) -> bool:
++    return "oma-snap-kernel-ubuntu" in ctx.user_configuration.get("kernels", [])
++
++
+ def _configure_limine_boot(ctx: InstallContext, installer, config) -> None:
++    if _uses_snapdragon_boot(ctx):
++        if arch.is_pre_mount(config):
++            cmdline = _build_pre_mounted_cmdline(ctx, _blkid_uuid(_btrfs_root_device(ctx)))
++            _write_pre_mounted_crypttab(ctx)
++        else:
++            root = installer._get_root()
++            if root is None:
++                raise RuntimeError("Could not detect target root for Snapdragon boot")
++            cmdline = " ".join(installer._get_kernel_params(root))
++        path = ctx.target / "etc/kernel/cmdline"
++        path.parent.mkdir(parents=True, exist_ok=True)
++        path.write_text(cmdline + "\n")
++        return
+     if not arch.bootloader_enabled(config):
+         return
+     if not arch.is_limine(config):
+@@ -936,6 +960,9 @@ def configure_hibernation(ctx: InstallContext) -> None:
+     Limine UKI build still happens later in finalize_limine_boot after this
+     writes the resume hook and kernel cmdline drop-in.
+     """
++    if _uses_snapdragon_boot(ctx):
++        info("› Snapdragon hibernation setup deferred pending boot/resume validation")
++        return
+     setup = ctx.target / "usr" / "bin" / "omarchy-hibernation-setup"
+     if not setup.exists():
+         _debug_log(ctx, "skipping hibernation: /usr/bin/omarchy-hibernation-setup is not installed")
+@@ -1200,7 +1227,10 @@ def stage_provisioning_state(ctx: InstallContext) -> None:
+ 
+ 
+ def _stage_node_tarball(ctx: InstallContext, provisioning_dir) -> None:
+-    tarballs = sorted(NODE_PACKAGES_DIR.glob("node-v*-linux-x64.tar.gz"))
++    node_arch = {"aarch64": "arm64", "x86_64": "x64"}.get(platform.machine())
++    if node_arch is None:
++        raise RuntimeError(f"Unsupported Node architecture: {platform.machine()}")
++    tarballs = sorted(NODE_PACKAGES_DIR.glob(f"node-v*-linux-{node_arch}.tar.gz"))
+     if not tarballs:
+         # Hard error on every install, not just deferred-provisioning installs: the stash is what lets a
+         # later factory reset finalize the next owner offline, and an ISO
+@@ -1270,6 +1300,13 @@ def finalize_limine_boot(ctx: InstallContext) -> None:
+     """Finalize Limine after target system setup has written all dynamic
+     boot drop-ins (hibernation, hardware quirks, protected-mode ESP settings).
+     """
++    if _uses_snapdragon_boot(ctx):
++        boot = _boot_intent(ctx)
++        cmd = [str(ctx.target / "usr/bin/oma-snap-boot-install"), "--target", str(ctx.target), "--esp", boot["esp_mount"]]
++        if boot.get("enable_fallback"):
++            cmd.append("--fallback")
++        subprocess.run(cmd, check=True)
++        return
+     if not (ctx.target / "usr" / "bin" / "limine-update").exists():
+         raise RuntimeError("/usr/bin/limine-update missing in target")
+ 
+@@ -1643,6 +1680,24 @@ def _tailscale_authkey(path: Path) -> str:
+ # ─────────────────────────────────────────────────────────────────────────────
+ 
+ def validate_boot(ctx: InstallContext) -> None:
++    if _uses_snapdragon_boot(ctx):
++        boot = _boot_intent(ctx)
++        esp = ctx.target / boot["esp_mount"].lstrip("/")
++        kernels = list((ctx.target / "usr/lib/oma-snap").glob("*/vmlinuz.efi"))
++        if len(kernels) != 1 or not kernels[0].is_file():
++            raise RuntimeError("Expected exactly one packaged Snapdragon kernel")
++        release = kernels[0].parent.name
++        for name in [f"oma-snap/{release}/vmlinuz.efi", f"oma-snap/{release}/initramfs.img", "oma-snap/grub/grub.cfg", "EFI/oma-snap/grubaa64.efi"]:
++            path = esp / name
++            if not path.is_file() or path.stat().st_size == 0:
++                raise RuntimeError(f"Snapdragon boot artifact missing or empty: {path}")
++        original = ctx.target / f"usr/lib/oma-snap/{release}/vmlinuz.efi"
++        deployed = esp / f"oma-snap/{release}/vmlinuz.efi"
++        if hashlib.sha256(original.read_bytes()).digest() != hashlib.sha256(deployed.read_bytes()).digest():
++            raise RuntimeError("Installed kernel differs from the packaged Stubble image")
++        if boot.get("enable_fallback") and not (esp / "EFI/BOOT/BOOTAA64.EFI").is_file():
++            raise RuntimeError("Removable Snapdragon bootloader is missing")
++        return
+     _assert_boot_hooks_restored(ctx)
+ 
+     boot = _boot_intent(ctx)
+diff --git i/test/unit/test_provisioning_state.py w/test/unit/test_provisioning_state.py
+index 7386f00..c3481b0 100644
+--- i/test/unit/test_provisioning_state.py
++++ w/test/unit/test_provisioning_state.py
+@@ -188,6 +188,9 @@ class StageProvisioningStateTest(unittest.TestCase):
+         self.packages = Path(self.tmp.name) / "opt-packages"
+         self.packages.mkdir()
+         (self.packages / "node-v24.0.0-linux-x64.tar.gz").write_bytes(b"node")
++        machine_patch = mock.patch.object(phases_impl.platform, "machine", return_value="x86_64")
++        machine_patch.start()
++        self.addCleanup(machine_patch.stop)
+         node_patch = mock.patch.object(phases_impl, "NODE_PACKAGES_DIR", self.packages)
+         node_patch.start()
+         self.addCleanup(node_patch.stop)
+@@ -211,6 +214,19 @@ class StageProvisioningStateTest(unittest.TestCase):
+         self.assertFalse((self.provisioning_dir() / "pending").exists())
+         self.assertFalse((self.target / "etc/systemd/system/omarchy-provision-owner.service").exists())
+ 
++    def test_arm_stages_arm_node_even_when_x64_is_bundled(self):
++        (self.packages / "node-v26.8.2-linux-arm64.tar.gz").write_bytes(b"arm node")
++        with mock.patch.object(phases_impl.platform, "machine", return_value="aarch64"):
++            phases_impl.stage_provisioning_state(make_ctx(self.target, defer_provisioning=False))
++        staged = self.provisioning_dir() / "packages"
++        self.assertEqual([p.name for p in staged.iterdir()], ["node-v26.8.2-linux-arm64.tar.gz"])
++        self.assertEqual((staged / "node-v26.8.2-linux-arm64.tar.gz").read_bytes(), b"arm node")
++
++    def test_arm_rejects_an_x64_only_bundle(self):
++        with mock.patch.object(phases_impl.platform, "machine", return_value="aarch64"):
++            with self.assertRaisesRegex(RuntimeError, "no bundled Node tarball"):
++                phases_impl.stage_provisioning_state(make_ctx(self.target, defer_provisioning=False))
++
+     def test_deferred_provisioning_against_runtime_without_support_fails_clearly(self):
+         ctx = make_ctx(self.target)
+         with self.assertRaisesRegex(RuntimeError, "does not ship"):
+diff --git i/test/unit/test_snapdragon_boot.py w/test/unit/test_snapdragon_boot.py
+new file mode 100644
+index 0000000..5e18977
+--- /dev/null
++++ w/test/unit/test_snapdragon_boot.py
+@@ -0,0 +1,67 @@
++import tempfile
++import unittest
++from pathlib import Path
++from unittest import mock
++
++from .test_provisioning_state import make_ctx, phases_impl
++
++
++class SnapdragonBootTest(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory()
++        self.addCleanup(self.tmp.cleanup)
++        self.target = Path(self.tmp.name)
++        self.ctx = make_ctx(
++            self.target,
++            defer_provisioning=False,
++            is_protected=True,
++            user_configuration={"kernels": ["oma-snap-kernel-ubuntu"]},
++            omarchy_install={"boot": {"esp_mount": "/boot", "enable_fallback": False}},
++        )
++        self.kernel = "oma-snap/7.0.0-31-generic/vmlinuz.efi"
++        for name in [self.kernel, "oma-snap/7.0.0-31-generic/initramfs.img", "oma-snap/grub/grub.cfg", "EFI/oma-snap/grubaa64.efi"]:
++            path = self.target / "boot" / name
++            path.parent.mkdir(parents=True, exist_ok=True)
++            path.write_bytes(b"fixture payload")
++        original = self.target / "usr/lib" / self.kernel
++        original.parent.mkdir(parents=True, exist_ok=True)
++        original.write_bytes(b"fixture payload")
++
++    def test_preserved_esp_does_not_request_fallback_overwrite(self):
++        with mock.patch.object(phases_impl.subprocess, "run") as run:
++            phases_impl.finalize_limine_boot(self.ctx)
++        self.assertNotIn("--fallback", run.call_args.args[0])
++        self.assertEqual(run.call_args.args[0][0], str(self.target / "usr/bin/oma-snap-boot-install"))
++
++    def test_boot_payload_validation_accepts_matching_kernel(self):
++        phases_impl.validate_boot(self.ctx)
++
++    def test_modified_stubble_image_is_rejected(self):
++        (self.target / "boot" / self.kernel).write_bytes(b"modified")
++        with self.assertRaisesRegex(RuntimeError, "differs from the packaged"):
++            phases_impl.validate_boot(self.ctx)
++
++    def test_missing_packaged_kernel_is_rejected(self):
++        (self.target / "usr/lib" / self.kernel).unlink()
++        with self.assertRaisesRegex(RuntimeError, "exactly one packaged"):
++            phases_impl.validate_boot(self.ctx)
++
++    def test_ambiguous_packaged_kernels_are_rejected(self):
++        older = self.target / "usr/lib/oma-snap/7.0.0-30-generic/vmlinuz.efi"
++        older.parent.mkdir(parents=True)
++        older.write_bytes(b"older kernel")
++        with self.assertRaisesRegex(RuntimeError, "exactly one packaged"):
++            phases_impl.validate_boot(self.ctx)
++
++    def test_requested_fallback_must_exist(self):
++        self.ctx.omarchy_install["boot"]["enable_fallback"] = True
++        with self.assertRaisesRegex(RuntimeError, "Removable Snapdragon bootloader"):
++            phases_impl.validate_boot(self.ctx)
++
++    def test_unsupported_encrypted_deferred_mode_fails_before_disk_work(self):
++        self.ctx.defer_provisioning = True
++        self.ctx.encrypt = True
++        with mock.patch.object(phases_impl.subprocess, "run") as run:
++            with self.assertRaisesRegex(RuntimeError, "Encrypted deferred provisioning"):
++                phases_impl.prepare_live(self.ctx)
++            run.assert_not_called()

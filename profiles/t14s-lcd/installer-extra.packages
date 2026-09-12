@@ -1,0 +1,15 @@
+base
+base-devel
+linux-firmware
+mkinitcpio-archiso
+openssh
+sudo
+zram-generator
+iwd
+pipewire
+pipewire-alsa
+pipewire-jack
+pipewire-pulse
+gst-plugin-pipewire
+libpulse
+wireplumber

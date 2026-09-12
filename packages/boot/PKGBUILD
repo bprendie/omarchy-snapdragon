@@ -1,0 +1,13 @@
+pkgname=oma-snap-boot
+pkgver=0.1.0
+pkgrel=6
+pkgdesc='Snapdragon boot finalization for the Quattro ARM installer prototype'
+arch=('aarch64')
+license=('custom')
+depends=('grub' 'mkinitcpio' 'cryptsetup' 'plymouth' 'arch-install-scripts' 'oma-snap-kernel-ubuntu=7.0.0.31.31-1' 'oma-snap-firmware-ubuntu=20260319.217ca6e4-2')
+options=('!strip' '!debug')
+package() {
+  install -Dm755 "$startdir/oma-snap-boot-install" "$pkgdir/usr/bin/oma-snap-boot-install"
+  install -Dm644 "$startdir/mkinitcpio-installed.conf" "$pkgdir/usr/share/oma-snap/mkinitcpio-installed.conf"
+  install -Dm755 "$startdir/oma_snap_qcom" "$pkgdir/usr/lib/initcpio/install/oma_snap_qcom"
+}

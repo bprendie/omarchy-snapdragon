@@ -1,0 +1,164 @@
+{
+  "alsa_cards": {
+    "value": "0 [sofhdadsp      ]: sof-hda-dsp - sof-hda-dsp\n                      HP-HPDragonfly13.5inchG4NotebookPC-SBKPFV3-8B63"
+  },
+  "arch_packages": {
+    "value": "linux-firmware 20260810-2\nmesa 1:26.2.2-1\nalsa-ucm-conf 1.2.16.1-1\nhyprland 0.56.2-2\nquickshell 0.3.1-1"
+  },
+  "architecture": "amd64",
+  "batteries": {
+    "BAT0": {
+      "charge_full": {
+        "error": "open /sys/class/power_supply/BAT0/charge_full: no such file or directory"
+      },
+      "charge_full_design": {
+        "error": "open /sys/class/power_supply/BAT0/charge_full_design: no such file or directory"
+      },
+      "charge_now": {
+        "error": "open /sys/class/power_supply/BAT0/charge_now: no such file or directory"
+      },
+      "current_now": {
+        "error": "open /sys/class/power_supply/BAT0/current_now: no such file or directory"
+      },
+      "cycle_count": {
+        "value": "13"
+      },
+      "energy_full": {
+        "value": "67268000"
+      },
+      "energy_full_design": {
+        "value": "68426000"
+      },
+      "energy_now": {
+        "value": "46980000"
+      },
+      "power_now": {
+        "value": "9202000"
+      },
+      "status": {
+        "value": "Discharging"
+      },
+      "voltage_now": {
+        "value": "11951000"
+      }
+    }
+  },
+  "bios_date": {
+    "value": "05/05/2026"
+  },
+  "bios_version": {
+    "value": "V90 Ver. 01.12.01"
+  },
+  "device_tree_compatible": {
+    "error": "open /proc/device-tree/compatible: no such file or directory"
+  },
+  "device_tree_model": {
+    "error": "open /proc/device-tree/model: no such file or directory"
+  },
+  "display_connectors": {
+    "card1-DP-1": {
+      "modes": {},
+      "status": {
+        "value": "disconnected"
+      }
+    },
+    "card1-DP-2": {
+      "modes": {},
+      "status": {
+        "value": "disconnected"
+      }
+    },
+    "card1-DP-3": {
+      "modes": {},
+      "status": {
+        "value": "disconnected"
+      }
+    },
+    "card1-DP-4": {
+      "modes": {},
+      "status": {
+        "value": "disconnected"
+      }
+    },
+    "card1-HDMI-A-1": {
+      "modes": {},
+      "status": {
+        "value": "disconnected"
+      }
+    },
+    "card1-eDP-1": {
+      "modes": {
+        "value": "1920x1280\n1920x1280"
+      },
+      "status": {
+        "value": "connected"
+      }
+    }
+  },
+  "efi_boot": true,
+  "firmware_packages": {
+    "error": "exec: \"dpkg-query\": executable file not found in $PATH"
+  },
+  "host_class": "non-target",
+  "kernel": {
+    "value": "7.2.3-arch1-3"
+  },
+  "kernel_command_line_redacted": [
+    "cryptdevice=\u003credacted\u003e",
+    "root=\u003credacted\u003e",
+    "zswap.enabled=\u003credacted\u003e",
+    "rootflags=\u003credacted\u003e",
+    "rw",
+    "rootfstype=btrfs",
+    "rtc_cmos.use_acpi_alarm=\u003credacted\u003e",
+    "resume=\u003credacted\u003e",
+    "resume_offset=\u003credacted\u003e",
+    "initramfs_async=\u003credacted\u003e",
+    "quiet",
+    "splash",
+    "loglevel=0",
+    "systemd.show_status=\u003credacted\u003e",
+    "rd.udev.log_level=\u003credacted\u003e",
+    "vt.global_cursor_default=\u003credacted\u003e"
+  ],
+  "limitations": "No raw logs, EDID serials, boot identifiers, addresses or secrets collected. Kernel config, boot artifacts, graphics renderer, panel identity and relevant errors require separate local inspection. Target classification is provisional.",
+  "machine_type": {
+    "value": "HP Dragonfly 13.5 inch G4 Notebook PC"
+  },
+  "memory": "MemTotal:       32418516 kB",
+  "model": {
+    "value": "SBKPFV3"
+  },
+  "modules": {
+    "value": "Module                  Size  Used by\nntfs3                 344064  0\nexfat                 131072  0\nuvcvideo              188416  0\nvideobuf2_vmalloc      20480  2 uvcvideo\nuvc                    12288  1 uvcvideo\nsnd_usb_audio         626688  0\nsnd_usbmidi_lib        53248  1 snd_usb_audio\nsnd_ump                40960  1 snd_usb_audio\nsnd_rawmidi            53248  2 snd_usbmidi_lib,snd_ump\ncdc_mbim               20480  0\ncdc_wdm                36864  1 cdc_mbim\ncdc_ncm                53248  1 cdc_mbim\ncdc_ether              28672  1 cdc_ncm\nusbnet                 65536  3 cdc_mbim,cdc_ncm,cdc_ether\nr8152                 184320  0\nmii                    20480  2 usbnet,r8152\nxfs                  4403200  0\nuas                    32768  0\nusb_storage            94208  1 uas\nnf_conntrack_netlink    61440  0\nxt_nat                 12288  5\nveth                   40960  0\ntcp_diag               20480  0\ninet_diag              20480  1 tcp_diag\nxt_MASQUERADE          16384  4\nbridge                466944  0\nstp                    12288  1 bridge\nllc                    16384  2 bridge,stp\nxfrm_user              81920  1\nxfrm_algo              16384  1 xfrm_user\nxt_set                 24576  0\nip_set                 69632  1 xt_set\nnft_chain_nat          12288  7\nnf_nat                 65536  3 xt_nat,nft_chain_nat,xt_MASQUERADE\noverlay               253952  2\nccm                    24576  2\nrfcomm                110592  16\nsnd_seq_dummy          16384  0\nsnd_hrtimer            16384  1\nsnd_seq               135168  7 snd_seq_dummy\nsnd_seq_device         16384  3 snd_seq,snd_ump,snd_rawmidi\nhid_sensor_custom_intel_hinge    12288  0\nhid_sensor_gyro_3d     16384  0\nhid_sensor_rotation    20480  0\nhid_sensor_accel_3d    20480  0\nhid_sensor_als         16384  0\nhid_sensor_trigger     20480  11 hid_sensor_gyro_3d,hid_sensor_custom_intel_hinge,hid_sensor_als,hid_sensor_accel_3d,hid_sensor_rotation\nkfifo_buf              12288  1 hid_sensor_trigger\nhid_sensor_iio_common    20480  6 hid_sensor_gyro_3d,hid_sensor_trigger,hid_sensor_custom_intel_hinge,hid_sensor_als,hid_sensor_accel_3d,hid_sensor_rotation\nindustrialio          147456  7 hid_sensor_gyro_3d,hid_sensor_trigger,hid_sensor_custom_intel_hinge,kfifo_buf,hid_sensor_als,hid_sensor_accel_3d,hid_sensor_rotation\nhid_sensor_custom      28672  0\nhid_sensor_hub         32768  8 hid_sensor_gyro_3d,hid_sensor_trigger,hid_sensor_iio_common,hid_sensor_custom_intel_hinge,hid_sensor_als,hid_sensor_accel_3d,hid_sensor_rotation,hid_sensor_custom\nintel_ishtp_hid        32768  0\nqrtr                   57344  2\nalgif_hash             16384  1\nalgif_skcipher         12288  1\naf_alg                 32768  6 algif_hash,algif_skcipher\nbnep                   36864  2\nsnd_ctl_led            28672  0\nsnd_soc_skl_hda_dsp    16384  5\nsnd_sof_probes         40960  0\nsnd_soc_intel_sof_board_helpers    32768  1 snd_soc_skl_hda_dsp\nsnd_soc_intel_hda_dsp_common    16384  1 snd_soc_intel_sof_board_helpers\nsnd_hda_codec_intelhdmi    28672  1\nsnd_hda_codec_hdmi     61440  1 snd_hda_codec_intelhdmi\nsnd_hda_codec_alc269   159744  1\nsnd_hda_codec_realtek_lib    65536  1 snd_hda_codec_alc269\nsnd_hda_scodec_component    20480  1 snd_hda_codec_alc269\nsnd_hda_codec_generic   114688  2 snd_hda_codec_realtek_lib,snd_hda_codec_alc269\nsnd_soc_dmic           12288  1\nsnd_hda_intel          73728  0\nsnd_sof_pci_intel_tgl    16384  2\nsnd_sof_pci_intel_cnl    24576  1 snd_sof_pci_intel_tgl\nsnd_sof_intel_hda_generic    45056  2 snd_sof_pci_intel_tgl,snd_sof_pci_intel_cnl\nsoundwire_intel        94208  1 snd_sof_intel_hda_generic\nsnd_sof_intel_hda_sdw_bpt    24576  1 soundwire_intel\nsnd_sof_intel_hda_common   217088  4 snd_sof_intel_hda_sdw_bpt,snd_sof_intel_hda_generic,snd_sof_pci_intel_tgl,snd_sof_pci_intel_cnl\nsnd_soc_hdac_hda       24576  1 snd_sof_intel_hda_common\nsnd_sof_intel_hda_mlink    45056  4 snd_sof_intel_hda_sdw_bpt,soundwire_intel,snd_sof_intel_hda_common,snd_sof_intel_hda_generic\nsnd_sof_intel_hda      24576  2 snd_sof_intel_hda_common,snd_sof_intel_hda_generic\nsoundwire_cadence      61440  1 soundwire_intel\nsnd_sof_pci            24576  3 snd_sof_intel_hda_generic,snd_sof_pci_intel_tgl,snd_sof_pci_intel_cnl\nsnd_sof_xtensa_dsp     16384  1 snd_sof_intel_hda_generic\nsnd_sof               512000  7 snd_sof_intel_hda_sdw_bpt,snd_sof_pci,snd_sof_intel_hda_common,snd_sof_intel_hda_generic,snd_sof_probes,snd_sof_intel_hda,snd_sof_pci_intel_cnl\nsnd_sof_utils          16384  1 snd_sof\nsnd_soc_acpi_intel_match   147456  4 snd_soc_intel_sof_board_helpers,snd_sof_intel_hda_generic,snd_sof_pci_intel_tgl,snd_sof_pci_intel_cnl\nsnd_soc_acpi_intel_sdca_quirks    12288  1 snd_soc_acpi_intel_match\nsoundwire_generic_allocation    20480  1 soundwire_intel\nsnd_soc_sdw_utils     163840  1 snd_sof_intel_hda_generic\nsnd_soc_acpi           16384  2 snd_soc_acpi_intel_match,snd_sof_intel_hda_generic\nsoundwire_bus        1216512  4 soundwire_intel,snd_soc_sdw_utils,soundwire_generic_allocation,soundwire_cadence\nsnd_soc_sdca          151552  2 snd_soc_acpi_intel_sdca_quirks,soundwire_bus\ncrc8                   12288  1 soundwire_cadence\nintel_rapl_msr         24576  0\nsnd_soc_avs           266240  0\nintel_uncore_frequency    12288  0\nsnd_soc_hda_codec      28672  1 snd_soc_avs\nintel_uncore_frequency_common    16384  1 intel_uncore_frequency\nsnd_hda_ext_core       36864  7 snd_sof_intel_hda_sdw_bpt,snd_soc_avs,snd_soc_hda_codec,snd_sof_intel_hda_common,snd_soc_hdac_hda,snd_sof_intel_hda_mlink,snd_sof_intel_hda\nsnd_hda_codec         225280  12 snd_hda_codec_generic,snd_soc_avs,snd_hda_codec_hdmi,snd_soc_hda_codec,snd_hda_intel,snd_soc_intel_hda_dsp_common,snd_hda_codec_realtek_lib,snd_soc_hdac_hda,snd_hda_codec_alc269,snd_sof_intel_hda,snd_soc_skl_hda_dsp,snd_hda_codec_intelhdmi\nvfat                   28672  1\nsnd_hda_core          151552  14 snd_hda_codec_generic,snd_soc_avs,snd_hda_codec_hdmi,snd_soc_hda_codec,snd_hda_intel,snd_hda_ext_core,snd_hda_codec,snd_soc_intel_hda_dsp_common,snd_sof_intel_hda_common,snd_hda_codec_realtek_lib,snd_soc_hdac_hda,snd_hda_codec_alc269,snd_sof_intel_hda,snd_hda_codec_intelhdmi\niwlmvm                716800  0\nfat                   114688  1 vfat\nx86_pkg_temp_thermal    16384  0\nsnd_intel_dspcfg       49152  5 snd_soc_avs,snd_hda_intel,snd_sof,snd_sof_intel_hda_common,snd_sof_intel_hda_generic\nintel_powerclamp       24576  0\nsnd_intel_sdw_acpi     16384  2 snd_intel_dspcfg,snd_sof_intel_hda_generic\ncoretemp               24576  0\nsnd_hwdep              24576  2 snd_usb_audio,snd_hda_codec\nmac80211             1814528  1 iwlmvm\nmousedev               28672  0\njoydev                 24576  0\nintel_ipu6_isys       143360  3\nsnd_soc_core          454656  12 snd_soc_avs,snd_soc_hda_codec,soundwire_intel,snd_sof,snd_soc_intel_sof_board_helpers,snd_soc_sdca,snd_sof_intel_hda_common,snd_soc_sdw_utils,snd_soc_hdac_hda,snd_sof_probes,snd_soc_dmic,snd_soc_skl_hda_dsp\nvideobuf2_dma_sg       24576  1 intel_ipu6_isys\nbtusb                  86016  0\nptp                    57344  1 iwlmvm\nsnd_compress           36864  3 snd_soc_avs,snd_soc_core,snd_sof_probes\nkvm_intel             524288  0\niTCO_wdt               16384  0\nsnd_hda_scodec_cs35l41_i2c    12288  0\nsnd_hda_scodec_cs35l41_spi    12288  0\nvideobuf2_memops       16384  2 videobuf2_vmalloc,videobuf2_dma_sg\nintel_pmc_bxt          16384  1 iTCO_wdt\nac97_bus               12288  1 snd_soc_core\npps_core               32768  1 ptp\nsnd_hda_scodec_cs35l41    77824  2 snd_hda_scodec_cs35l41_i2c,snd_hda_scodec_cs35l41_spi\nvideobuf2_v4l2         45056  2 intel_ipu6_isys,uvcvideo\nbtmtk                  40960  1 btusb\nprocessor_thermal_device_pci    16384  0\nhi556                  24576  3\nsnd_pcm_dmaengine      20480  1 snd_soc_core\nmei_hdcp               28672  0\nmei_pxp                20480  0\nmei_wdt                16384  0\nhid_multitouch         40960  0\nsnd_soc_cs_amp_lib     28672  1 snd_hda_scodec_cs35l41\nvideobuf2_common       98304  6 videobuf2_vmalloc,videobuf2_v4l2,intel_ipu6_isys,uvcvideo,videobuf2_dma_sg,videobuf2_memops\niosm                  159744  0\nlibarc4                12288  1 mac80211\nprocessor_thermal_device    24576  1 processor_thermal_device_pci\ni2c_i801               40960  0\nv4l2_fwnode            36864  2 hi556,intel_ipu6_isys\nbtrtl                  32768  1 btusb\nsnd_pcm               221184  16 snd_soc_avs,snd_hda_codec_hdmi,snd_hda_intel,snd_usb_audio,snd_hda_codec,soundwire_intel,snd_sof,snd_soc_sdca,snd_sof_intel_hda_common,snd_compress,snd_sof_intel_hda_generic,snd_soc_core,snd_sof_utils,snd_hda_core,snd_pcm_dmaengine\nsnd_soc_cs35l41_lib    45056  3 snd_hda_scodec_cs35l41_i2c,snd_hda_scodec_cs35l41,snd_hda_scodec_cs35l41_spi\nnxp_nci_i2c            20480  0\nhp_bioscfg             90112  0\nkvm                  1490944  1 kvm_intel\ncs_dsp                 94208  2 snd_hda_scodec_cs35l41,snd_soc_cs_amp_lib\nsnd_timer              57344  3 snd_seq,snd_hrtimer,snd_pcm\niwlwifi               622592  1 iwlmvm\nbtbcm                  24576  1 btusb\nprocessor_thermal_wt_hint    16384  2 processor_thermal_device_pci,processor_thermal_device\nspi_nor               192512  0\nnxp_nci                12288  1 nxp_nci_i2c\nwwan                   36864  1 iosm\nintel_ish_ipc          36864  0\nsnd                   159744  35 snd_ctl_led,snd_hda_codec_generic,snd_seq,snd_seq_device,snd_hda_codec_hdmi,snd_soc_hda_codec,snd_hwdep,snd_hda_intel,snd_usb_audio,snd_usbmidi_lib,snd_hda_codec,snd_sof,snd_hda_scodec_cs35l41,snd_soc_sdca,snd_timer,snd_hda_codec_realtek_lib,snd_compress,snd_soc_sdw_utils,snd_soc_hdac_hda,snd_hda_codec_alc269,snd_soc_core,snd_ump,snd_pcm,snd_rawmidi\nv4l2_async             36864  3 v4l2_fwnode,hi556,intel_ipu6_isys\nfirmware_attributes_class    12288  1 hp_bioscfg\ni2c_smbus              20480  1 i2c_i801\nmei_me                 65536  3\nbtintel                77824  1 btusb\nplatform_temperature_control    20480  1 processor_thermal_device\nirqbypass              16384  1 kvm\nintel_skl_int3472_tps68470    24576  0\nrapl                   20480  2\nintel_cstate           20480  0\nintel_uncore          282624  0\nbluetooth            1212416  44 btrtl,btmtk,btintel,btbcm,bnep,btusb,rfcomm\nhp_wmi                 53248  0\npcspkr                 12288  0\nwmi_bmof               12288  0\nmtd                   118784  3 spi_nor\ni2c_mux                20480  1 i2c_i801\ntps68470_regulator     12288  0\nnci                    98304  2 nxp_nci,nxp_nci_i2c\ngnss                   20480  1 wwan\n8250_dw                24576  0\ncfg80211             1581056  3 iwlmvm,iwlwifi,mac80211\nsoundcore              16384  2 snd_ctl_led,snd\nmei                   217088  7 mei_wdt,mei_hdcp,mei_pxp,mei_me\nvideodev              430080  10 v4l2_async,v4l2_fwnode,hi556,videobuf2_v4l2,intel_ipu6_isys,uvcvideo\nintel_ipu6             90112  4 intel_ipu6_isys\nclk_tps68470           12288  0\nucsi_acpi              16384  0\ni2c_hid_acpi           12288  0\nnfc                   172032  2 nci,nxp_nci\nprocessor_thermal_soc_slider    16384  1 processor_thermal_device\nintel_ishtp            94208  2 intel_ishtp_hid,intel_ish_ipc\nintel_pmc_core        188416  0\nipu_bridge             24576  2 intel_ipu6,intel_ipu6_isys\nserial_multi_instantiate    20480  0\nint3403_thermal        16384  0\npmt_telemetry          16384  1 intel_pmc_core\ni2c_hid                45056  1 i2c_hid_acpi\nprocessor_thermal_rfim    28672  1 processor_thermal_device\nrfkill                 45056  10 hp_wmi,iwlmvm,nfc,bluetooth,cfg80211\ntypec_ucsi             90112  1 ucsi_acpi\npmt_discovery          20480  1 pmt_telemetry\nprocessor_thermal_rapl    20480  1 processor_thermal_device\nmc                     98304  9 v4l2_async,videodev,snd_usb_audio,hi556,videobuf2_v4l2,intel_ipu6_isys,uvcvideo,videobuf2_common\nintel_rapl_common      53248  2 intel_rapl_msr,processor_thermal_rapl\nroles                  16384  1 typec_ucsi\npmt_class              20480  2 pmt_telemetry,pmt_discovery\nintel_skl_int3472_discrete    28672  2\nint3400_thermal        24576  0\nprocessor_thermal_wt_req    12288  1 processor_thermal_device\nintel_hid              36864  0\nacpi_tad               24576  0\ntypec                 135168  1 typec_ucsi\nintel_pmc_ssram_telemetry    20480  1 intel_pmc_core\nprocessor_thermal_power_floor    12288  2 processor_thermal_device_pci,processor_thermal_device\nintel_skl_int3472_common    16384  2 intel_skl_int3472_tps68470,intel_skl_int3472_discrete\nacpi_thermal_rel       24576  1 int3400_thermal\nsparse_keymap          12288  2 hp_wmi,intel_hid\nintel_sar              12288  0\npinctrl_tigerlake      28672  15\nacpi_pad              184320  0\nintel_pmc_pwrm_telemetry    12288  1 intel_pmc_ssram_telemetry\nprocessor_thermal_mbox    12288  4 processor_thermal_power_floor,processor_thermal_wt_req,processor_thermal_rfim,processor_thermal_wt_hint\nigen6_edac             40960  0\nint340x_thermal_zone    16384  2 int3403_thermal,processor_thermal_device\nmac_hid                12288  0\nip6t_REJECT            12288  1\nnf_reject_ipv6         24576  1 ip6t_REJECT\nxt_hl                  12288  22\nip6t_rt                16384  3\nipt_REJECT             12288  1\nnf_reject_ipv4         12288  1 ipt_REJECT\nxt_LOG                 16384  12\nnf_log_syslog          24576  12\nnft_limit              16384  15\nxt_limit               12288  0\nxt_addrtype            12288  8\nxt_tcpudp              20480  60\nxt_conntrack           12288  28\nnf_conntrack          208896  5 xt_conntrack,nf_nat,xt_nat,nf_conntrack_netlink,xt_MASQUERADE\nnf_defrag_ipv6         24576  1 nf_conntrack\nnf_defrag_ipv4         12288  1 nf_conntrack\nnft_compat             20480  144\nx_tables               73728  13 xt_conntrack,nft_compat,xt_LOG,xt_tcpudp,xt_addrtype,xt_nat,ip6t_rt,xt_set,ipt_REJECT,xt_limit,xt_hl,xt_MASQUERADE,ip6t_REJECT\nnf_tables             401408  929 nft_compat,nft_chain_nat,nft_limit\nsg                     53248  0\ni2c_dev                28672  0\npkcs8_key_parser       12288  0\nntsync                 20480  0\ncrypto_user            16384  0\nacpi_call              20480  0\nzram                   73728  1\n842_decompress         20480  1 zram\n842_compress           24576  1 zram\nlz4hc_compress         20480  1 zram\ndm_crypt               65536  1\nencrypted_keys         32768  1 dm_crypt\ntrusted                45056  2 encrypted_keys,dm_crypt\nasn1_encoder           16384  1 trusted\ntee                    61440  1 trusted\ndm_mod                237568  3 dm_crypt\nxe                   4567040  0\ndrm_ttm_helper         20480  1 xe\ndrm_suballoc_helper    20480  1 xe\ngpu_sched              77824  1 xe\ndrm_gpuvm              57344  1 xe\ndrm_exec               12288  2 drm_gpuvm,xe\ndrm_gpusvm_helper      61440  1 xe\ni915                 5099520  95\nspi_pxa2xx_platform    12288  0\ndw_dmac                12288  0\nspi_pxa2xx_core        36864  1 spi_pxa2xx_platform\naesni_intel           102400  4\ndrm_buddy              12288  2 xe,i915\ni2c_algo_bit           24576  2 xe,i915\ngf128mul               12288  1 aesni_intel\nnvme                   77824  2\nttm                   151552  3 drm_ttm_helper,xe,i915\nserio_raw              20480  0\naead                   16384  5 dm_crypt,ccm,xfrm_algo,mac80211,aesni_intel\nintel_gtt              32768  1 i915\nintel_lpss_pci         28672  2\nnvme_core             294912  3 nvme\nspi_intel_pci          12288  0\nintel_lpss             12288  1 intel_lpss_pci\ndrm_display_helper    303104  2 xe,i915\nvideo                  81920  2 xe,i915\nspi_intel              40960  1 spi_intel_pci\nnvme_keyring           20480  1 nvme_core\nintel_vsec             28672  4 intel_pmc_ssram_telemetry,intel_pmc_pwrm_telemetry,pmt_telemetry,xe\nidma64                 20480  0\nnvme_auth              32768  1 nvme_core\ncec                   102400  3 drm_display_helper,xe,i915\nwmi                    40960  4 hp_wmi,video,hp_bioscfg,wmi_bmof\nthunderbolt           614400  1 typec"
+  },
+  "os": {
+    "value": "NAME=\"Omarchy\"\nPRETTY_NAME=\"Omarchy\"\nID=omarchy\nID_LIKE=arch\nBUILD_ID=\"4.0.3\"\nVERSION_ID=\"4.0.3\"\nANSI_COLOR=\"38;2;158;206;106\"\nHOME_URL=\"https://omarchy.org/\"\nDOCUMENTATION_URL=\"https://learn.omacom.io/2/the-omarchy-manual\"\nSUPPORT_URL=\"https://discord.gg/tXFUdasqhY\"\nBUG_REPORT_URL=\"https://github.com/basecamp/omarchy/issues\"\nLOGO=omarchy"
+  },
+  "pci_devices": {
+    "value": "00:00.0 Host bridge [0600]: Intel Corporation Raptor Lake-P/U 2p+8e cores Host Bridge/DRAM Controller [8086:a708] (rev 01)\n00:02.0 VGA compatible controller [0300]: Intel Corporation Raptor Lake-P [Iris Xe Graphics] [8086:a7a1] (rev 04)\n00:04.0 Signal processing controller [1180]: Intel Corporation Raptor Lake Dynamic Platform and Thermal Framework Processor Participant [8086:a71d] (rev 01)\n00:05.0 Multimedia controller [0480]: Intel Corporation Raptor Lake IPU [8086:a75d] (rev 01)\n00:06.0 PCI bridge [0604]: Intel Corporation Raptor Lake PCI Express 4.0 Graphics Port [8086:a74d] (rev 01)\n00:06.2 PCI bridge [0604]: Intel Corporation Device [8086:a73d] (rev 01)\n00:07.0 PCI bridge [0604]: Intel Corporation Raptor Lake-P Thunderbolt 4 PCI Express Root Port #0 [8086:a76e] (rev 01)\n00:07.2 PCI bridge [0604]: Intel Corporation Raptor Lake-P Thunderbolt 4 PCI Express Root Port #2 [8086:a72f] (rev 01)\n00:08.0 System peripheral [0880]: Intel Corporation GNA Scoring Accelerator module [8086:a74f] (rev 01)\n00:0a.0 Signal processing controller [1180]: Intel Corporation Raptor Lake Crashlog and Telemetry [8086:a77d] (rev 01)\n00:0d.0 USB controller [0c03]: Intel Corporation Raptor Lake-P Thunderbolt 4 USB Controller [8086:a71e] (rev 01)\n00:0d.2 USB controller [0c03]: Intel Corporation Raptor Lake-P Thunderbolt 4 NHI #0 [8086:a73e] (rev 01)\n00:0d.3 USB controller [0c03]: Intel Corporation Raptor Lake-P Thunderbolt 4 NHI #1 [8086:a76d] (rev 01)\n00:10.0 Serial bus controller [0c80]: Intel Corporation Alder Lake-P Serial IO I2C Controller #2 [8086:51d8] (rev 01)\n00:10.1 Serial bus controller [0c80]: Intel Corporation Alder Lake-P Serial IO I2C Controller #3 [8086:51d9] (rev 01)\n00:12.0 Serial controller [0700]: Intel Corporation Alder Lake-P Integrated Sensor Hub [8086:51fc] (rev 01)\n00:14.0 USB controller [0c03]: Intel Corporation Alder Lake PCH USB 3.2 xHCI Host Controller [8086:51ed] (rev 01)\n00:14.2 RAM memory [0500]: Intel Corporation Alder Lake PCH Shared SRAM [8086:51ef] (rev 01)\n00:14.3 Network controller [0280]: Intel Corporation Raptor Lake PCH CNVi WiFi [8086:51f1] (rev 01)\n00:15.0 Serial bus controller [0c80]: Intel Corporation Alder Lake PCH Serial IO I2C Controller #0 [8086:51e8] (rev 01)\n00:15.1 Serial bus controller [0c80]: Intel Corporation Alder Lake PCH Serial IO I2C Controller #1 [8086:51e9] (rev 01)\n00:16.0 Communication controller [0780]: Intel Corporation Alder Lake PCH HECI Controller [8086:51e0] (rev 01)\n00:19.0 Serial bus controller [0c80]: Intel Corporation Alder Lake-P Serial IO I2C Controller #0 [8086:51c5] (rev 01)\n00:1c.0 PCI bridge [0604]: Intel Corporation Alder Lake PCH-P PCI Express Root Port #9 [8086:51bf] (rev 01)\n00:1e.0 Communication controller [0780]: Intel Corporation Alder Lake PCH UART #0 [8086:51a8] (rev 01)\n00:1e.2 Serial bus controller [0c80]: Intel Corporation Alder Lake SPI Controller [8086:51aa] (rev 01)\n00:1f.0 ISA bridge [0601]: Intel Corporation Raptor Lake LPC/eSPI Controller [8086:519d] (rev 01)\n00:1f.3 Multimedia audio controller [0401]: Intel Corporation Raptor Lake-P/U/H cAVS [8086:51ca] (rev 01)\n00:1f.4 SMBus [0c05]: Intel Corporation Alder Lake PCH-P SMBus Host Controller [8086:51a3] (rev 01)\n00:1f.5 Serial bus controller [0c80]: Intel Corporation Alder Lake-P PCH SPI Controller [8086:51a4] (rev 01)\n02:00.0 Non-Volatile memory controller [0108]: KIOXIA Corporation NVMe SSD Controller XG8 [1e0f:0010] (rev 01)\n57:00.0 Cellular controller/modem [0d40]: Intel Corporation XMM7560 LTE Advanced Pro Modem [8086:7560] (rev 01)"
+  },
+  "root_filesystem": {
+    "value": "btrfs"
+  },
+  "schema": 1,
+  "soc": {
+    "error": "open /sys/devices/soc0/soc_id: no such file or directory"
+  },
+  "soc_revision": {
+    "error": "open /sys/devices/soc0/revision: no such file or directory"
+  },
+  "storage": {
+    "value": "{\n   \"blockdevices\": [\n      {\n         \"name\": \"zram0\",\n         \"type\": \"disk\",\n         \"size\": 33195819008,\n         \"fstype\": \"swap\",\n         \"parttype\": null,\n         \"ro\": false,\n         \"rm\": false\n      },{\n         \"name\": \"nvme0n1\",\n         \"type\": \"disk\",\n         \"size\": 1024209543168,\n         \"fstype\": null,\n         \"parttype\": null,\n         \"ro\": false,\n         \"rm\": false,\n         \"children\": [\n            {\n               \"name\": \"nvme0n1p1\",\n               \"type\": \"part\",\n               \"size\": 2147483648,\n               \"fstype\": \"vfat\",\n               \"parttype\": \"c12a7328-f81f-11d2-ba4b-00a0c93ec93b\",\n               \"ro\": false,\n               \"rm\": false\n            },{\n               \"name\": \"nvme0n1p2\",\n               \"type\": \"part\",\n               \"size\": 1022059610112,\n               \"fstype\": \"crypto_LUKS\",\n               \"parttype\": \"4f68bce3-e8cd-4db1-96e7-fbcaf984b709\",\n               \"ro\": false,\n               \"rm\": false,\n               \"children\": [\n                  {\n                     \"name\": \"root\",\n                     \"type\": \"crypt\",\n                     \"size\": 1022042832896,\n                     \"fstype\": \"btrfs\",\n                     \"parttype\": null,\n                     \"ro\": false,\n                     \"rm\": false\n                  }\n               ]\n            }\n         ]\n      }\n   ]\n}"
+  },
+  "time_utc": "2026-09-11T19:43:07Z",
+  "usb_devices": {
+    "value": "Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub\nBus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub\nBus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub\nBus 003 Device 002: ID 06cb:0104 Synaptics, Inc. \nBus 003 Device 003: ID 8087:0033 Intel Corp. AX211 Bluetooth\nBus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub"
+  },
+  "vendor": {
+    "value": "HP"
+  },
+  "virtualization": {
+    "error": "exit status 1"
+  }
+}

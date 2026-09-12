@@ -1,0 +1,17 @@
+pkgname=oma-snap-aquamarine13
+pkgver=0.14.0
+pkgrel=1
+pkgdesc='Aquamarine ABI 13 compatibility library for the oma_snap Arch ARM snapshot'
+arch=('aarch64')
+url='https://github.com/hyprwm/aquamarine'
+license=('BSD-3-Clause')
+depends=('glibc' 'libgcc' 'libstdc++' 'hyprutils' 'libdisplay-info' 'libdrm' 'libglvnd' 'libinput' 'mesa' 'pixman' 'seatd' 'systemd-libs' 'wayland' 'wayland-protocols')
+provides=('libaquamarine.so=13-64')
+options=('!debug')
+source=('aquamarine-cross-stage.tar.gz')
+package() {
+  install -Dm755 "$srcdir/usr/lib/libaquamarine.so.0.14.0" "$pkgdir/usr/lib/libaquamarine.so.0.14.0"
+  ln -s libaquamarine.so.0.14.0 "$pkgdir/usr/lib/libaquamarine.so.13"
+  install -Dm644 /sources/aquamarine/LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
+sha256sums=('ddea2d5e2ad8508780a8f0c277c7226905e8c058c8a22e880d72976ac8fc67f5')

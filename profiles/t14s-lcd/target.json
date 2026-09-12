@@ -1,0 +1,12 @@
+{
+  "model": "Lenovo ThinkPad T14s Snapdragon",
+  "soc_family": "Snapdragon X Elite",
+  "ram_gib": 32,
+  "panel": "LCD",
+  "baseline_os": "Ubuntu 26.04",
+  "evidence": "user report, 2026-09-11",
+  "expected_compatible": "lenovo,thinkpad-t14s-lcd",
+  "machine_type": null,
+  "baseline_kernel": null,
+  "physical_boot_verified_by_project": false
+}

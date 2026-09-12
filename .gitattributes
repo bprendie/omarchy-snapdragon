@@ -1,0 +1,2 @@
+# Preserve HP's vendor metadata verbatim, including its original CRLF/spacing.
+packages/hp-elitebook-firmware/sp162865.cva -whitespace

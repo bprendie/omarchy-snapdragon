@@ -1,0 +1,6 @@
+--- usr/share/omarchy-iso/orchestrator/phases_impl.py
++++ usr/share/omarchy-iso/orchestrator/phases_impl.py
+@@ -149,2 +149,3 @@
+         packages += ["grub", "oma-snap-boot", "archlinuxarm-keyring"]
++        packages += ["oma-snap-firmware-hp", "oma-snap-audio-hp"]
+     return packages

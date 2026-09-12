@@ -1,0 +1,11 @@
+Model: ASUS Zenbook A14 UX3407RA (X Elite); not UX3407QA/X Plus.
+Source: ASUS model-specific support API and official download server.
+Support: https://www.asus.com/us/supportonly/ux3407ra/helpdesk_download/
+Package: Qualcomm Board Support Package V1.312.8100.0, dated 2026-01-27.
+URL: https://dlcdnets.asus.com/pub/ASUS/nb/Image/Driver/DriverPackage/48168/SOCPackage_forWebSite_Qualcomm_Z_V1.312.8100.0_48168.exe
+ASUS-published SHA256: ce4593e948157ede6d936bec0db03b09bcbb39c3b11fab5d89c52b8954e72fde
+Five GPU/ADSP/CDSP data files extracted using 7z. No Windows executable,
+BIOS capsule or EC updater is executed or packaged.
+Local/private testing only. Public redistribution permission is not established.
+Retain the original archive and extracted firmware locally for testing.
+Hardware is unavailable; VM tests cannot establish hardware functionality.

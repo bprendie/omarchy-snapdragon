@@ -1,0 +1,20 @@
+pkgname=oma-snap-firmware-ubuntu
+pkgver=20260319.217ca6e4
+pkgrel=2
+pkgdesc='Ubuntu Qualcomm firmware in a kernel-specific namespace for oma_snap'
+arch=('any')
+url='https://cdimage.ubuntu.com/releases/26.04/release/'
+license=('custom')
+options=('!strip' '!debug')
+package() {
+  local input=/output/ubuntu-hardware
+  local fw="$pkgdir/usr/lib/firmware/7.0.0-31-generic"
+  mkdir -p "$fw"
+  for tree in qcom ath12k qca; do
+    cp -a "$input/usr/lib/firmware/$tree" "$fw/"
+  done
+  for group in graphics misc wireless; do
+    install -Dm644 "$input/usr/share/doc/linux-firmware-qualcomm-$group/copyright" \
+      "$pkgdir/usr/share/licenses/$pkgname/qualcomm-$group.copyright"
+  done
+}

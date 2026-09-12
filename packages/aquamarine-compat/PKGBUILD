@@ -1,0 +1,23 @@
+pkgname=aquamarine
+pkgver=0.14.0
+pkgrel=1
+pkgdesc='Aquamarine ABI 13 rebuilt for the pinned Arch ARM Hyprland'
+arch=('aarch64')
+url='https://github.com/hyprwm/aquamarine'
+license=('BSD-3-Clause')
+depends=('glibc' 'libgcc' 'libstdc++' 'hyprutils' 'libdisplay-info' 'libdrm' 'libglvnd' 'libinput' 'mesa' 'pixman' 'seatd' 'systemd-libs' 'wayland' 'wayland-protocols')
+makedepends=('cmake' 'ninja' 'hyprwayland-scanner')
+provides=('libaquamarine.so')
+options=('!debug')
+# git archive of a79fb21b2e2a82dd061a6d071802bcf38bd5c383, prefix aquamarine/.
+source=('aquamarine-0.14.0.tar.gz')
+sha256sums=('0905b6077507ec59c791127393e186484d3c3c39ad17b1f294dac6f07e9d1b77')
+build() {
+  cmake -S "$srcdir/aquamarine" -B build -G Ninja \
+    -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=lib
+  cmake --build build --parallel "${OMA_SNAP_BUILD_JOBS:-2}"
+}
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+  install -Dm644 "$srcdir/aquamarine/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
