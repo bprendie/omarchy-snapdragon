@@ -30,7 +30,7 @@ owns_rule=true
 udevadm control --reload-rules
 udevadm trigger --subsystem-match=block --sysname-match="$node*"
 udevadm settle --timeout=20
-iso=dist/oma-snap-installer-thinkpad-hp-audio-arm64.iso
+iso=omarchy-snapdragon-v0.1.0.iso
 sha256sum -c "$iso.sha256"
 iso_bytes=$(stat -c %s "$iso")
 [[ $(blockdev --getsize64 $device) -gt $iso_bytes ]]
@@ -42,7 +42,7 @@ blockdev --flushbufs $device
 actual=$(dd if=$device bs=4M iflag=direct,count_bytes count="$iso_bytes" status=progress | sha256sum)
 printf 'Readback SHA-256: %s\n' "${actual%% *}"
 [[ ${actual%% *} == "$expected" ]]
-printf 'PASS: complete HP installer USB readback matches %s (%s bytes)\n' "$expected" "$iso_bytes"
+printf 'PASS: complete Snapdragon installer USB readback matches %s (%s bytes)\n' "$expected" "$iso_bytes"
 blockdev --rereadpt $device
 udevadm settle --timeout=20
 [[ $(blkid -p -s LABEL -o value ${device}3) == OMADIAG ]]
