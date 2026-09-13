@@ -1,0 +1,12 @@
+pkgname=oma-snap-hotkeys-hp
+pkgver=0.1.0
+pkgrel=1
+pkgdesc='HP 8CBE brightness and volume shortcuts for Snapdragon Omarchy'
+arch=('any')
+license=('custom')
+depends=('bash')
+options=('!strip' '!debug')
+package() {
+  install -Dm644 "$startdir/hp_media_keys.lua" "$pkgdir/usr/share/oma-snap/hp_media_keys.lua"
+  install -Dm755 "$startdir/oma-snap-hp-hotkeys" "$pkgdir/usr/bin/oma-snap-hp-hotkeys"
+}

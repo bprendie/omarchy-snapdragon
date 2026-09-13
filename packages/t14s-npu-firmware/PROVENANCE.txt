@@ -1,0 +1,18 @@
+Source: https://download.lenovo.com/pccbbs/mobiles/n42qq23w.exe
+Lenovo package 1.0.0.23, published September 1, 2026.
+SHA256: 9ec6ae30abd40f56aa6b3b0b480686acbbb72ff12ba186b3f45f61fc924ef4f3
+Metadata: https://download.lenovo.com/pccbbs/mobiles/n42qq23w_2_.xml
+Extracted Core_drivers/qcnspmcdm_ext_cdsp8380/{qccdsp8380.mbn,cdsp_dtbs.elf}
+Firmware branch: CDSP.HT.2.9.c1-00078-HAMOA-1.
+Archive size and SHA256 verified against Lenovo metadata. Installer not executed.
+Both files are required together; retain the original compressed Ubuntu files
+for rollback. The uncompressed overrides take precedence in the versioned
+firmware directory. Removing this package and rebuilding initramfs restores
+Ubuntu cDSP firmware. Kernel updates require renewed validation.
+
+Proprietary Lenovo/Qualcomm artifacts, retained for local hardware testing.
+A redistribution grant has not been established for this vendor archive.
+Do not redistribute these binary files without the necessary permission.
+FastRPC shells and the Qualcomm QAIRT SDK are separate test inputs and are
+not included here. Firmware installation alone does not provide an NPU API.
+Physical validation: docs/t14s-camera-backlight-npu.md.

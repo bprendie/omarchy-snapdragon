@@ -1,0 +1,14 @@
+9618c9eed84471513b99c2c21989d235a99bc3f51bb3cb206361ea25164a7824  build/camera-offline-packages/gst-plugin-libcamera-0.7.2-4-aarch64.pkg.tar.xz
+530a303789dcf52180ce125464f8f294040315f28ffda424e102ddd6213d4fda  build/camera-offline-packages/gst-plugin-libcamera-0.7.2-4-aarch64.pkg.tar.xz.sig
+ff078c2e4f67ca4c5f6b93233b8d3de5afe3e824733884b4b372cb0dd3d981ce  build/camera-offline-packages/libcamera-0.7.2-4-aarch64.pkg.tar.xz
+677a762edf8c6c0e3d30fff26f294dc9006f55b487fbb31d60f05255d2384f13  build/camera-offline-packages/libcamera-0.7.2-4-aarch64.pkg.tar.xz.sig
+07867a7346ab7536906ac9c7a3c945f9d450da776993cfa9cf362e444f5a912a  build/camera-offline-packages/libcamera-ipa-0.7.2-4-aarch64.pkg.tar.xz
+1b0634f4f79e2d0a5c964017a78b6d33239ec1aa452516e044e0081f4182effe  build/camera-offline-packages/libcamera-ipa-0.7.2-4-aarch64.pkg.tar.xz.sig
+01044f65edb685ed3198e414a0a5a0980aafd14c39d5345672ce85438dd2bb80  build/camera-offline-packages/libcamera-tools-0.7.2-4-aarch64.pkg.tar.xz
+130e7278d6d3b3ba6053382200d76155bc57daeda2185000360e35aeefc05cb2  build/camera-offline-packages/libcamera-tools-0.7.2-4-aarch64.pkg.tar.xz.sig
+06101bf686e9e53cf0beec44af52db11cf8b52f90fbaae9dde80cb39a52d84c7  build/camera-offline-packages/libpisp-1.5.0-1-aarch64.pkg.tar.xz
+fb63e4d9d9e7b6cd1940401a78b7dc43c02828ec081a1fcaf9ab9b36a1addbdf  build/camera-offline-packages/libpisp-1.5.0-1-aarch64.pkg.tar.xz.sig
+14da56c5d1cd5d738d4b55ef8150b82a80c8305d33caa09703f8c485dc8fbf25  build/camera-offline-packages/nlohmann-json-3.12.0-2-any.pkg.tar.xz
+5eec03a70f0738d54e736b15fed771b3b8db9a273442b9bf1b2a765f00b9d942  build/camera-offline-packages/nlohmann-json-3.12.0-2-any.pkg.tar.xz.sig
+b6b089ed3af1e60e2e9d87f072eba14c744e9836eb6d556dbb73fb3a24bac3e4  build/camera-offline-packages/pipewire-libcamera-1:1.6.8-1-aarch64.pkg.tar.xz
+cd605616d0ae1a8d5f4ff9c355d6393659e293813ee636f327086fb56518489e  build/camera-offline-packages/pipewire-libcamera-1:1.6.8-1-aarch64.pkg.tar.xz.sig

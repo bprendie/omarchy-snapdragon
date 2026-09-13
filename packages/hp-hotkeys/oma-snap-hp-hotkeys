@@ -1,0 +1,19 @@
+#!/bin/bash
+# Run as the installation user after stock Omarchy user provisioning.
+set -euo pipefail
+[[ -r /sys/class/dmi/id/board_name ]] || exit 0
+[[ $(</sys/class/dmi/id/board_name) == 8CBE ]] || exit 0
+[[ $EUID != 0 ]] || { echo 'Run as the desktop user.' >&2; exit 1; }
+config=${XDG_CONFIG_HOME:-$HOME/.config}/hypr
+[[ -f $config/bindings.lua ]] || { echo 'Omarchy user configuration is missing.' >&2; exit 1; }
+source_file=/usr/share/oma-snap/hp_media_keys.lua
+target=$config/hp_media_keys.lua
+if [[ -e $target || -L $target ]]; then
+  cmp -s "$source_file" "$target" || { echo 'Existing HP shortcuts differ; preserve them.' >&2; exit 1; }
+else
+  install -m644 "$source_file" "$target"
+fi
+if ! grep -Fxq 'require("hypr.hp_media_keys")' "$config/bindings.lua"; then
+  cp -p -- "$config/bindings.lua" "$config/bindings.lua.before-hp-media-$(date +%s%N)"
+  printf '\n-- HP brightness/volume shortcuts; preserves plain F-keys.\nrequire("hypr.hp_media_keys")\n' >> "$config/bindings.lua"
+fi

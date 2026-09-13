@@ -1,0 +1,60 @@
+/dts-v1/;
+/plugin/;
+&apps_rsc {
+ hp_camera_regulators {
+  compatible = "qcom,pm8010-rpmh-regulators";
+  qcom,pmic-id = "m";
+  vdd-l3-l4-supply = <&vreg_s4c_1p8>;
+  hp_cam_dovdd: ldo3 {
+   regulator-name = "hp_camera_l3m_1p8";
+   regulator-min-microvolt = <1800000>;
+   regulator-max-microvolt = <1800000>;
+   regulator-initial-mode = <3>;
+  };
+ };
+};
+&tlmm {
+ hp_cam_pins: hp-camera-state {
+  mclk { pins = "gpio100"; function = "cam_aon"; drive-strength = <16>; bias-disable; };
+  reset { pins = "gpio237"; function = "gpio"; drive-strength = <2>; bias-disable; };
+  enable { pins = "gpio50"; function = "gpio"; drive-strength = <2>; bias-disable; };
+ };
+};
+&cci1 { status = "okay"; pinctrl-0 = <&cci1_i2c1_default>; pinctrl-1 = <&cci1_i2c1_sleep>; };
+&cci1_i2c1 {
+ #address-cells = <1>;
+ #size-cells = <0>;
+ clock-frequency = <400000>;
+ hp_ov05c10: camera@10 {
+  compatible = "oma-snap,hp-ov05c10";
+  reg = <0x10>;
+  reset-gpios = <&tlmm 237 1>;
+  enable-gpios = <&tlmm 50 0>;
+  pinctrl-names = "default";
+  pinctrl-0 = <&hp_cam_pins>;
+  clocks = <&camcc 79>;
+  assigned-clocks = <&camcc 79>;
+  assigned-clock-rates = <19200000>;
+  dovdd-supply = <&hp_cam_dovdd>;
+  orientation = <0>;
+  rotation = <0>;
+  port {
+   hp_cam_ep: endpoint {
+    data-lanes = <1 2>;
+    link-frequencies = /bits/ 64 <900000000 480000000>;
+    remote-endpoint = <&camss_csiphy4_inep0>;
+   };
+  };
+ };
+};
+&camss_csiphy4_inep0 {
+ clock-lanes = <7>;
+ data-lanes = <0 1>;
+ remote-endpoint = <&hp_cam_ep>;
+};
+&csiphy4 {
+ vdda-0p8-supply = <&vreg_l2c_0p8>;
+ vdda-1p2-supply = <&vreg_l1c_1p2>;
+ status = "okay";
+};
+&camss { status = "okay"; };

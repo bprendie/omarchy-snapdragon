@@ -1,42 +1,70 @@
-# HP EliteBook Ultra G1q camera status — September 13, 2026
+# HP EliteBook Ultra G1q camera — September 13, 2026
 
-**The internal webcam is not enabled by the current hardware description.**
-This differs from the ThinkPad's missing-userspace-package issue.
+**RGB webcam capture works on the physical HP, including after reboot.**
+The owner confirmed a usable preview. Two subsequent ten-frame libcamera
+captures passed at approximately 30 fps after a clean reboot; a ten-frame
+PipeWire/GStreamer capture also passed. The camera service started automatically.
+These changes are local and are not in the published v0.1.0 ISO yet.
+A later successful repeated capture logged one CAMSS “Received wm done for
+unmapped index” warning; its effect is unestablished and needs monitoring.
 
-Read-only inspection of the physical B13U7UT#ABA / 8CBE machine, BIOS F.34,
-kernel `7.0.0-31-generic`, found:
+## What was missing
 
-- No `/dev/video*`, `/dev/media*` or `/sys/class/video4linux` devices.
-- No camera source in PipeWire.
-- Loaded device-tree model: `HP EliteBook Ultra G1q`.
-- `soc@0/isp@acb7000` (CAMSS): `status = "disabled"`.
-- Both CCI controllers, at `ac16000` and `ac15000`: disabled.
-- No camera sensor node or sensor-to-ISP graph in the loaded device tree.
-- USB enumeration contains root hubs only; no USB camera was detected.
-- The libcamera/PipeWire camera packages are absent, but installing them alone
-  cannot supply the missing hardware description.
+The stock Ubuntu `7.0.0-31-generic` device tree disabled CAMSS and CCI and
+contained no camera sensor node. The kernel also lacked the OV05C10 sensor
+driver. Installing camera userspace alone could not fix this HP.
 
-The upstream [EliteBook device tree](https://github.com/torvalds/linux/blob/master/arch/arm64/boot/dts/qcom/x1e80100-hp-elitebook-ultra-g1q.dts)
-and its [shared HP definitions](https://github.com/torvalds/linux/blob/master/arch/arm64/boot/dts/qcom/x1-hp-omnibook-x14.dtsi)
-also contain no camera sensor enablement at the time of inspection. A newer
-kernel must be evaluated for actual camera changes, not assumed to fix this.
+We recovered the machine's ACPI tables from the EFI RSDP using a temporary,
+read-only kernel export module, then disassembled them without executing AML.
+HP SoftPaq sp162865 camera resource tables supplied the front sensor's power
+sequence, address and clock. Kernel pinctrl definitions and the working
+ThinkPad topology helped cross-check the wiring. Physical sensor binding and
+frame capture then validated the candidate.
 
-The retained HP SoftPaq sp162865 archive listing contains camera modules and
-tuning data for `ov05c10` and `hm1092`. These are investigation leads from a
-multi-driver archive, not proof of the exact sensors fitted to this machine.
+## Implemented support
 
-Next bring-up steps:
+`packages/hp-camera/` packages an Intel-derived GPL-2.0 OV05C10 driver,
+a board-specific DT overlay, a helper that populates the late-added CSI PHY,
+and a hardware-gated systemd service. See its README for source provenance,
+wiring and build requirements. No proprietary Windows camera binary runs.
 
-1. Identify the installed RGB/IR sensors and their board wiring from Windows
-   device/ACPI data, vendor configuration or a verified matching upstream patch.
-2. Confirm Linux sensor-driver support and describe CCI address, supplies,
-   reset/power GPIOs, clocks and CSI lane/endpoints in the HP device tree.
-3. Test that description through a recoverable boot path, preserving the
-   known-working installed boot entry.
-4. Once the sensor enumerates, use the camera packages now queued in the
-   shared installer profile and repeat the ThinkPad's libcamera and PipeWire
-   capture checks, followed by visual and suspend/resume validation.
+The sensor uses CCI1 master 1, address 0x10, GPIO237 reset, GPIO50 supply enable,
+PM8010 LDO3_M at 1.8 V, MCLK4 at 19.2 MHz, and CSI4 with two data lanes.
+Native sensor capture is 2888×1808; libcamera produces 2880×1808 RGB frames.
+The borrowed driver's VBLANK handling needed a runtime-PM correction to avoid
+I2C reads while powered down and an unbalanced PM reference. The corrected
+version passed repeated post-reboot capture without those earlier errors.
 
-No packages, firmware, boot files or device-tree settings were changed on the
-HP for this audit. No capture test was possible. Local evidence is retained
-under ignored `build/hp-camera-audit/`.
+Userspace: `libcamera`, `libcamera-tools`, `pipewire-libcamera`, and
+`gst-plugin-libcamera` (with their dependencies). PipeWire exposes node
+`libcamera_input._base_soc_0_cci_ac16000_i2c-bus_1_camera_10`.
+
+## Repeat validation
+
+```sh
+systemctl status oma-snap-camera-hp.service
+cam -l
+cam -c 1 --capture=10
+cam -c 1 --capture=10
+gst-launch-1.0 -q pipewiresrc \
+  target-object=libcamera_input._base_soc_0_cci_ac16000_i2c-bus_1_camera_10 \
+  num-buffers=10 ! video/x-raw ! fakesink
+# Optional visible preview:
+cam -c 1 --capture --sdl
+```
+
+Local evidence is retained in ignored `build/hp-camera-audit/`. Captured
+images were not saved. ACPI dumps remain local.
+
+## Remaining limitations
+
+This is an interim out-of-tree implementation pinned to kernel 7.0.0-31;
+it needs rebuilding and testing with any replacement kernel. It is not DKMS.
+The modules are unsigned and taint the kernel. Runtime overlay removal emits
+allocation warnings; disable the service and reboot for rollback instead of
+unloading helpers under the camera stack. Original EFI/kernel files are intact.
+
+Libcamera uses uncalibrated software ISP defaults and warns that sensor
+properties, timing metadata and a sensor helper are absent. Color/exposure
+quality, suspend/resume, browser applications, privacy LED behavior and IR
+camera support remain unvalidated. A good RGB preview does not validate IR.

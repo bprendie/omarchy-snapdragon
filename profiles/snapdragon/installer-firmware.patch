@@ -1,6 +1,16 @@
 --- usr/share/omarchy-iso/orchestrator/phases_impl.py
 +++ usr/share/omarchy-iso/orchestrator/phases_impl.py
-@@ -149,2 +149,3 @@
+@@ -149,2 +149,6 @@
          packages += ["grub", "oma-snap-boot", "archlinuxarm-keyring"]
 +        packages += ["oma-snap-firmware-hp", "oma-snap-audio-hp", "oma-snap-firmware-asus-a14"]
++        packages += ["oma-snap-camera-hp", "oma-snap-firmware-t14s-npu"]
++        packages += ["oma-snap-hotkeys-hp"]
++        packages += ["libcamera", "libcamera-tools", "pipewire-libcamera", "gst-plugin-libcamera"]
      return packages
+@@ -1407,0 +1412,6 @@
++    if _uses_snapdragon_boot(ctx):
++        _run_target_setup_command(
++            ctx,
++            ["/usr/bin/oma-snap-hp-hotkeys"],
++            user=ctx.username,
++        )

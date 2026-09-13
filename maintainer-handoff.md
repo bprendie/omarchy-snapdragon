@@ -11,7 +11,7 @@ The ThinkPad T14s Gen 6 LCD is essentially working for everyday desktop use. The
 | Target | Physically confirmed | Remaining qualifications |
 | --- | --- | --- |
 | ThinkPad T14s Gen 6, X Elite, 32 GB, BOE LCD | End-to-end installation, graphical encrypted-disk unlock, Omarchy desktop, audio, Wi-Fi, Bluetooth and brightness | Charging can require unplug/replug. A scoped TrackPoint scrolling workaround is included; remaining button/EC behavior is not settled. OLED variants are not validated. |
-| HP EliteBook Ultra G1q 14, B13U7UT#ABA, board 8CBE | Installation, graphical encrypted-disk unlock, desktop, Wi-Fi, Bluetooth, touchpad, speaker audio and brightness through the desktop widget | Fn/media keys, keyboard backlight and webcam do not work. One unexpected reset during keyboard investigation remains unexplained. Microphone/headset operation and comprehensive power testing remain open. |
+| HP EliteBook Ultra G1q 14, B13U7UT#ABA, board 8CBE | Installation, graphical encrypted-disk unlock, desktop, Wi-Fi, Bluetooth, touchpad, speaker audio, brightness through the desktop widget and RGB camera (local follow-up) | Native Fn/media keys and keyboard backlight do not work. HP-only Super+F3/F4 brightness and Super+F6/F7/F8 mute/volume shortcuts are physically verified in local user configuration; normal installer integration is included in local v0.1.2. One unexpected reset during keyboard investigation remains unexplained. Microphone/headset operation and comprehensive power testing remain open. |
 | HP NPU, separate follow-up | FastRPC calculator, Qualcomm DSP validator and a small QNN HTP ReLU graph returned correct results | Runtime staged separately on the HP; not installed by v0.1.0. No performance, power, large-model or cross-device claim. |
 | ASUS Zenbook A14 UX3407RA, X Elite | None | Firmware package and early OLED driver pass generic ARM VM checks. Automatic device-tree selection and all physical functions need testing. UX3407QA is outside this profile. |
 
@@ -252,7 +252,21 @@ Before treating this as an officially maintained distribution, the main gaps are
 - Snapshot boot selection/restore and factory reset: explicitly blocked in this profile. Snapshot creation alone must not be advertised as full recovery parity.
 - Hibernation/resume: deferred. Encrypted deferred owner provisioning is rejected before disk work.
 - Physical ASUS testing and broader panel/model coverage.
-- HP Fn/media keys/backlight and [camera device-tree enablement](docs/hp-camera-status.md), ThinkPad charging/remaining pointing-device behavior, and systematic power/thermal/suspend testing.
+- HP Fn/media keys/backlight, upstreaming the [working camera integration](docs/hp-camera-status.md), ThinkPad charging/remaining pointing-device behavior, and systematic power/thermal/suspend testing.
 - Optional application gaps and NPU runtime packaging.
 
 A useful first upstream slice would be architecture-aware Quattro boot finalization and ARM keyring provisioning, followed by separately reviewable hardware packages. The working ISO is a reference and test vehicle; the goal is to make these changes small enough, well-owned enough and reproducible enough that maintaining Snapdragon support does not depend on this original workspace.
+
+## Local v0.1.1 follow-up
+
+The HP RGB camera now passes physical capture after reboot with a user-confirmed
+usable preview. Its missing sensor driver and board description are packaged
+in `packages/hp-camera/`; see [camera bring-up](docs/hp-camera-status.md).
+The [v0.1.1 candidate](docs/snapdragon-v0.1.1.md) includes that support, both
+machines' camera userspace and the matched Lenovo cDSP firmware used in the
+ThinkPad NPU test. It retains the existing HP, ThinkPad and ASUS additions.
+This work remains local pending explicit permission to push.
+
+HP EC access was identified from recovered firmware tables and a single
+hotkey-enable register read succeeded. Its enable bit was already set.
+No EC setting was changed; Fn/media keys and keyboard lighting remain gaps.

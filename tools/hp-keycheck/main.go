@@ -50,8 +50,13 @@ func main() {
 			}
 			var keys []string
 			for _, key := range buf[3:n] {
-				if key >= 0x3a && key <= 0x45 {
+				switch {
+				case key >= 0x3a && key <= 0x45:
 					keys = append(keys, fmt.Sprintf("F%d", key-0x3a+1))
+				case key >= 0x68 && key <= 0x73:
+					keys = append(keys, fmt.Sprintf("F%d (usage=%#02x)", key-0x68+13, key))
+				case key >= 0x39 && !(key >= 0x59 && key <= 0x63):
+					keys = append(keys, fmt.Sprintf("usage=%#02x", key))
 				}
 			}
 			if len(keys) > 0 {

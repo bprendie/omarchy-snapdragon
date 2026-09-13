@@ -1,0 +1,15 @@
+pkgname=oma-snap-firmware-t14s-npu
+pkgver=1.0.0.23
+pkgrel=1
+pkgdesc='Matched Lenovo T14s Gen 6 cDSP firmware validated with FastRPC and QNN HTP'
+arch=('any')
+license=('custom:Lenovo-Qualcomm')
+depends=('oma-snap-firmware-ubuntu=20260319.217ca6e4-2' 'oma-snap-kernel-ubuntu=7.0.0.31.31-1')
+options=('!strip' '!debug')
+package() {
+  local fw="$pkgdir/usr/lib/firmware/7.0.0-31-generic/qcom/x1e80100/LENOVO/21N1"
+  for name in qccdsp8380.mbn cdsp_dtbs.elf; do
+    install -Dm644 "$startdir/firmware/$name" "$fw/$name"
+  done
+  install -Dm644 "$startdir/PROVENANCE.txt" "$pkgdir/usr/share/doc/$pkgname/PROVENANCE.txt"
+}

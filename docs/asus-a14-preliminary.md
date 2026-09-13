@@ -1,5 +1,9 @@
 # ASUS Zenbook A14 preliminary checks — 2026-09-12
 
+September 13 follow-up: [camera and encrypted-unlock readiness](asus-camera-unlock-readiness.md)
+checks the shipped RGB camera graph and known early-display prerequisites.
+ASUS hardware remains untested.
+
 Integration follow-up: the ASUS package and early panel driver are now wired
 into the combined v0.1.0 builder. See `docs/snapdragon-v0.1.0.md` for the
 resulting ISO validation. Hardware remains untested; the notes below describe

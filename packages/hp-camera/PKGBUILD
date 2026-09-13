@@ -1,0 +1,18 @@
+pkgname=oma-snap-camera-hp
+pkgver=0.1.0
+pkgrel=2
+pkgdesc='HP EliteBook Ultra G1q OV05C10 camera support for Ubuntu kernel 7.0.0-31'
+arch=('aarch64')
+license=('GPL-2.0-only')
+depends=('oma-snap-kernel-ubuntu=7.0.0.31.31-1' 'libcamera' 'libcamera-tools' 'pipewire-libcamera' 'gst-plugin-libcamera')
+options=('!strip' '!debug')
+install=hp-camera.install
+package() {
+  for module in ov05c10 hp_camera_overlay hp_camera_children; do
+    install -Dm644 "$startdir/src/$module.ko" \
+      "$pkgdir/usr/lib/modules/7.0.0-31-generic/updates/oma-snap-camera-hp/$module.ko"
+  done
+  install -Dm644 "$startdir/oma-snap-camera-hp.service" \
+    "$pkgdir/usr/lib/systemd/system/oma-snap-camera-hp.service"
+  install -Dm644 "$startdir/README.md" "$pkgdir/usr/share/doc/$pkgname/README.md"
+}

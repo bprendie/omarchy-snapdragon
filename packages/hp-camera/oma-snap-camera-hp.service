@@ -1,0 +1,16 @@
+[Unit]
+Description=HP EliteBook Ultra G1q camera hardware support
+After=systemd-udev-trigger.service
+ConditionPathExists=/sys/class/dmi/id/board_name
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecCondition=/usr/bin/grep -qx 8CBE /sys/class/dmi/id/board_name
+ExecStart=/usr/bin/modprobe -a v4l2-cci i2c-qcom-cci qcom-camss phy-qcom-mipi-csi2
+ExecStart=/usr/bin/modprobe ov05c10
+ExecStart=/usr/bin/modprobe hp_camera_overlay
+ExecStart=/usr/bin/modprobe hp_camera_children
+
+[Install]
+WantedBy=multi-user.target

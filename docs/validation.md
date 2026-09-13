@@ -1,6 +1,27 @@
 # Validation ledger
 
-Updated 2026-09-11. PASS applies only to the stated scope. Physical target results require exact kernel/package versions and retained local evidence.
+Updated 2026-09-13. PASS applies only to the stated scope. Older observations
+below remain as historical evidence; they are not the current hardware status.
+
+## Physical follow-up, kernel 7.0.0-31-generic
+
+| Check | Status | Evidence / scope |
+| --- | --- | --- |
+| ThinkPad and HP installation/unlock/desktop | PASS | User-confirmed physical installs; hardware follow-up documents |
+| ThinkPad RGB camera | PASS | Added camera userspace; direct and PipeWire capture, owner-confirmed preview |
+| HP RGB camera | PASS | OV05C10 package; reboot autoload, repeated direct and PipeWire capture, owner-confirmed preview; `docs/hp-camera-status.md` |
+| ThinkPad NPU | PASS | Calculator, DSP validator, QNN HTP graph with temporary matched Lenovo cDSP firmware; `docs/t14s-camera-backlight-npu.md` |
+| HP NPU | PASS | Separate FastRPC/QNN test runtime; `docs/hp-npu-validation.md` |
+| ThinkPad keyboard backlight | FAIL | Still dark after control test; TrackPoint cable disconnected, keyboard replacement pending |
+| HP Fn/media keys and keyboard backlight | FAIL | No working fix; targeted EC read shows hotkey enable bit already set |
+| Camera suspend/resume, IR and privacy LED | UNTESTED | RGB capture does not establish these behaviors |
+| v0.1.1 offline closure and live-root integrity | PASS | 970 packages resolve; ten boot/firmware/camera packages checked, zero altered files |
+| v0.1.1 ARM UEFI VM live boot | PASS | Omarchy welcome screen, zero failed services, package integrity and HP service gating verified |
+| v0.1.1 physical reinstall | UNTESTED | Local ISO candidate; not flashed during this follow-up |
+| ASUS physical validation | UNTESTED | No hardware access |
+
+## Historical build ledger, September 11
+
 
 | Check | Status | Evidence / scope |
 | --- | --- | --- |

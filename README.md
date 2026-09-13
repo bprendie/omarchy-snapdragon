@@ -17,15 +17,15 @@ see the [maintainer handoff](maintainer-handoff.md).
 
 A native ARM64 Omarchy desktop using **Arch Linux ARM userspace, Ubuntu's Snapdragon-capable kernel and firmware, and the stock-derived Quattro installer**. Quattro handles the installation flow, disk configuration, encryption, packages and user setup. This repository adds the hardware packages, early boot drivers and boot finalization needed for Snapdragon machines.
 
-Current image: **omarchy-snapdragon-v0.1.0.iso** — [download v0.1.0](https://github.com/bprendie/omarchy-snapdragon/releases/tag/v0.1.0) (7.48 GB), with a [SHA-256 checksum](omarchy-snapdragon-v0.1.0.iso.sha256). See the [release notes](docs/snapdragon-v0.1.0.md) for exact versions and validation.
+Published image: **omarchy-snapdragon-v0.1.2.iso** — [download v0.1.2](https://github.com/bprendie/omarchy-snapdragon/releases/tag/v0.1.2) (7.50 GB), with a [SHA-256 checksum](omarchy-snapdragon-v0.1.2.iso.sha256). See the [release notes](docs/snapdragon-v0.1.2.md) for exact versions and validation.
 
 GitHub release assets have a 2 GiB per-file limit. Download all four
-`omarchy-snapdragon-v0.1.0.iso.part-*` files and the ISO checksum from the release,
+`omarchy-snapdragon-v0.1.2.iso.part-*` files and the ISO checksum from the release,
 then reconstruct the original image:
 
 ```bash
-cat omarchy-snapdragon-v0.1.0.iso.part-{00,01,02,03} > omarchy-snapdragon-v0.1.0.iso
-sha256sum -c omarchy-snapdragon-v0.1.0.iso.sha256
+cat omarchy-snapdragon-v0.1.2.iso.part-{00,01,02,03} > omarchy-snapdragon-v0.1.2.iso
+sha256sum -c omarchy-snapdragon-v0.1.2.iso.sha256
 ```
 
 ## Hardware status
@@ -33,20 +33,20 @@ sha256sum -c omarchy-snapdragon-v0.1.0.iso.sha256
 | Machine | Status | Known gaps |
 | --- | --- | --- |
 | Lenovo ThinkPad T14s Gen 6, Snapdragon X Elite, LCD | Physical installation, encrypted-disk unlock and Omarchy desktop confirmed; audio, Wi-Fi, Bluetooth and panel brightness work | Charging can require unplug/replug; TrackPoint workaround included, with remaining EC/button behavior unconfirmed; keyboard backlight unresolved on a unit awaiting keyboard replacement |
-| HP EliteBook Ultra G1q 14, B13U7UT#ABA | Physical installation, graphical disk unlock and desktop confirmed; Wi-Fi, Bluetooth, touchpad, speaker audio and brightness widget work; **NPU validated with a QNN HTP workload** (separate test runtime) | Fn/media keys, keyboard backlight and [webcam enablement](docs/hp-camera-status.md); one unexplained reset during keyboard investigation |
+| HP EliteBook Ultra G1q 14, B13U7UT#ABA | Physical installation, graphical disk unlock and desktop confirmed; Wi-Fi, Bluetooth, touchpad, speaker audio, brightness widget and [RGB webcam](docs/hp-camera-status.md) work; **NPU validated with a QNN HTP workload** (separate test runtime) | Native Fn/media keys and keyboard backlight remain unresolved; [HP-only Super+F brightness/volume shortcuts](docs/hp-unlock-fn-investigation.md#hp-only-brightnessvolume-workaround) physically verified; included in v0.1.2; one unexplained reset during keyboard investigation |
 | ASUS Zenbook A14 UX3407RA, Snapdragon X Elite | Firmware and early OLED driver included; package and boot checks pass in an ARM VM | **No physical hardware test yet**; UX3407QA is outside this profile |
 
-The combined v0.1.0 ISO reaches the Omarchy welcome screen in an ARM UEFI VM with zero failed services. The ThinkPad and HP confirmations come from preceding images carrying their respective fixes. A VM cannot establish ASUS hardware support or replace a physical installation test. Untested functions, including comprehensive suspend/resume and microphone/headset behavior, are not implied by a successful desktop boot.
+The v0.1.2 ISO reaches the Omarchy welcome screen in an ARM UEFI VM with zero failed services. Its 971-package offline dependency check and 11 boot/firmware/camera/hotkey package integrity checks pass. The hardware fixes below were tested on the installed laptops; a full physical reinstall of v0.1.2 remains untested. QEMU cannot validate ASUS hardware behavior.
 
-**HP NPU follow-up:** a small neural-network operation has now passed on the
-physical HP through Qualcomm's QNN HTP backend. The separately staged test
-runtime is not included in v0.1.0. See [NPU validation](docs/hp-npu-validation.md).
+## September 13 updates — v0.1.2
 
-**ThinkPad follow-up (September 13):** camera capture now passes after installing
-libcamera/PipeWire camera packages, which are added to the next-build profile.
-The NPU also passed the calculator, DSP validator and QNN HTP workload using
-a temporary matched Lenovo firmware/runtime pair. Neither change is in the
-published v0.1.0 ISO. See [test details and backlight findings](docs/t14s-camera-backlight-npu.md).
+- **ThinkPad RGB webcam works:** the owner confirmed a usable preview. The ISO now includes libcamera tools, the GStreamer plugin and PipeWire camera integration. [Camera test details](docs/t14s-camera-backlight-npu.md).
+- **HP RGB webcam works:** added the OV05C10 sensor driver, HP-specific device-tree overlay and startup service. Direct and PipeWire captures passed after reboot, and the owner confirmed a usable picture. Activation is restricted to HP board 8CBE. [HP camera integration](docs/hp-camera-status.md).
+- **ThinkPad NPU validated:** a DSP calculator, validator and QNN HTP workload passed using a matched Lenovo cDSP firmware pair. That firmware is included in the ISO. The separately staged Qualcomm test runtime/SDK is not included. The [HP NPU](docs/hp-npu-validation.md) was also validated earlier.
+- **HP brightness and volume shortcuts work:** Super+F3/F4 adjusts brightness; Super+F6 toggles mute; Super+F7/F8 adjusts volume. The owner confirmed these physically. Normal installation now adds them only on the HP; plain F-keys are preserved. This is a workaround for unresolved native Fn/media-key behavior. [Shortcut and firmware investigation](docs/hp-unlock-fn-investigation.md#hp-only-brightnessvolume-workaround).
+- **ASUS readiness checked:** the shipped kernel already enables the UX3407RA RGB camera graph and provides its driver. The known OLED/display drivers and GPU/DSP firmware are present in early boot. A new build check catches missing prerequisites. No speculative camera patch was added, and physical ASUS testing is still needed. [ASUS camera/unlock audit](docs/asus-camera-unlock-readiness.md).
+
+Existing ThinkPad and HP encrypted-unlock, audio, Wi-Fi and other fixes are retained. All 970 packages from v0.1.1 remain byte-identical; the HP shortcut package is the only addition. Keyboard backlights remain unresolved, ThinkPad charging can require unplug/replug, and comprehensive suspend/resume, microphone/headset and camera privacy/IR testing remain open. See the [v0.1.2 release notes](docs/snapdragon-v0.1.2.md) for validation and limitations.
 
 ## Where the pieces come from
 
@@ -68,19 +68,20 @@ Exact source revisions and input checksums are in [manifests/](manifests/), incl
 
 ## Building and testing
 
-The current build requires a prepared Linux workspace with Docker, Go, Git, GnuPG, xorriso and ARM64 execution through QEMU/binfmt. The scripts depend on retained inputs, an ARM build container and staged installer roots; this is not yet a one-command build from a clean checkout. See [reproducibility notes](docs/reproducibility.md).
+The current build requires a prepared Linux workspace with Docker, Go, Python 3, device-tree-compiler (fdtget), Git, GnuPG, xorriso and ARM64 execution through QEMU/binfmt. The scripts depend on retained inputs, an ARM build container and staged installer roots; this is not yet a one-command build from a clean checkout. See [reproducibility notes](docs/reproducibility.md).
 
-From that prepared workspace:
+Prepare the camera and firmware inputs described in the [v0.1.1 notes](docs/snapdragon-v0.1.1.md), then, from that prepared workspace:
 
 ```bash
-bash scripts/build-boot-package.sh
+bash scripts/build-hp-hotkeys-package.sh
 bash scripts/build-snapdragon-installer.sh
+bash scripts/verify-snapdragon-offline.sh
 ```
 
 The builder writes the versioned ISO at the repository root and refuses to overwrite an existing image or staging tree. Verify it with:
 
 ```bash
-sha256sum -c omarchy-snapdragon-v0.1.0.iso.sha256
+sha256sum -c omarchy-snapdragon-v0.1.2.iso.sha256
 ```
 
 Build intermediates, old images, VMs, downloaded inputs and private target data stay outside Git. The root release ISO and checksum are explicitly allowed. Source recipes, patches, provenance and technical documentation remain available for review and upstream collaboration.
