@@ -1,6 +1,6 @@
 # Maintainer handoff: Omarchy Snapdragon
 
-Updated September 12, 2026. Release: **v0.1.0**, based on **Omarchy 4.0.3**.
+Updated September 13, 2026. Release: **v0.1.0**, based on **Omarchy 4.0.3**.
 
 ## Purpose and current state
 
@@ -16,6 +16,14 @@ The ThinkPad T14s Gen 6 LCD is essentially working for everyday desktop use. The
 | ASUS Zenbook A14 UX3407RA, X Elite | None | Firmware package and early OLED driver pass generic ARM VM checks. Automatic device-tree selection and all physical functions need testing. UX3407QA is outside this profile. |
 
 The combined v0.1.0 ISO boots to the stock Omarchy welcome screen in an ARM UEFI VM with zero failed services. Its hardware packages pass integrity checks. The ThinkPad and HP physical confirmations came from preceding images carrying their respective fixes; the combined ASUS-inclusive image still needs a physical installation regression test. The USB has been written and fully readback-verified for that test.
+
+September 13 follow-up: the ThinkPad camera now passes direct and PipeWire
+capture after installing missing camera packages; those are queued in the
+next-build profile. Its NPU passed with a temporary matched Lenovo cDSP
+firmware/runtime pair, then the original firmware was restored. Keyboard
+backlight remains unresolved on the unit awaiting keyboard replacement.
+These follow-up changes are not in the published v0.1.0 ISO. See
+[ThinkPad test details](docs/t14s-camera-backlight-npu.md).
 
 ## Why this took integration work
 

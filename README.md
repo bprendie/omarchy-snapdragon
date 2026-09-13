@@ -2,7 +2,7 @@
 
 **This is a real Omarchy 4.0.3 distribution for Snapdragon X Elite laptops, built from Omarchy's desktop and Quattro installer. It is a work in progress and an unofficial community port.**
 
-**The ThinkPad T14s Gen 6 with Snapdragon X Elite and an LCD panel is essentially fully working for everyday use.** Installation, encrypted-disk unlock, the Omarchy desktop, audio, Wi-Fi, Bluetooth and display brightness have all been physically tested. The remaining charging and TrackPoint caveats are listed below.
+**The ThinkPad T14s Gen 6 with Snapdragon X Elite and an LCD panel is essentially fully working for everyday use.** Installation, encrypted-disk unlock, the Omarchy desktop, audio, Wi-Fi, Bluetooth and display brightness have all been physically tested. The remaining charging, TrackPoint and keyboard-backlight caveats are listed below.
 
 Snapdragon X Elite “Copilot+ PCs” are capable laptops that can feel abandoned if you want to run Linux instead of the Windows installation they shipped with. Our experience has been a patchwork of working desktops, missing firmware, invisible disk-unlock prompts, silent speakers and model-specific quirks. This project is an attempt to make that hardware useful as a Linux daily driver—and make getting there repeatable with a bootable Omarchy installer.
 
@@ -32,7 +32,7 @@ sha256sum -c omarchy-snapdragon-v0.1.0.iso.sha256
 
 | Machine | Status | Known gaps |
 | --- | --- | --- |
-| Lenovo ThinkPad T14s Gen 6, Snapdragon X Elite, LCD | Physical installation, encrypted-disk unlock and Omarchy desktop confirmed; audio, Wi-Fi, Bluetooth and panel brightness work | Charging can require unplug/replug; TrackPoint workaround included, with remaining EC/button behavior unconfirmed |
+| Lenovo ThinkPad T14s Gen 6, Snapdragon X Elite, LCD | Physical installation, encrypted-disk unlock and Omarchy desktop confirmed; audio, Wi-Fi, Bluetooth and panel brightness work | Charging can require unplug/replug; TrackPoint workaround included, with remaining EC/button behavior unconfirmed; keyboard backlight unresolved on a unit awaiting keyboard replacement |
 | HP EliteBook Ultra G1q 14, B13U7UT#ABA | Physical installation, graphical disk unlock and desktop confirmed; Wi-Fi, Bluetooth, touchpad, speaker audio and brightness widget work; **NPU validated with a QNN HTP workload** (separate test runtime) | Fn/media keys and keyboard backlight; one unexplained reset during keyboard investigation |
 | ASUS Zenbook A14 UX3407RA, Snapdragon X Elite | Firmware and early OLED driver included; package and boot checks pass in an ARM VM | **No physical hardware test yet**; UX3407QA is outside this profile |
 
@@ -41,6 +41,12 @@ The combined v0.1.0 ISO reaches the Omarchy welcome screen in an ARM UEFI VM wit
 **HP NPU follow-up:** a small neural-network operation has now passed on the
 physical HP through Qualcomm's QNN HTP backend. The separately staged test
 runtime is not included in v0.1.0. See [NPU validation](docs/hp-npu-validation.md).
+
+**ThinkPad follow-up (September 13):** camera capture now passes after installing
+libcamera/PipeWire camera packages, which are added to the next-build profile.
+The NPU also passed the calculator, DSP validator and QNN HTP workload using
+a temporary matched Lenovo firmware/runtime pair. Neither change is in the
+published v0.1.0 ISO. See [test details and backlight findings](docs/t14s-camera-backlight-npu.md).
 
 ## Where the pieces come from
 

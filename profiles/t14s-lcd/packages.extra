@@ -6,12 +6,16 @@ btrfs-progs
 cryptsetup
 efibootmgr
 grub
+gst-plugin-libcamera
 hyprtoolkit
+libcamera
+libcamera-tools
 mesa
 nodejs
 omarchy-keyring
 pipewire
 pipewire-alsa
+pipewire-libcamera
 pipewire-pulse
 python
 snapper
