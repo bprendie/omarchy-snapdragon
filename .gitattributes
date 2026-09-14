@@ -1,2 +1,6 @@
 # Preserve HP's vendor metadata verbatim, including its original CRLF/spacing.
 packages/hp-elitebook-firmware/sp162865.cva -whitespace
+
+# Preserve checksum-pinned upstream notices and the installer patch verbatim.
+packages/asus-a16-firmware/upstream/ath12k/QCC2072/hw1.0/Notice.txt -whitespace
+profiles/snapdragon/installer-kernel-update-v022.patch -whitespace

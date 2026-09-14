@@ -68,7 +68,8 @@ blocker. This also does not prove that the disabled SoCCP transport gives us
 working battery reporting or restart/recovery; those remain open.
 
 The camera has no enabled sensor/CCI/CAMSS capture graph in this candidate.
-Do not transfer the working A14 or ThinkPad camera result to this different SoC.
+The A14's enabled camera graph and the ThinkPad's physical camera result do not
+establish camera support on this different SoC.
 Wi-Fi calibration, audio, accelerated rendering, hotkeys/backlight, battery,
 NPU, suspend and actual panel/disk-unlock behavior all require A16 testing.
 No first-generation ASUS firmware is relabelled as A16 firmware.
