@@ -10,7 +10,7 @@ import (
 )
 
 func extractCandidate(c candidate, dir, output string) error {
-	if !regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+-generic$`).MatchString(c.KernelRelease) {
+	if !regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+-(generic|qcom-x1e)$`).MatchString(c.KernelRelease) {
 		return fmt.Errorf("unsupported kernel release")
 	}
 	if err := os.Mkdir(output, 0755); err != nil {

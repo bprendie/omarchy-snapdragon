@@ -1,9 +1,9 @@
 # ASUS Zenbook A16 identification — September 13, 2026
 
-**Deferred to v0.2.2, per user direction.** Finish and validate the current
-v0.2.0 kernel-update build first. The v0.2.2 item is an investigation target,
-not a promise of working X2 support. Ubuntu's X2 readiness has not yet been
-verified in this project; do not expand v0.2.0 scope to resolve it.
+**Investigation resumed for v0.2.2 on September 14.** The owner confirms the
+published v0.2.0 ISO works well. A newer Ubuntu Concept kernel contains the exact
+A16 tree and boot-selection mappings; see [the kernel audit](asus-a16-kernel-audit.md).
+This is an investigation result, not a hardware-support claim.
 
 User-supplied identifiers, preserved verbatim:
 

@@ -19,7 +19,7 @@ func resolvePolicy(records []record, p policy) ([]record, string, error) {
 	if err != nil || p.TestRelease == "" {
 		return latest, release, err
 	}
-	if !regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+-generic$`).MatchString(p.TestRelease) {
+	if !regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+-(generic|qcom-x1e)$`).MatchString(p.TestRelease) {
 		return nil, "", fmt.Errorf("invalid rollback test release")
 	}
 	image, err := selectRecord(records, "linux-image-"+p.TestRelease, "")

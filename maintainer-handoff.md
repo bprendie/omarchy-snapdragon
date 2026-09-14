@@ -1,7 +1,33 @@
 # Maintainer handoff: Omarchy Snapdragon
 
-Updated September 13, 2026. Current testing release: **v0.2.0**, based on
-**Omarchy 4.0.3**. [Download the release](https://github.com/bprendie/omarchy-snapdragon/releases/tag/v0.2.0).
+Updated September 14, 2026. Latest experimental release: **v0.2.2**, based on
+**Omarchy 4.0.3**. [Download v0.2.2](https://github.com/bprendie/omarchy-snapdragon/releases/tag/v0.2.2).
+**v0.2.0 remains the physically tested HP/ThinkPad baseline.**
+
+## v0.2.2 handoff delta
+
+v0.2.0 established the retained-kernel update architecture around Ubuntu
+7.0.0-31-generic. v0.2.2 exercises it with Ubuntu Concept 7.2.0-18-qcom-x1e
+(7.2-rc7 base), exact ASUS A16 UX3607OA/X2 matching, matching rebuilt HP camera
+modules and flavour-aware lifecycle tools. A separate pinned PPA policy verifies
+Concept metadata and artifact dependencies; installed systems still use pacman.
+This release ships a local signed testing snapshot, not a public automatic
+Concept kernel update feed.
+
+A16 Wi-Fi/GPU/DSP firmware, upstream board-specific audio topology/UCM and early
+SCMI power-domain support are integrated. The complete ISO reaches the welcome
+screen in an ARM UEFI VM, with zero failed services and all 976 offline packages
+resolved. **No physical machine has passed on this new kernel.** The camera's
+enabled capture graph is absent; display/unlock, graphics, audio, wireless,
+input/hotkeys, battery/charging, NPU, suspend and docks require A16 testing.
+The disabled SoCCP node is an investigation lead, not a demonstrated diagnosis
+of a battery or boot failure.
+
+Start with an A16 live boot and the [tester checklist](docs/asus-a16-testing.md).
+Recheck HP/ThinkPad before recommending this kernel to their users. Details,
+artifact identity and deferred update tests are in the
+[v0.2.2 technical notes](docs/snapdragon-v0.2.2.md). Historical physical results
+below refer to the earlier tested stack unless explicitly stated otherwise.
 
 ## Purpose and current state
 

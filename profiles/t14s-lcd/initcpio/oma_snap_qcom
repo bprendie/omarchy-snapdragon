@@ -2,12 +2,14 @@
 # Build-time hook: include DT-probed Qualcomm prerequisites without HP autodetect.
 build() {
   local tree
-  for tree in clk/qcom pinctrl/qcom soc/qcom regulator interconnect/qcom phy/qualcomm usb/dwc3 i2c/busses spmi remoteproc rpmsg power/domain/qcom; do
+  for tree in clk/qcom pinctrl/qcom soc/qcom regulator interconnect/qcom phy/qualcomm usb/dwc3 i2c/busses spmi remoteproc rpmsg power/domain/qcom pmdomain/qcom; do
     add_all_modules "/drivers/$tree/"
   done
+  # Glymur display power domains are provided through the modular SCMI driver.
+  add_module scmi_pm_domain
   # DT links do not create module dependencies on msm. Include the LCD chain.
   add_module panel_edp
-  # ASUS UX3407RA OLED panel must bind before encrypted-root unlock.
+  # ASUS UX3407RA/UX3607OA OLED panel must bind before encrypted-root unlock.
   add_module panel_samsung_atna33xc20
   add_module pwm_bl
   add_module leds_qcom_lpg

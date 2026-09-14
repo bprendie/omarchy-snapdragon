@@ -82,7 +82,7 @@ func verifyRelease(p policy, suite, dir string, cached bool) (fields, error) {
 }
 
 func checkRelease(p policy, suite string, result fields, now time.Time) error {
-	if result["Origin"] != "Ubuntu" || result["Suite"] != suite || result["Codename"] != p.Release {
+	if result["Origin"] != p.origin() || result["Suite"] != suite || result["Codename"] != p.Release {
 		return fmt.Errorf("unexpected archive identity")
 	}
 	date, err := time.Parse(time.RFC1123, result["Date"])
@@ -90,7 +90,7 @@ func checkRelease(p policy, suite string, result fields, now time.Time) error {
 		return err
 	}
 	age := time.Duration(p.MaxAge) * time.Hour
-	if suite == p.Release {
+	if suite == p.Release && !p.concept() {
 		age = 366 * 24 * time.Hour
 	}
 	if date.After(now.Add(24*time.Hour)) || now.Sub(date) > age {

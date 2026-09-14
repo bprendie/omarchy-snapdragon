@@ -1,6 +1,6 @@
 pkgname=oma-snap-kernel-tools
-pkgver=0.2.0
-pkgrel=10
+pkgver=0.2.2
+pkgrel=1
 pkgdesc='Retained Snapdragon kernel preparation, boot selection and transaction tools'
 arch=('aarch64')
 license=('custom')

@@ -1,0 +1,20 @@
+pkgname=oma-snap-firmware-asus-a16
+pkgver=1.312.4500.0
+pkgrel=2
+pkgdesc='ASUS UX3607OA GPU/DSP firmware; incomplete experimental X2 support'
+arch=('any')
+license=('custom:ASUS-Qualcomm' 'custom:Qualcomm-Atheros' 'BSD-3-Clause')
+options=('!strip' '!debug')
+package() {
+  local fw="$pkgdir/usr/lib/firmware/7.2.0-18-qcom-x1e/qcom/glymur/ASUSTeK/UX3607OA"
+  install -dm755 "$fw"
+  install -m644 "$startdir/firmware/"* "$fw/"
+  local base="$pkgdir/usr/lib/firmware/7.2.0-18-qcom-x1e"
+  install -dm755 "$base/ath12k/QCC2072/hw1.0"
+  install -m644 "$startdir/upstream/ath12k/QCC2072/hw1.0/"* "$base/ath12k/QCC2072/hw1.0/"
+  install -Dm644 "$startdir/GLYMUR-ASUS-Zenbook-A16-UX3607OA-tplg.bin" "$base/qcom/glymur/GLYMUR-ASUS-Zenbook-A16-UX3607OA-tplg.bin"
+  install -Dm644 "$startdir/upstream/LICENSES/LICENSE.QualcommAtheros_ath10k" "$pkgdir/usr/share/licenses/$pkgname/LICENSE.QualcommAtheros_ath10k"
+  install -Dm644 "$startdir/LICENSE.BSD-3-Clause" "$pkgdir/usr/share/licenses/$pkgname/LICENSE.BSD-3-Clause"
+  install -Dm644 "$startdir/upstream/WHENCE" "$pkgdir/usr/share/doc/$pkgname/WHENCE"
+  install -Dm644 "$startdir/PROVENANCE.txt" "$pkgdir/usr/share/doc/$pkgname/PROVENANCE.txt"
+}

@@ -6,7 +6,7 @@ name=${1:?Usage: build-kernel-set-camera.sh SET_NAME}
 [[ $# == 1 && $name =~ ^[a-zA-Z0-9._-]+$ ]] || exit 1
 set_root=build/kernel-sets/$name
 release=$(jq -er .kernel_release "$set_root/extracted.json")
-[[ $release =~ ^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+-generic$ ]] || exit 1
+[[ $release =~ ^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+-(generic|qcom-x1e)$ ]] || exit 1
 [[ ! -e $set_root/hp-camera ]] || { echo 'Preserve the existing module build.' >&2; exit 1; }
 cp -a packages/hp-camera/src "$set_root/hp-camera"
 headers=/output/kernel-sets/$name/root/usr/src/linux-headers-$release

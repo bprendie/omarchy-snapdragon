@@ -1,0 +1,10 @@
+ASUS UX3607OA-only ALSA card-name mapping, physically unvalidated.
+The kernel sound.model is GLYMUR-ASUS-Zenbook-A16-UX3607OA.
+The upstream board-specific AudioReach topology uses MultiMedia1 playback
+(4 channels, PCM 0) and MultiMedia2 capture (PCM 1), matching the installed
+Qualcomm/glymur/GLYMUR-CRD.conf and HiFi.conf profile and four WSA8845 codec names.
+No global UCM file, mixer gain or other laptop profile is changed.
+Reviewed profile: alsa-project/alsa-ucm-conf
+00175aa645c482111d096c3d8230f182a875d286 (BSD-3-Clause).
+The live base contains byte-identical HiFi.conf. Physical testing must confirm
+card matching, mixer controls, all four speakers and both microphones.

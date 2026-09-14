@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 func main() {
@@ -48,6 +49,10 @@ func generate(record, archive, out string, previous uint64) error {
 	if err = os.WriteFile(filepath.Join(out, "candidate.json"), append(data, '\n'), 0644); err != nil {
 		return err
 	}
+	minimumTools := "0.2.0-10"
+	if strings.HasSuffix(a.KernelRelease, "-qcom-x1e") {
+		minimumTools = "0.2.2-1"
+	}
 	build := fmt.Sprintf(`pkgname=oma-snap-kernel
 epoch=1
 pkgver=%d
@@ -55,12 +60,12 @@ pkgrel=1
 pkgdesc='Approved Ubuntu-derived Snapdragon kernel provider'
 arch=('aarch64')
 license=('custom')
-depends=('oma-snap-set-%s=0.2.0-1' 'oma-snap-kernel-tools>=0.2.0-10')
+depends=('oma-snap-set-%s=0.2.0-1' 'oma-snap-kernel-tools>=%s')
 options=('!strip' '!debug')
 package() {
   install -Dm644 "$startdir/candidate.json" "$pkgdir/usr/share/oma-snap/kernel-provider/candidate.json"
 }
-`, a.Sequence, a.HardwareSet)
+`, a.Sequence, a.HardwareSet, minimumTools)
 	if err = os.WriteFile(filepath.Join(out, "PKGBUILD"), []byte(build), 0644); err != nil {
 		return err
 	}

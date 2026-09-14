@@ -1,0 +1,34 @@
+ASUS Zenbook A16 UX3607OA — experimental, not hardware validated.
+Source: https://www.asus.com/sg/supportonly/ux3607oa/helpdesk_download/
+BSP V1.312.4500.0, released 2026-07-23; ASUS published SHA256:
+e8f2389ac5d4dfd30a1a8481ec3c1e282f24baea2898414351d0b6eb1fa8a0b3
+Download: https://dlcdnets.asus.com/pub/ASUS/nb/Image/Driver/DriverPackage/50616/SOCPackage_forWebSite_Qualcomm_Z_V1.312.4500.0_50616.exe
+
+Files extracted without executing the Windows installer:
+GFX/qcdx8480/qcdxkmsuc8480.mbn
+NPU/qcnspmcdm8480/{qccdsp8480.mbn,cdsp_dtbs.elf}
+Subsystem/qcsubsys_ext_adsp8480/{qcadsp8480.mbn,adsp_dtbs.elf}
+Paths are relative to QualcommBSP/. ADSP uses the top-level driver pair,
+not the differently sized nested ADSP/ alternative. Hardware compatibility
+of this pair is not yet validated.
+
+Missing: soccp.mbn and soccp_dtb.mbn. The BSP SoCCP INF references the
+boot firmware images, but does not contain them. The candidate DT marks this node disabled; missing filenames alone do not
+prove a normal-boot blocker. A late-attach function is present in its PAS driver.
+Actual SoCCP/battery behavior still requires hardware validation.
+
+These vendor binaries retain ASUS/Qualcomm ownership. They are retained locally
+as required testing inputs. Do not redistribute without applicable permission;
+a provenance notice does not grant distribution rights. No A16 support claim.
+
+Upstream additions, separate from the restricted ASUS binaries:
+linux-firmware d371ae3b6888b260e4c37b327a020401cfaaaefd:
+ath12k/QCC2072/hw1.0/{board-2.bin,firmware-2.bin,Notice.txt}.
+See retained WHENCE and LICENSE.QualcommAtheros_ath10k for redistribution terms.
+URLs, sizes and SHA256 are in manifests/asus-a16-upstream-firmware.json.
+
+A16 AudioReach topology built from linux-msm/audioreach-topology
+ e7b20b2b16cdda18eb8ae143c8d95c4815c0288e,
+GLYMUR-ASUS-Zenbook-A16-UX3607OA.m4, BSD-3-Clause.
+This is the board-specific upstream topology, not the reference project's
+hand-tuned GLYMUR-A16 topology. Audio remains physically unvalidated.

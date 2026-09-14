@@ -41,3 +41,25 @@ The user explicitly selected maximum stock Quattro installer reuse. See `docs/qu
 [Official ARM package mirror](https://pkgs.omarchy.org/edge/aarch64/): metadata snapshot hash recorded in `manifests/omarchy-repository.sha256`; package signatures verified by pacman using the pinned upstream Omarchy keyring (fingerprint `40DFB630FF42BCFFB047046CF0134EE680CAC571`). Hyprland 0.56.2 from this mirror links to ABI 14, superseding the earlier custom ABI 13 workaround for the desktop image.
 
 [Node 26.8.2 release](https://nodejs.org/dist/v26.8.2/): ARM64 tarball checksum pinned in `manifests/node.sha256` from the official HTTPS checksum listing. The binary executes in the ARM build environment. This checksum verification is not a separately verified release-signing-key signature. The user approved retaining stock cloud/AI tools; this ARM bundle supports stock offline Node provisioning.
+
+## ASUS A16 v0.2.2 offline integration — September 14, 2026
+
+- linux-firmware commit `d371ae3b6888b260e4c37b327a020401cfaaaefd`,
+  [QCC2072 directory](https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware/+/d371ae3b6888b260e4c37b327a020401cfaaaefd/ath12k/QCC2072/hw1.0/).
+  Retained upstream board/firmware bundle, Notice, WHENCE and redistribution
+  license; file URLs and SHA256 in `manifests/asus-a16-upstream-firmware.json`.
+- linux-msm/audioreach-topology commit
+  `e7b20b2b16cdda18eb8ae143c8d95c4815c0288e`,
+  [board-specific A16 topology](https://github.com/linux-msm/audioreach-topology/blob/e7b20b2b16cdda18eb8ae143c8d95c4815c0288e/GLYMUR-ASUS-Zenbook-A16-UX3607OA.m4).
+  Compiled and decoded: MultiMedia1 four-channel playback, MultiMedia2 capture.
+  Backend widget-reference diagnostics during compilation refer to machine-driver
+  endpoints; this is not a claim that the hardware has accepted the topology.
+- alsa-ucm-conf commit `00175aa645c482111d096c3d8230f182a875d286`,
+  [Glymur HiFi profile](https://github.com/alsa-project/alsa-ucm-conf/blob/00175aa645c482111d096c3d8230f182a875d286/ucm2/Qualcomm/glymur/HiFi.conf).
+  Same PCM layout and four codec prefixes as the candidate A16 topology/DT;
+  literal include closure checked against the live image. Physical audio pending.
+- [Upstream PAS driver](https://kernel.googlesource.com/pub/scm/linux/kernel/git/torvalds/linux/+/refs/heads/master/drivers/remoteproc/qcom_q6v5_pas.c)
+  was an investigation lead for late attach. Actual Concept module inspection
+  confirms `qcom_pas_attach` and the Kaanapali SoCCP match; actual embedded A16
+  DT marks SoCCP disabled. Do not equate firmware-name properties with an enabled
+  firmware-loading path or claim working battery reporting from this audit.

@@ -12,6 +12,7 @@ mkdir -p build/kernel-sets
 docker run --rm --network none --user "$(id -u):$(id -g)" \
   -v "$PWD/build/kernel-candidate:/usr/local/bin/kernel-candidate:ro" \
   -v "$(realpath "$policy"):/policy.json:ro" \
+  -v "$PWD/profiles/snapdragon/ubuntu-concept-keyring.gpg:/concept-keyring.gpg:ro" \
   -v "$PWD/build/kernel-candidates/$name:/candidate:ro" \
   -v "$PWD/build/kernel-sets:/sets" oma-snap-candidate-builder:local \
   kernel-candidate --policy /policy.json --verify /candidate --extract "/sets/$set_name"

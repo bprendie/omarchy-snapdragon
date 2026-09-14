@@ -44,7 +44,7 @@ func verifyCandidate(p policy, dir string) (candidate, error) {
 	}
 	var records []record
 	var evidence []repository
-	for _, suite := range []string{p.Release, p.Release + "-updates", p.Release + "-security"} {
+	for _, suite := range p.suites() {
 		rows, r, err := loadIndex(p, suite, filepath.Join(dir, suite), true)
 		if err != nil {
 			return c, err

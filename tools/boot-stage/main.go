@@ -102,7 +102,7 @@ func run() (result error) {
 	if err = json.Unmarshal(data, &m); err != nil {
 		return err
 	}
-	if m.ID != *id || !regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+-generic$`).MatchString(m.Release) {
+	if m.ID != *id || !regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+-(generic|qcom-x1e)$`).MatchString(m.Release) {
 		return fmt.Errorf("invalid set identity/release")
 	}
 	staging := "/var/lib/oma-snap/staging"

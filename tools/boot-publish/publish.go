@@ -24,7 +24,7 @@ type build struct {
 var hexID = regexp.MustCompile(`^[a-f0-9]{64}$`)
 
 func (b build) validIdentity() bool {
-	return b.Schema == 1 && hexID.MatchString(b.Hardware) && hexID.MatchString(b.Entry) && hexID.MatchString(b.KernelHash) && hexID.MatchString(b.InitrdHash) && regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+-generic$`).MatchString(b.Release)
+	return b.Schema == 1 && hexID.MatchString(b.Hardware) && hexID.MatchString(b.Entry) && hexID.MatchString(b.KernelHash) && hexID.MatchString(b.InitrdHash) && regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+-(generic|qcom-x1e)$`).MatchString(b.Release)
 }
 
 func readBuild(stage string) (build, error) {

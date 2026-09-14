@@ -67,7 +67,7 @@ func run() error {
 	if err = json.Unmarshal(data, &extracted); err != nil {
 		return err
 	}
-	if extracted.Schema != 1 || !regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+-generic$`).MatchString(extracted.Release) {
+	if extracted.Schema != 1 || !regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+-(generic|qcom-x1e)$`).MatchString(extracted.Release) {
 		return fmt.Errorf("invalid extracted candidate")
 	}
 	if err = os.Mkdir(*output, 0755); err != nil {

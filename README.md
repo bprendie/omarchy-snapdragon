@@ -13,16 +13,49 @@ The goal is to preserve as much of **stock Omarchy Quattro** as possible, contri
 For architecture, kernel extraction, ARM packaging, testing and remaining work,
 see the [maintainer handoff](maintainer-handoff.md).
 
-**Testing release: v0.2.0.** It adds the retained-kernel update
+**Physically tested X Elite baseline: v0.2.0.** It adds the retained-kernel update
 pipeline and carries forward the v0.1.2 hardware support. The owner confirmed a
 successful HP installation, direct cameras on HP and ThinkPad, and an online Omarchy package update after connecting to Wi-Fi. See [release notes](docs/snapdragon-v0.2.0.md) and
 [what changed for maintainers](docs/v0.2-maintainability.md).
+
+**Experimental release: v0.2.2 — ASUS A16 UX3607OA / Snapdragon X2.**
+[Download v0.2.2](https://github.com/bprendie/omarchy-snapdragon/releases/tag/v0.2.2).
+It moves from Ubuntu `7.0.0-31-generic` to Ubuntu Concept
+`7.2.0-18-qcom-x1e` (a **7.2-rc7** base), adds the exact A16 device tree,
+QCC2072 Wi-Fi firmware, A16 GPU/DSP firmware and audio routing, and early SCMI
+power-domain support for display initialization. Omarchy remains 4.0.3 and the
+retained-kernel update architecture is preserved.
+
+The complete ISO reaches the Omarchy welcome screen in an ARM UEFI VM with
+zero failed services; all 976 offline installer packages resolve. **No physical
+machine has been validated on this new kernel.** HP and ThinkPad need regression
+testing, and v0.2.0 remains the physically tested baseline for those machines.
+A VM cannot establish A16 feature parity.
+
+**A16 gaps:** the enabled webcam capture pipeline is missing. Wi-Fi, Bluetooth,
+GPU acceleration, audio, keyboard/touchpad and visible disk unlock are prepared
+but physically untested. Fn/media keys, keyboard backlight, battery/charging,
+NPU, suspend and external displays/docks remain uncertain. Firmware presence
+alone does not establish working hardware. See the
+[release comparison and technical notes](docs/snapdragon-v0.2.2.md) and
+[A16 tester checklist](docs/asus-a16-testing.md).
+
+Download all four v0.2.2 ISO parts and its checksum from the release, then run:
+
+```bash
+cat omarchy-snapdragon-v0.2.2.iso.part-{00,01,02,03} > omarchy-snapdragon-v0.2.2.iso
+sha256sum -c omarchy-snapdragon-v0.2.2.iso.sha256
+```
+
+The v0.2.2 ISO is 8,265,340,928 bytes. It includes a local signed testing
+repository snapshot; publishing the ISO does not create an online Ubuntu
+Concept kernel update service.
 
 ## What it installs
 
 A native ARM64 Omarchy desktop using **Arch Linux ARM userspace, Ubuntu's Snapdragon-capable kernel and firmware, and the stock-derived Quattro installer**. Quattro handles the installation flow, disk configuration, encryption, packages and user setup. This repository adds the hardware packages, early boot drivers and boot finalization needed for Snapdragon machines.
 
-Published testing image: **omarchy-snapdragon-v0.2.0.iso** — [download v0.2.0](https://github.com/bprendie/omarchy-snapdragon/releases/tag/v0.2.0) (8.02 GB), with a [SHA-256 checksum](omarchy-snapdragon-v0.2.0.iso.sha256). See the [release notes](docs/snapdragon-v0.2.0.md) for versions, physical results and remaining validation.
+Previous physically tested image: **omarchy-snapdragon-v0.2.0.iso** — [download v0.2.0](https://github.com/bprendie/omarchy-snapdragon/releases/tag/v0.2.0) (8.02 GB), with a [SHA-256 checksum](omarchy-snapdragon-v0.2.0.iso.sha256). See the [release notes](docs/snapdragon-v0.2.0.md) for versions, physical results and remaining validation.
 
 Download all four `omarchy-snapdragon-v0.2.0.iso.part-*` files and the ISO
 checksum from the release, then reconstruct the original image:
@@ -37,11 +70,15 @@ not part of the Git source history.
 
 ## Hardware status
 
+HP/ThinkPad physical results below apply to earlier kernels, including v0.2.0;
+they are not regression results for v0.2.2.
+
 | Machine | Status | Known gaps |
 | --- | --- | --- |
 | Lenovo ThinkPad T14s Gen 6, Snapdragon X Elite, LCD | Physical installation, encrypted-disk unlock and Omarchy desktop confirmed; audio, Wi-Fi, Bluetooth and panel brightness work | Charging can require unplug/replug; TrackPoint workaround included, with remaining EC/button behavior unconfirmed; keyboard backlight unresolved on a unit awaiting keyboard replacement |
 | HP EliteBook Ultra G1q 14, B13U7UT#ABA | Physical installation, graphical disk unlock and desktop confirmed; Wi-Fi, Bluetooth, touchpad, speaker audio, brightness widget and [RGB webcam](docs/hp-camera-status.md) work; **NPU validated with a QNN HTP workload** (separate test runtime) | Native Fn/media keys and keyboard backlight remain unresolved; [HP-only Super+F brightness/volume shortcuts](docs/hp-unlock-fn-investigation.md#hp-only-brightnessvolume-workaround) physically verified; included in v0.1.2; one unexplained reset during keyboard investigation |
 | ASUS Zenbook A14 UX3407RA, Snapdragon X Elite | Firmware and early OLED driver included; package and boot checks pass in an ARM VM | **No physical hardware test yet**; UX3407QA is outside this profile |
+| ASUS Zenbook A16 UX3607OA, Snapdragon X2 Elite Extreme | Experimental v0.2.2 device tree, firmware, audio and early-boot prerequisites included; ARM VM smoke boot passes | No physical results; webcam capture pipeline missing; power, input, audio, graphics, NPU and suspend need hardware testing |
 
 The v0.1.2 ISO reaches the Omarchy welcome screen in an ARM UEFI VM with zero failed services. Its 971-package offline dependency check and 11 boot/firmware/camera/hotkey package integrity checks pass. The hardware fixes below were tested on the installed laptops; a full physical reinstall of v0.1.2 remains untested. QEMU cannot validate ASUS hardware behavior.
 

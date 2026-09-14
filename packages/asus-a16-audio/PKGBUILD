@@ -1,0 +1,13 @@
+pkgname=oma-snap-audio-asus-a16
+pkgver=0.2.2
+pkgrel=1
+pkgdesc='Experimental ASUS UX3607OA mapping to the upstream Glymur four-speaker UCM profile'
+arch=('any')
+license=('BSD-3-Clause')
+depends=('alsa-ucm-conf')
+package() {
+  local ucm="$pkgdir/usr/share/alsa/ucm2/conf.d/glymur"
+  install -dm755 "$ucm"
+  ln -s ../../Qualcomm/glymur/GLYMUR-CRD.conf "$ucm/GLYMUR-ASUS-Zenbook-A16-UX3607OA.conf"
+  install -Dm644 "$startdir/PROVENANCE.txt" "$pkgdir/usr/share/doc/$pkgname/PROVENANCE.txt"
+}

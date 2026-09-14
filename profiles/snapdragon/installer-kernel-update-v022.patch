@@ -1,0 +1,73 @@
+--- usr/share/omarchy-iso/orchestrator/phases_impl.py
++++ usr/share/omarchy-iso/orchestrator/phases_impl.py
+@@ -23,6 +23,7 @@
+ from __future__ import annotations
+
+ import hashlib
++import json
+ import os
+ import platform
+ import re
+@@ -147,6 +148,7 @@
+     if platform.machine() == "aarch64":
+         packages.remove("limine")
+         packages += ["grub", "oma-snap-boot", "archlinuxarm-keyring"]
++        packages += ["oma-snap-kernel", "oma-snap-kernel-tools", "oma-snap-repository", "oma-snap-audio-asus-a16"]
+         packages += ["oma-snap-firmware-hp", "oma-snap-audio-hp", "oma-snap-firmware-asus-a14"]
+         packages += ["oma-snap-camera-hp", "oma-snap-firmware-t14s-npu"]
+         packages += ["oma-snap-hotkeys-hp"]
+@@ -1038,6 +1040,11 @@
+     if ctx.state.get("target_setup_prepared"):
+         return
+
++    # Keep the signed release snapshot for offline updates and recovery.
++    shutil.copytree(
++        "/var/cache/oma-snap/repository",
++        ctx.target / "var/cache/oma-snap/repository",
++    )
+     shutil.copy("/etc/pacman.conf", str(ctx.target / "etc" / "pacman.conf"))
+
+     bind_mounts = [
+@@ -1309,6 +1316,12 @@
+         cmd = [str(ctx.target / "usr/bin/oma-snap-boot-install"), "--target", str(ctx.target), "--esp", boot["esp_mount"]]
+         if boot.get("enable_fallback"):
+             cmd.append("--fallback")
++        channel = Path("/usr/share/omarchy-iso/kernel-channel").read_text().strip()
++        if channel not in ("testing", "stable"):
++            raise RuntimeError("Invalid installer kernel channel")
++        channel_path = ctx.target / "etc/oma-snap/kernel-channel"
++        channel_path.parent.mkdir(parents=True, exist_ok=True)
++        channel_path.write_text(channel + "\n")
+         subprocess.run(cmd, check=True)
+         return
+     if not (ctx.target / "usr" / "bin" / "limine-update").exists():
+@@ -1707,6 +1720,29 @@
+             raise RuntimeError("Installed kernel differs from the packaged Stubble image")
+         if boot.get("enable_fallback") and not (esp / "EFI/BOOT/BOOTAA64.EFI").is_file():
+             raise RuntimeError("Removable Snapdragon bootloader is missing")
++        provider = json.loads((ctx.target / "usr/share/oma-snap/kernel-provider/candidate.json").read_text())
++        if provider.get("status") != "approved":
++            raise RuntimeError("Installed Snapdragon provider is not approved")
++        channel = (ctx.target / "etc/oma-snap/kernel-channel").read_text().strip()
++        if channel not in ("testing", "stable") or provider.get("channel") != channel:
++            raise RuntimeError("Installed Snapdragon provider channel mismatch")
++        hardware = provider["hardware_set"]
++        if not re.fullmatch(r"[a-f0-9]{64}", hardware):
++            raise RuntimeError("Invalid installed hardware identity")
++        job = json.loads((ctx.target / f"var/lib/oma-snap/jobs/complete/{hardware}.json").read_text())
++        entry = job["boot_entry"]
++        if job.get("error") or job.get("hardware_set") != hardware or not re.fullmatch(r"[a-f0-9]{64}", entry):
++            raise RuntimeError("Invalid installed provider preparation")
++        published = json.loads((esp / f"oma-snap/entries/{entry}/entry.json").read_text())
++        if published.get("hardware_set") != hardware or published.get("kernel_release") != provider["kernel_release"]:
++            raise RuntimeError("Installed boot entry differs from approved provider")
++        menu = (esp / "oma-snap/grub/grub.cfg").read_text()
++        if f"set default=oma-snap-{entry}\n" not in menu or "--id 'oma-snap-legacy'" not in menu:
++            raise RuntimeError("Approved provider or legacy fallback missing from boot menu")
++        for name, field in (("vmlinuz.efi", "kernel_sha256"), ("initramfs.img", "initramfs_sha256")):
++            payload = esp / f"oma-snap/entries/{entry}/{name}"
++            if hashlib.sha256(payload.read_bytes()).hexdigest() != published[field]:
++                raise RuntimeError(f"Installed provider boot payload changed: {name}")
+         return
+     _assert_boot_hooks_restored(ctx)
+

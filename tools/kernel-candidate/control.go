@@ -55,7 +55,7 @@ func paragraphs(r io.Reader, visit func(fields) error) error {
 	return flush()
 }
 
-var kernelName = regexp.MustCompile(`^linux-(generic$|image-|headers-|(main-)?modules-)`)
+var kernelName = regexp.MustCompile(`^linux-(generic$|qcom-x1e$|qcom-x1e-headers-|image-|headers-|(main-)?modules-)`)
 var bareDep = regexp.MustCompile(`^linux-[a-z0-9.+-]+$`)
 var exactDep = regexp.MustCompile(`^(linux-[a-z0-9.+-]+)\s*\(=\s*([^ )]+)\)$`)
 

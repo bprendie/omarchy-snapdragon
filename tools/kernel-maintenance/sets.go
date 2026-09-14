@@ -9,7 +9,7 @@ import (
 )
 
 var identity = regexp.MustCompile(`^[a-f0-9]{64}$`)
-var releaseName = regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+-generic$`)
+var releaseName = regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+-(generic|qcom-x1e)$`)
 
 func retainedReleases(root string) (map[string]bool, error) {
 	result := map[string]bool{}

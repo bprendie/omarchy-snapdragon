@@ -1,0 +1,9 @@
+{
+  "archive": "https://ppa.launchpadcontent.net/ubuntu-concept/x1e/ubuntu",
+  "release": "resolute",
+  "architecture": "arm64",
+  "meta_package": "linux-qcom-x1e",
+  "keyring": "/concept-keyring.gpg",
+  "signer": "8818B03153EA3CE7BBEF3A2A07E5CB0286C3AF17",
+  "max_update_age_hours": 168
+}

@@ -1,0 +1,35 @@
+{
+  "commit": "d371ae3b6888b260e4c37b327a020401cfaaaefd",
+  "files": [
+    {
+      "path": "packages/asus-a16-firmware/upstream/LICENSES/LICENSE.QualcommAtheros_ath10k",
+      "sha256": "337a55102138d7baa143ee4a4c6c91693e0113fece35d380b2a12109e8c23b3f",
+      "bytes": 2713,
+      "url": "https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware/+/d371ae3b6888b260e4c37b327a020401cfaaaefd/LICENSES/LICENSE.QualcommAtheros_ath10k?format=TEXT"
+    },
+    {
+      "path": "packages/asus-a16-firmware/upstream/WHENCE",
+      "sha256": "a11e84641f53f548aaa1130d1f9caa8096d1877c489d6fbbc13dd393aab68d4f",
+      "bytes": 473697,
+      "url": "https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware/+/d371ae3b6888b260e4c37b327a020401cfaaaefd/WHENCE?format=TEXT"
+    },
+    {
+      "path": "packages/asus-a16-firmware/upstream/ath12k/QCC2072/hw1.0/Notice.txt",
+      "sha256": "515bf4c9d620a87458e4447fe01a0e9bc384d1c3e0037cc4c3d2037b1ff25525",
+      "bytes": 142991,
+      "url": "https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware/+/d371ae3b6888b260e4c37b327a020401cfaaaefd/ath12k/QCC2072/hw1.0/Notice.txt?format=TEXT"
+    },
+    {
+      "path": "packages/asus-a16-firmware/upstream/ath12k/QCC2072/hw1.0/board-2.bin",
+      "sha256": "1574ec9c30ef21a0d3a45c02db49d04f36c9f10328537cc6c29e5f00880f2ad2",
+      "bytes": 401232,
+      "url": "https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware/+/d371ae3b6888b260e4c37b327a020401cfaaaefd/ath12k/QCC2072/hw1.0/board-2.bin?format=TEXT"
+    },
+    {
+      "path": "packages/asus-a16-firmware/upstream/ath12k/QCC2072/hw1.0/firmware-2.bin",
+      "sha256": "4c6a1be1f5bfad76319755ff76904abb21c4c7ece5293cc5f33a20b1f4c35254",
+      "bytes": 7148724,
+      "url": "https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware/+/d371ae3b6888b260e4c37b327a020401cfaaaefd/ath12k/QCC2072/hw1.0/firmware-2.bin?format=TEXT"
+    }
+  ]
+}

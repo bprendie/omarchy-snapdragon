@@ -2,9 +2,9 @@
 # Assemble a candidate hardware package from built kernel inputs and pinned firmware.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-name=${1:?Usage: prepare-hardware-package.sh SET_NAME NEW_PACKAGE_NAME}
+name=${1:?Usage: prepare-hardware-package.sh SET_NAME NEW_PACKAGE_NAME [--asus-a16]}
 package=${2:?Missing new package name}
-[[ $# == 2 && $name =~ ^[a-zA-Z0-9._-]+$ && $package =~ ^[a-zA-Z0-9._-]+$ ]] || exit 1
+[[ ( $# == 2 || ( $# == 3 && $3 == --asus-a16 ) ) && $name =~ ^[a-zA-Z0-9._-]+$ && $package =~ ^[a-zA-Z0-9._-]+$ ]] || exit 1
 destination=build/kernel-sets/$package
 firmware=build/kernel-sets/$package-firmware
 [[ ! -e $destination && ! -e $firmware ]] || exit 1
@@ -19,6 +19,10 @@ inputs=(
   build/hp-audio-package/oma-snap-audio-hp-0.1.0-1-any.pkg.tar.xz
 )
 manifests=(manifests/bridge-packages.sha256 manifests/hp-firmware-package.sha256 manifests/asus-a14-firmware-package.sha256 manifests/t14s-npu-firmware-package.sha256 manifests/hp-audio-package.sha256)
+if [[ ${3:-} == --asus-a16 ]]; then
+  inputs+=(build/asus-a16-firmware-package-v2/oma-snap-firmware-asus-a16-1.312.4500.0-2-any.pkg.tar.xz)
+  manifests+=(manifests/asus-a16-firmware-package.sha256)
+fi
 args=()
 for i in "${!inputs[@]}"; do
   archive=${inputs[$i]}

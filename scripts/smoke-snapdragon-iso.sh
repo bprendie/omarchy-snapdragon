@@ -4,6 +4,8 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 version=${1:-0.1.2}
 [[ $version =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit 1
+ram=${OMA_SNAP_VM_RAM:-8192}
+[[ $ram =~ ^[0-9]+$ ]]
 iso=omarchy-snapdragon-v${version}.iso
 vm_dir=build/snapdragon-v${version//./_}-vm
 [[ ! -e $vm_dir/serial.log ]] || { echo 'Preserve the existing VM evidence first.' >&2; exit 1; }
@@ -12,7 +14,7 @@ mkdir -p "$vm_dir"
 docker run --rm --network none --user "$(id -u):$(id -g)" \
   --name "oma-snap-v${version//./-}-smoke" \
   -v "$PWD/$iso:/image.iso:ro" -v "$PWD/$vm_dir:/work" oma-snap-builder:local \
-  qemu-system-aarch64 -machine virt -cpu cortex-a72 -m 8192 -smp 4 \
+  qemu-system-aarch64 -machine virt -cpu cortex-a72 -m "$ram" -smp 4 \
   -bios /usr/share/qemu-efi-aarch64/QEMU_EFI.fd \
   -device virtio-rng-pci -device virtio-gpu-pci -device qemu-xhci \
   -device usb-kbd -device usb-tablet \

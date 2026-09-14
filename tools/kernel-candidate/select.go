@@ -89,7 +89,7 @@ func closureRoots(records, pending []record) ([]record, string, error) {
 	release := ""
 	version := ""
 	for name, r := range seen {
-		if strings.HasPrefix(name, "linux-image-") && name != "linux-image-generic" {
+		if strings.HasPrefix(name, "linux-image-") && name != "linux-image-generic" && name != "linux-image-qcom-x1e" {
 			if release != "" {
 				return nil, "", fmt.Errorf("multiple image payloads")
 			}
@@ -97,10 +97,14 @@ func closureRoots(records, pending []record) ([]record, string, error) {
 			version = r.Fields["Version"]
 		}
 	}
-	if release == "" || !strings.HasSuffix(release, "-generic") {
-		return nil, "", fmt.Errorf("no generic image")
+	if !kernelRelease.MatchString(release) {
+		return nil, "", fmt.Errorf("no supported kernel image")
 	}
-	for _, name := range []string{"linux-modules-" + release, "linux-headers-" + release, "linux-headers-" + strings.TrimSuffix(release, "-generic")} {
+	common := "linux-headers-" + strings.TrimSuffix(release, "-generic")
+	if strings.HasSuffix(release, "-qcom-x1e") {
+		common = "linux-qcom-x1e-headers-" + strings.TrimSuffix(release, "-qcom-x1e")
+	}
+	for _, name := range []string{"linux-modules-" + release, "linux-headers-" + release, common} {
 		r, ok := seen[name]
 		if !ok || r.Fields["Version"] != version {
 			return nil, "", fmt.Errorf("missing/mismatched payload %s", name)

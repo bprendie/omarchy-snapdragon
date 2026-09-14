@@ -135,3 +135,17 @@ Tests in `tools/kernel-promotion` use synthetic archives and evidence, covering
 tampering, identity mismatch, absent evidence, sequence rejection, stable
 hardware requirements, and preserved ASUS status. These validate the gate's
 mechanics and do not stand in for candidate validation.
+
+## Experimental Concept candidates (v0.2.2)
+
+The testing channel can explicitly defer package reproducibility, VM rollback,
+and encrypted boot, with a nonempty reason for each absent result. It cannot
+defer source authentication or the ABI-matched HP camera build. Stable promotion
+still rejects all deferrals. A16 can be recorded as a fourth hardware profile;
+its presence does not change the existing ThinkPad/HP stable-validation gates.
+The 0.2.2 candidate records all hardware as untested on this new kernel. Earlier
+7.0 hardware results must not be reported as 7.2 results.
+
+The Concept provider requires `oma-snap-kernel-tools>=0.2.2-1`, whose release-name
+handling includes `-qcom-x1e`. This prevents activating a Concept provider with
+the older tools that accept only `-generic` releases.

@@ -1,0 +1,5 @@
+bd1a2d6735dc0507ace397ab868c05d70b286a30ea4a57e16771e272a045b5db  packages/asus-a16-firmware/firmware/qcdxkmsuc8480.mbn
+acf13d29288d283793f418a36650e8a261eed927d30de109a59cb2210f458794  packages/asus-a16-firmware/firmware/qccdsp8480.mbn
+9bee104a48d4aac647287d6c1454df170c1cff7158a2352711fd1e2163ea6d1d  packages/asus-a16-firmware/firmware/cdsp_dtbs.elf
+67b4e129d4d60fccd05d85be3754168f46535549a03a3627c598d634e73df49d  packages/asus-a16-firmware/firmware/qcadsp8480.mbn
+7906466c734b2f360d48cf086f80b6e04d84e9b02255c74545aa28d5df1e932c  packages/asus-a16-firmware/firmware/adsp_dtbs.elf

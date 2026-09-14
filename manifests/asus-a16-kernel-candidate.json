@@ -1,0 +1,36 @@
+{
+  "checked_on": "2026-09-14",
+  "status": "inspected-only; no boot or hardware validation",
+  "target": "asus,zenbook-a16-ux3607oa",
+  "archive": "https://ppa.launchpadcontent.net/ubuntu-concept/x1e/ubuntu/",
+  "suite": "resolute",
+  "package": "linux-modules-7.2.0-18-qcom-x1e",
+  "version": "7.2.0-18.18",
+  "package_sha256": "f78cb0b760f66c6ce762c73b680c6671beaeeb8365d3dbb24fc2cf22b3a9a51d",
+  "archive_signer": "8818B03153EA3CE7BBEF3A2A07E5CB0286C3AF17",
+  "verification": "gpgv InRelease PASS; Packages.xz SHA256/size PASS; package SHA256 PASS",
+  "kernel_sha256": "a6c4ac6e9e37d665c6a2096607632aec4c5a418e0a3fba97353243a78299f983",
+  "embedded_tree": {
+    "model": "ASUS Zenbook A16 (UX3607OA)",
+    "compatible": [
+      "asus,zenbook-a16-ux3607oa",
+      "qcom,glymur"
+    ],
+    "sha256": "980fca59c06f72e0e83d3765740cc8092671af3b429904c366c0b9f991bc03c3"
+  },
+  "hwid_mapping_count": 12,
+  "other_embedded_profiles": [
+    "HP EliteBook Ultra G1q",
+    "Lenovo ThinkPad T14s Gen 6 (LCD)",
+    "ASUS Zenbook A14 (UX3407RA)"
+  ],
+  "firmware_directory": "qcom/glymur/ASUSTeK/UX3607OA",
+  "explicit_board_firmware": [
+    "qcadsp8480.mbn",
+    "adsp_dtbs.elf",
+    "qccdsp8480.mbn",
+    "cdsp_dtbs.elf",
+    "soccp.mbn",
+    "soccp_dtb.mbn"
+  ]
+}

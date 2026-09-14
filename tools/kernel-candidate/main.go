@@ -70,7 +70,7 @@ func run() error {
 	if err = decoder.Decode(&p); err != nil {
 		return err
 	}
-	if !regexp.MustCompile(`^[a-z]+$`).MatchString(p.Release) || p.Architecture != "arm64" || p.MetaPackage != "linux-generic" || p.MaxAge < 1 || p.MaxAge > 168 || !regexp.MustCompile(`^[A-F0-9]{40}$`).MatchString(p.Signer) {
+	if !regexp.MustCompile(`^[a-z]+$`).MatchString(p.Release) || p.Architecture != "arm64" || !supportedTrack(p) || p.MaxAge < 1 || p.MaxAge > 168 || !regexp.MustCompile(`^[A-F0-9]{40}$`).MatchString(p.Signer) {
 		return fmt.Errorf("unsupported track policy")
 	}
 	if _, err = archiveURL(p.Archive, "dists/"+p.Release+"/InRelease"); err != nil {
@@ -92,7 +92,7 @@ func run() error {
 	}
 	result := candidate{Schema: 1, Status: candidateStatus(p), Created: time.Now().UTC(), Policy: p, Downloaded: *download}
 	var records []record
-	for _, suite := range []string{p.Release, p.Release + "-updates", p.Release + "-security"} {
+	for _, suite := range p.suites() {
 		fmt.Fprintln(os.Stderr, "Verify", suite)
 		dir := filepath.Join(*output, suite)
 		if err = os.Mkdir(dir, 0755); err != nil {

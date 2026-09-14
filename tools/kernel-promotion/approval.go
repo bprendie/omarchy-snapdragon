@@ -34,7 +34,7 @@ type approval struct {
 }
 
 var digestPattern = regexp.MustCompile(`^[a-f0-9]{64}$`)
-var releasePattern = regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+-generic$`)
+var releasePattern = regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+-[0-9]+-(generic|qcom-x1e)$`)
 
 func readJSON(path string, value any) error {
 	f, err := os.Open(path)
@@ -80,8 +80,8 @@ func (a approval) verify(base, archive string, previous uint64) error {
 		!digestPattern.MatchString(a.HardwareSet) || !releasePattern.MatchString(a.KernelRelease) {
 		return fmt.Errorf("invalid approval identity, decision or sequence")
 	}
-	if len(a.Hardware) != 3 {
-		return fmt.Errorf("all three hardware profiles must be recorded")
+	if len(a.Hardware) != 3 && len(a.Hardware) != 4 {
+		return fmt.Errorf("all existing hardware profiles must be recorded")
 	}
 	for _, profile := range []string{"t14s", "hp-g1q", "asus-ux3407ra"} {
 		state := a.Hardware[profile]
@@ -90,6 +90,14 @@ func (a approval) verify(base, archive string, previous uint64) error {
 		}
 		if a.Channel == "stable" && profile != "asus-ux3407ra" && state != "validated" {
 			return fmt.Errorf("stable promotion requires ThinkPad and HP validation")
+		}
+	}
+	for profile, state := range a.Hardware {
+		if profile != "t14s" && profile != "hp-g1q" && profile != "asus-ux3407ra" && profile != "asus-ux3607oa" {
+			return fmt.Errorf("unknown hardware profile: %s", profile)
+		}
+		if state != "validated" && state != "untested" {
+			return fmt.Errorf("invalid hardware state: %s", profile)
 		}
 	}
 	required := map[string]bool{"source-verification": false, "package-reproducibility": false,
@@ -111,14 +119,14 @@ func (a approval) verify(base, archive string, previous uint64) error {
 	}
 	for kind, present := range required {
 		if !present {
-			if a.Channel == "testing" && kind == "vm-encrypted-boot" && strings.TrimSpace(a.DeferredTests[kind]) != "" {
+			if a.Channel == "testing" && deferrableTestingCheck(kind) && strings.TrimSpace(a.DeferredTests[kind]) != "" {
 				continue
 			}
 			return fmt.Errorf("missing reviewed evidence: %s", kind)
 		}
 	}
 	for kind, reason := range a.DeferredTests {
-		if a.Channel != "testing" || kind != "vm-encrypted-boot" || required[kind] || strings.TrimSpace(reason) == "" {
+		if a.Channel != "testing" || !deferrableTestingCheck(kind) || required[kind] || strings.TrimSpace(reason) == "" {
 			return fmt.Errorf("invalid deferred testing check: %s", kind)
 		}
 	}
@@ -153,4 +161,10 @@ func (a approval) verify(base, archive string, previous uint64) error {
 		return fmt.Errorf("packaged set identity mismatch")
 	}
 	return nil
+}
+
+// Hardware-test candidates retain explicit missing-check reasons. Source
+// authentication and ABI-matched camera builds remain mandatory in all channels.
+func deferrableTestingCheck(kind string) bool {
+	return kind == "vm-encrypted-boot" || kind == "vm-rollback" || kind == "package-reproducibility"
 }
