@@ -1,0 +1,13 @@
+#!/bin/bash
+build() {
+  if [[ -z ${OMA_SNAP_SET_ID_FILE:-} || ! -f $OMA_SNAP_SET_ID_FILE ]]; then
+    printf 'OMA_SNAP_SET_ID_FILE must name the staged boot identity\n' >&2
+    return 1
+  fi
+  add_binary readlink
+  add_file "$OMA_SNAP_SET_ID_FILE" /etc/oma-snap/boot-set
+  add_runscript
+}
+help() {
+  echo 'Bind the initramfs-selected retained modules and firmware after mounting root.'
+}

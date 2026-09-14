@@ -8,12 +8,13 @@ if [[ ! -d $directory ]]; then
   git -C sources/omarchy-quattro worktree add --detach ../omarchy-snap "$revision"
 fi
 [[ $(git -C "$directory" rev-parse HEAD) == "$revision" ]]
-patch_file="$PWD/patches/0002-quattro-arm-profile.patch"
-if git -C "$directory" apply --check "$patch_file" 2>/dev/null; then
-  git -C "$directory" apply "$patch_file"
-else
-  git -C "$directory" apply --reverse --check "$patch_file"
-fi
+for patch_file in "$PWD/patches/0002-quattro-arm-profile.patch" "$PWD/patches/0004-quattro-retained-kernel-orphans.patch" "$PWD/patches/0005-quattro-kernel-preparation-wait.patch" "$PWD/patches/0006-quattro-kernel-reboot-identity.patch" "$PWD/patches/0007-quattro-refresh-kernel-wait.patch"; do
+  if git -C "$directory" apply --check "$patch_file" 2>/dev/null; then
+    git -C "$directory" apply "$patch_file"
+  else
+    git -C "$directory" apply --reverse --check "$patch_file"
+  fi
+done
 bash scripts/quattro-package-list.sh | cmp - "$directory/install/omarchy-base.packages"
 git -C "$directory" diff --check
 

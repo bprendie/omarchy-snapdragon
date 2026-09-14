@@ -4,10 +4,12 @@ cd "$(dirname "$0")/.."
 # Run after the installer VM exits. QEMU's disk lock rejects concurrent use.
 vm_dir="${OMA_SNAP_VM_DIR:-build/install-vm}"
 ssh_port="${OMA_SNAP_SSH_PORT:-2323}"
+vm_name="${OMA_SNAP_VM_NAME:-oma-snap-installed-test}"
+[[ $vm_name =~ ^oma-snap-[a-zA-Z0-9_-]+$ ]] || { echo 'Invalid test VM name' >&2; exit 1; }
 [[ $vm_dir =~ ^build/[a-zA-Z0-9_-]+$ ]] || { echo 'VM directory must be a direct child of build/' >&2; exit 1; }
 [[ $ssh_port =~ ^[0-9]+$ ]] && (( ssh_port > 1024 && ssh_port < 65536 )) || { echo 'Invalid SSH port' >&2; exit 1; }
 test -s "$vm_dir/target.img"
-docker run --rm -i --network host --user "$(id -u):$(id -g)" --name oma-snap-installed-test \
+docker run --rm -i --network host --user "$(id -u):$(id -g)" --name "$vm_name" \
   -v "$PWD/build:/work" oma-snap-builder:local \
   qemu-system-aarch64 -machine virt -cpu cortex-a72 -m 8192 -smp 4 \
   -bios /usr/share/qemu-efi-aarch64/QEMU_EFI.fd \

@@ -1,0 +1,4 @@
+post_install() {
+  systemctl enable oma-snap-kernel-prepare.path
+  systemctl start --no-block oma-snap-kernel-prepare.path
+}

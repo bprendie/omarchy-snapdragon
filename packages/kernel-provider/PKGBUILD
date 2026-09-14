@@ -1,0 +1,17 @@
+# Local integration candidate. Updating this dependency alone is not promotion.
+# A release must pass the external candidate/promotion gates before publication.
+pkgname=oma-snap-kernel
+pkgver=7.0.0.31.31
+pkgrel=1
+pkgdesc='Ubuntu-derived Snapdragon kernel provider with retained hardware payloads'
+arch=('aarch64')
+license=('custom')
+_set_id=66fd1aeac79199ae7e9e9b126dc2d8b0c996cb6afe2562d3f94f93cd157587bc
+_release=7.0.0-31-generic
+depends=("oma-snap-set-$_set_id" 'oma-snap-kernel-tools>=0.2.0-3')
+options=('!strip' '!debug')
+package() {
+  install -dm755 "$pkgdir/usr/share/oma-snap/kernel-provider"
+  printf '{"schema":1,"status":"unvalidated","hardware_set":"%s","kernel_release":"%s","ubuntu_meta_version":"7.0.0-31.31"}\n' \
+    "$_set_id" "$_release" > "$pkgdir/usr/share/oma-snap/kernel-provider/candidate.json"
+}

@@ -1,0 +1,5 @@
+#!/bin/sh
+# FAT-only Ubuntu container fixture. Real pacman-conf/locking is tested in the
+# native ARM pacman chroot; this container has no package database manager.
+[ "$#" = 1 ] && [ "$1" = DBPath ] || exit 1
+printf '%s\n' /var/lib/pacman/

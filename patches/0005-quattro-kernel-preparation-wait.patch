@@ -1,0 +1,38 @@
+diff --git a/bin/omarchy-update b/bin/omarchy-update
+--- a/bin/omarchy-update
++++ b/bin/omarchy-update
+@@ -40,16 +40,22 @@
+ 
+   omarchy-update-dev
+   omarchy-update-keyring
++  omarchy-update-snapdragon-kernel
+ 
+   # Migrations ship with the packages installed here and are written against
+   # them, so everything below waits on this finishing. An upgrade that stopped
+   # takes the update with it rather than migrating against what is still on disk.
+   omarchy-update-system-pkgs
++  omarchy-update-snapdragon-kernel
+   omarchy-migrate
++  omarchy-update-snapdragon-kernel
+   omarchy-hook post-update
++  omarchy-update-snapdragon-kernel
+   omarchy-update-aur-pkgs
++  omarchy-update-snapdragon-kernel
+   omarchy-update-mise
+   omarchy-update-orphan-pkgs
++  omarchy-update-snapdragon-kernel
+ 
+   omarchy-update-analyze-logs
+   omarchy-update-status
+diff --git a/bin/omarchy-update-snapdragon-kernel b/bin/omarchy-update-snapdragon-kernel
+new file mode 100755
+--- /dev/null
++++ b/bin/omarchy-update-snapdragon-kernel
+@@ -0,0 +1,7 @@
++#!/bin/bash
++# Wait between update phases that can change kernel packages.
++set -euo pipefail
++command -v oma-snap-kernel-queue >/dev/null || exit 0
++sudo systemctl start --wait oma-snap-kernel-prepare.service
++sudo oma-snap-kernel-queue --check-provider-prepared
++sudo oma-snap-boot-publish --activate-provider --wait-lock=30m

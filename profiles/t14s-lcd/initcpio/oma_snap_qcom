@@ -18,7 +18,11 @@ build() {
   done
   # HP EliteBook/Omnibook USB-C SBU routing gates the shared display graph.
   add_module gpio_sbu_mux
-  add_full_dir /usr/lib/firmware/7.0.0-31-generic
+  if [[ -z ${KERNELVERSION:-} || ! -d /usr/lib/firmware/$KERNELVERSION ]]; then
+    printf 'Missing firmware namespace for kernel %s\n' "${KERNELVERSION:-unset}" >&2
+    return 1
+  fi
+  add_full_dir "/usr/lib/firmware/$KERNELVERSION"
 }
 help() {
   echo 'Include Qualcomm platform modules and the versioned Ubuntu firmware set.'

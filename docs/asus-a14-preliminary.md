@@ -1,5 +1,9 @@
 # ASUS Zenbook A14 preliminary checks — 2026-09-12
 
+September 13 identification update: the user's newly supplied ASUS model is an
+[A16 UX3607OA-family machine](asus-a16-identification.md), a separate target.
+The A14 checks below do not establish support for that A16.
+
 September 13 follow-up: [camera and encrypted-unlock readiness](asus-camera-unlock-readiness.md)
 checks the shipped RGB camera graph and known early-display prerequisites.
 ASUS hardware remains untested.

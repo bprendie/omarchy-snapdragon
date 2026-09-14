@@ -1,0 +1,12 @@
+[Trigger]
+Operation = Remove
+Operation = Upgrade
+Type = Package
+Target = oma-snap-set-*
+
+[Action]
+Description = Protecting retained Snapdragon boot hardware...
+When = PreTransaction
+Exec = /usr/bin/oma-snap-kernel-retain
+AbortOnFail
+NeedsTargets

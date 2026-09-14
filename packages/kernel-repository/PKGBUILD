@@ -1,0 +1,16 @@
+pkgname=oma-snap-repository
+pkgver=0.2.0
+pkgrel=1
+pkgdesc='Signing trust and mirror configuration for the Snapdragon package repository'
+arch=('any')
+license=('custom')
+depends=('pacman' 'gnupg')
+backup=('etc/pacman.d/oma-snap-mirrorlist')
+install=repository.install
+package() {
+  install -Dm644 "$startdir/oma-snap.gpg" "$pkgdir/usr/share/pacman/keyrings/oma-snap.gpg"
+  install -Dm644 "$startdir/oma-snap-trusted" "$pkgdir/usr/share/pacman/keyrings/oma-snap-trusted"
+  install -Dm644 "$startdir/oma-snap-revoked" "$pkgdir/usr/share/pacman/keyrings/oma-snap-revoked"
+  install -Dm644 "$startdir/oma-snap-mirrorlist" "$pkgdir/etc/pacman.d/oma-snap-mirrorlist"
+  install -Dm644 "$startdir/repository.json" "$pkgdir/usr/share/oma-snap/repository.json"
+}

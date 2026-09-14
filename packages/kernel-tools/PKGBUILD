@@ -1,0 +1,31 @@
+pkgname=oma-snap-kernel-tools
+pkgver=0.2.0
+pkgrel=10
+pkgdesc='Retained Snapdragon kernel preparation, boot selection and transaction tools'
+arch=('aarch64')
+license=('custom')
+depends=('bash' 'coreutils' 'pacman' 'systemd' 'util-linux' 'kmod' 'mkinitcpio' 'cryptsetup' 'plymouth' 'grub' 'kernel-modules-hook' 'rsync')
+backup=('etc/oma-snap/esp-path' 'etc/pacman.d/hooks/60-depmod.hook')
+install=kernel-tools.install
+options=('!strip' '!debug')
+package() {
+  local tool hook
+  for tool in kernel-set boot-stage boot-publish kernel-retain kernel-queue kernel-maintenance; do
+    install -Dm755 "$startdir/oma-snap-$tool" "$pkgdir/usr/bin/oma-snap-$tool"
+  done
+  install -Dm644 "$startdir/esp-path" "$pkgdir/etc/oma-snap/esp-path"
+  install -Dm644 "$startdir/mkinitcpio-update.conf" "$pkgdir/usr/share/oma-snap/kernel-update/mkinitcpio.conf"
+  install -Dm755 "$startdir/oma_snap_qcom_update" "$pkgdir/usr/lib/initcpio/install/oma_snap_qcom_update"
+  install -Dm755 "$startdir/oma_snap_set_install" "$pkgdir/usr/lib/initcpio/install/oma_snap_set"
+  install -Dm755 "$startdir/oma_snap_set_hook" "$pkgdir/usr/lib/initcpio/hooks/oma_snap_set"
+  for hook in 01-oma-snap-retain 02-oma-snap-retain-legacy 95-oma-snap-prepare; do
+    install -Dm644 "$startdir/$hook.hook" "$pkgdir/usr/share/libalpm/hooks/$hook.hook"
+  done
+  # Higher-priority hook preserves retained releases and delegates other targets
+  # to kmod's original depmod script; do not replace kmod-owned files.
+  install -Dm644 "$startdir/60-depmod.hook" "$pkgdir/etc/pacman.d/hooks/60-depmod.hook"
+  install -Dm644 "$startdir/linux-modules-cleanup-oma-snap.conf" "$pkgdir/usr/lib/systemd/system/linux-modules-cleanup.service.d/oma-snap.conf"
+  install -Dm644 "$startdir/oma-snap-kernel-prepare.path" "$pkgdir/usr/lib/systemd/system/oma-snap-kernel-prepare.path"
+  install -Dm644 "$startdir/oma-snap-kernel-prepare.service" "$pkgdir/usr/lib/systemd/system/oma-snap-kernel-prepare.service"
+  install -d "$pkgdir/var/lib/oma-snap/jobs/"{pending,running,failed,complete,work}
+}

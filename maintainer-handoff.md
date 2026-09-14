@@ -1,6 +1,7 @@
 # Maintainer handoff: Omarchy Snapdragon
 
-Updated September 13, 2026. Release: **v0.1.0**, based on **Omarchy 4.0.3**.
+Updated September 13, 2026. Current testing release: **v0.2.0**, based on
+**Omarchy 4.0.3**. [Download the release](https://github.com/bprendie/omarchy-snapdragon/releases/tag/v0.2.0).
 
 ## Purpose and current state
 
@@ -15,15 +16,30 @@ The ThinkPad T14s Gen 6 LCD is essentially working for everyday desktop use. The
 | HP NPU, separate follow-up | FastRPC calculator, Qualcomm DSP validator and a small QNN HTP ReLU graph returned correct results | Runtime staged separately on the HP; not installed by v0.1.0. No performance, power, large-model or cross-device claim. |
 | ASUS Zenbook A14 UX3407RA, X Elite | None | Firmware package and early OLED driver pass generic ARM VM checks. Automatic device-tree selection and all physical functions need testing. UX3407QA is outside this profile. |
 
-The combined v0.1.0 ISO boots to the stock Omarchy welcome screen in an ARM UEFI VM with zero failed services. Its hardware packages pass integrity checks. The ThinkPad and HP physical confirmations came from preceding images carrying their respective fixes; the combined ASUS-inclusive image still needs a physical installation regression test. The USB has been written and fully readback-verified for that test.
+## The v0.2.0 maintenance milestone
 
-September 13 follow-up: the ThinkPad camera now passes direct and PipeWire
-capture after installing missing camera packages; those are queued in the
-next-build profile. Its NPU passed with a temporary matched Lenovo cDSP
-firmware/runtime pair, then the original firmware was restored. Keyboard
-backlight remains unresolved on the unit awaiting keyboard replacement.
-These follow-up changes are not in the published v0.1.0 ISO. See
-[ThinkPad test details](docs/t14s-camera-backlight-npu.md).
+v0.2.0 supplies a kernel-provider lifecycle: authenticated Ubuntu candidate
+acquisition, matching headers and camera module rebuilds, reproducible retained
+hardware packages, signed coordinated repository assembly, queued boot
+preparation, and provider-controlled selection with a retained fallback. The
+kernel binary itself is still Ubuntu's 7.0.0-31-generic Stubble image.
+
+The owner confirmed a successful physical HP installation. Direct camera
+previews work on both HP and ThinkPad; Chromium access remains a separate deferred
+issue, with permissions not yet confirmed as its cause. The owner also reported
+that **connecting to Wi-Fi after installation let the normal Omarchy update run
+and immediately pull available updated packages**. This is a practical online
+package-update success, not proof that a newer Snapdragon kernel was delivered.
+
+Read [the maintainability overview](docs/v0.2-maintainability.md) for the before/
+after architecture, update sequence, evidence and remaining work. The
+[v0.2.0 notes](docs/snapdragon-v0.2.0.md) identify the exact ISO, testing approval
+and deferred checks. The included kernel repository is still a local signed
+snapshot; production hosting and trust transition remain unfinished.
+
+The extraction and hardware sections below explain the original v0.1 bootstrap.
+Their fixed paths and package tables are historical where indicated; the
+provider/set layout in the v0.2.0 overview is the current update model.
 
 ## Why this took integration work
 
@@ -58,7 +74,9 @@ The acquisition audit verified Ubuntu's signed `InRelease` metadata, checked the
 
 `scripts/extract-kernel-update.sh` uses `dpkg-deb -x` in an isolated builder to extract the image and matching modules. It separately extracts control files for inspection with `dpkg-deb -e`. **No Debian maintainer scripts are run, and no Ubuntu package manager is installed on the target.**
 
-We do not rebuild, patch or strip this kernel binary. `packages/ubuntu-t14s-kernel/PKGBUILD` creates an Arch package named `oma-snap-kernel-ubuntu`, version `7.0.0.31.31-1`, containing:
+We do not rebuild, patch or strip this kernel binary. The original bootstrap
+package remains as a legacy fallback in v0.2.0; retained updates use separate
+hardware-set packages. `packages/ubuntu-t14s-kernel/PKGBUILD` creates an Arch package named `oma-snap-kernel-ubuntu`, version `7.0.0.31.31-1`, containing:
 
 ```text
 /usr/lib/oma-snap/7.0.0-31-generic/vmlinuz.efi
@@ -77,7 +95,9 @@ We retain the wrapped image byte-for-byte. `tools/inspect-kernel` inspects its A
 
 This matters: extracting only a raw Linux image or combining it with arbitrary modules would discard part of the working boot path. The installer checks that the kernel copied onto the EFI System Partition matches the packaged Stubble image.
 
-The original kernel's signature is preserved, but **the complete Omarchy ISO/GRUB/initramfs Secure Boot chain has not been validated**. Ubuntu's Secure Boot capability must not be presented as a property of this entire port.
+The original kernel signature is preserved with the binary. **Secure Boot is
+disabled and out of scope.** Ubuntu metadata and pacman package signature checks
+verify software provenance; they do not enable Secure Boot.
 
 ### 4. Package firmware in the kernel's namespace
 
@@ -107,7 +127,9 @@ The display fixes are small but significant:
 
 Quattro mounts and provisions the target, then invokes the Go helper in `tools/boot-install`. The helper validates the target and FAT ESP, creates a separate `oma-snap` namespace, copies the kernel, generates the target initramfs and installs ARM64 GRUB with `--no-nvram`. It adds `EFI/BOOT/BOOTAA64.EFI` only when fallback installation is explicitly requested, and refuses to overwrite an existing fallback directory.
 
-The current boot command includes `clk_ignore_unused pd_ignore_unused arm64.nopauth`; GRUB also retains the Snapdragon memory-range workaround from the bring-up path. These should be reviewed against newer upstream support, rather than silently propagated forever. Kernel version and paths are hardcoded in several components. The helper is an installation finalizer, not an atomic kernel updater.
+The current boot command includes `clk_ignore_unused pd_ignore_unused arm64.nopauth`; GRUB also retains the Snapdragon memory-range workaround from the bring-up path. These should be reviewed against newer upstream support, rather than silently propagated forever. The original bootstrap has fixed legacy paths. v0.2.0 adds separate retained-set
+preparation and selection commands plus approved-provider integration in the
+fresh installer; complete power-loss recovery remains a follow-up.
 
 ## How the Omarchy ARM packages actually work
 
@@ -121,7 +143,9 @@ An ARM package is not automatically created when its x86 equivalent is released.
 
 ### Omarchy runtime and settings
 
-We reuse Omarchy's package recipes from `omacom/omarchy-pkgs`. Both `omarchy` and `omarchy-settings` are built from the pinned **4.0.3** source commit `0534987009061cbe2dacdde4ad564092ab698d12`, with the local ARM profile patch applied through `OMARCHY_SRC`. `scripts/build-quattro-profile.sh` produces **4.0.3-1.4** packages.
+We reuse Omarchy's package recipes from `omacom/omarchy-pkgs`. Both `omarchy` and `omarchy-settings` are built from the pinned **4.0.3** source commit `0534987009061cbe2dacdde4ad564092ab698d12`, with the local ARM profile patch applied through `OMARCHY_SRC`. The original `scripts/build-quattro-profile.sh` produced **4.0.3-1.4** packages;
+v0.2.0 uses `scripts/build-quattro-update-profile.sh` and the coordinated
+**4.0.3-1.9** runtime/settings pair with kernel lifecycle patches.
 
 `omarchy` supplies runtime commands and installation/user-setup code. `omarchy-settings` supplies packaged defaults and assets used by the desktop and live installer. The recipes separate the pair so settings can be installed before the complete desktop. The runtime has a versioned dependency on its settings counterpart.
 
@@ -146,7 +170,9 @@ oma-snap-audio-hp                0.1.0-1
 oma-snap-firmware-asus-a14        1.312.8100.0-1
 ```
 
-The upstream archives retain their signatures. They are indexed separately from the local integration packages. The local `oma-snap-local` offline repository currently uses unsigned packages checked against retained hash manifests; upstream signature checks remain required. This scoped exception is not equivalent to disabling pacman signature verification globally. Maintained package/repository signing remains release-engineering work.
+The upstream archives retain their signatures. They are indexed separately from the local integration packages. The legacy `oma-snap-local` offline repository uses unsigned packages checked against retained hash manifests; upstream signature checks remain required. This scoped exception is not equivalent to disabling pacman signature verification globally. v0.2.0 adds a separate signed `oma-snap` repository for its coordinated update
+packages, while preserving that legacy offline set. Public hosting and production
+trust deployment remain release-engineering work.
 
 The early installer package list includes the boot helper, ARM keyring and model firmware/audio packages before installed boot generation. For simplicity, the combined ISO currently installs HP and ASUS payload packages on ARM targets together. Their firmware filenames/UCM matches are model-scoped, but the package-selection stage is not yet an elegant per-machine dispatcher.
 
@@ -154,13 +180,28 @@ The early installer package list includes the boot helper, ARM keyring and model
 
 The fresh-install signature failure was fixed by installing and populating `archlinuxarm-keyring`, alongside the existing keyrings. A previously failing Alacritty install then succeeded with its Arch Linux ARM signature verified. That fix is integrated into the installer and keyring-update path.
 
-Ordinary ARM packages can use pacman's configured repositories, but **full Omarchy rolling-update parity is not finished**. The MVP configuration contains:
+The owner physically confirmed that the normal Omarchy update flow fetched
+available online packages after a v0.2.0 installation connected to Wi-Fi. ARM
+packages still depend on their repositories publishing compatible AArch64 builds.
+
+The v0.2.0 refresh templates use:
 
 ```ini
-IgnorePkg = omarchy omarchy-settings hyprland hyprtoolkit hyprland-guiutils
+IgnorePkg = hyprland hyprtoolkit hyprland-guiutils
 ```
 
-The Omarchy repository also has `Usage = Sync Search Install`, excluding ordinary upgrade use. These holds protect the tested package combination; they are not a long-term update solution. The custom kernel/firmware packages have no hosted rolling update channel, and Ubuntu APT updates do not reach this Arch installation. Removing the holds without establishing replacement packages, signing and boot rollback would bypass the current compatibility policy.
+The original `omarchy` and `omarchy-settings` holds are removed. Their patched
+pair is supplied through the signed Snapdragon repository, while the upstream
+Omarchy repository retains `Usage = Sync Search Install`. This protects the
+Snapdragon-specific update integration from an unrestricted upstream replacement.
+The helper waits for kernel preparation and checks the provider before activation;
+the orphan cleanup path protects retained kernel sets.
+
+The custom repository shipped in this ISO is an offline signed snapshot, not
+a hosted kernel release channel. Ubuntu APT updates do not run on the target.
+Future Ubuntu kernels must pass the candidate/approval workflow and be delivered
+as pacman packages through a maintained endpoint. The successful physical package
+update did not establish that a new custom kernel was fetched or activated.
 
 ## Changes a maintainer would review
 
@@ -181,21 +222,20 @@ The `t14s-lcd` directory names reflect the first target; some contents are now s
 
 ### Get the exact image
 
-Download all four ISO parts and the checksum from the [v0.1.0 release](https://github.com/bprendie/omarchy-snapdragon/releases/tag/v0.1.0). GitHub's per-asset size limit requires splitting this 7,482,687,488-byte ISO.
+For the current testing release, use `omarchy-snapdragon-v0.2.0.iso` in the repo
+root or `~/ISOs`, with the adjacent checksum. Exact size, hash and qualification
+are in [the v0.2.0 notes](docs/snapdragon-v0.2.0.md). The GitHub release supplies four ISO parts and checksums; the README explains
+how to reconstruct the image.
 
-```bash
-cat omarchy-snapdragon-v0.1.0.iso.part-{00,01,02,03} > omarchy-snapdragon-v0.1.0.iso
-sha256sum -c omarchy-snapdragon-v0.1.0.iso.sha256
-```
-
-Expected SHA-256: `4f13254d37527fbaaf5cb45712544258104ddba11012f19022a953deb01ddc7c`.
+The owner has paused further VM testing. The procedures below are for an explicit
+future validation run, not instructions to restart the existing paused job.
 
 ### VM smoke test
 
 With the documented builder image available:
 
 ```bash
-OMA_SNAP_TEST_ISO=omarchy-snapdragon-v0.1.0.iso \
+OMA_SNAP_TEST_ISO=omarchy-snapdragon-v0.2.0.iso \
 OMA_SNAP_VM_DIR=build/maintainer-live-test \
 OMA_SNAP_SSH_PORT=2334 \
 bash scripts/smoke-installer-live.sh
@@ -236,19 +276,32 @@ For NPU evidence and runtime inputs, see [HP NPU validation](docs/hp-npu-validat
 
 ## Build reproducibility and release gaps
 
-The current ISO can be built from the prepared development workspace using `scripts/build-boot-package.sh` and `scripts/build-snapdragon-installer.sh`. **A clean Git clone is not sufficient.** The combined builder reuses retained `build/installer-root-export`, `build/installer-iso`, EFI/diagnostic images, downloaded packages and the populated ARM container. Those large inputs were deliberately excluded from Git.
+The v0.2.0 assembly path is `scripts/stage-v020-installer.sh`, followed by
+`scripts/assemble-v020-installer.sh` with the prepared signed candidate repository
+and pinned signing-key fingerprint. Provider generation and repository assembly
+are documented in [the promotion guide](docs/kernel-promotion.md). The process
+still requires the pinned v0.1.2 base ISO, matching packages and a populated
+builder; **a clean Git clone alone is not sufficient**.
 
-The repository includes acquisition scripts, recipes and manifests, but the sequence still contains historical defaults, hardcoded versions, retained-root assumptions and baseline scripts expecting five local packages. Some older wildcard package selections also need care when multiple package revisions are retained. The combined builder handles the v0.1.0 delta explicitly; it is not a general release pipeline.
+Cleanup removed the obsolete extracted roots and duplicate images that older
+commands referenced. Retained input archives, recipes, manifests, current
+packages and test logs remain available. Historical scratch paths may need to
+be regenerated. Approximately 275 GiB was removed.
 
-Earlier experiments reproduced ISO packaging and SquashFS compression from identical staging inputs. That does not prove a clean rebuild of all packages, root contents and initramfs is reproducible. The current combined builder also uses its own direct xorriso invocation rather than the earlier normalized packaging helper. See [reproducibility evidence](docs/reproducibility.md) for the limited scope of those earlier results.
+The retained hardware package was reproduced byte for byte. That does not prove
+that the entire ISO, initialized trust store and generated initramfs reproduce
+from a clean checkout. See [candidate results](docs/snapdragon-v0.2.0.md) and
+[earlier reproducibility evidence](docs/reproducibility.md) for their exact scope.
 
 Before treating this as an officially maintained distribution, the main gaps are:
 
 - A clean, documented build pipeline with immutable input retention and CI.
-- Signed project packages/repository and a coordinated ARM desktop update policy.
-- Kernel update hooks, multi-kernel support, atomic ESP deployment and boot rollback. The present validator expects exactly one packaged kernel.
+- Production hosting and trust transition for the signed package repository;
+  broader ARM desktop update parity beyond the retained compatibility holds.
+- Complete encrypted retained-candidate and approved-provider activation tests.
+  Kernel hooks, retained sets and different-ABI VM rollback now exist; automatic
+  pruning, legacy retirement and complete interruption recovery remain open.
 - Correct corresponding-source delivery and per-payload firmware licensing review for distribution.
-- End-to-end Secure Boot validation for this boot chain.
 - Snapshot boot selection/restore and factory reset: explicitly blocked in this profile. Snapshot creation alone must not be advertised as full recovery parity.
 - Hibernation/resume: deferred. Encrypted deferred owner provisioning is rejected before disk work.
 - Physical ASUS testing and broader panel/model coverage.
@@ -257,7 +310,7 @@ Before treating this as an officially maintained distribution, the main gaps are
 
 A useful first upstream slice would be architecture-aware Quattro boot finalization and ARM keyring provisioning, followed by separately reviewable hardware packages. The working ISO is a reference and test vehicle; the goal is to make these changes small enough, well-owned enough and reproducible enough that maintaining Snapdragon support does not depend on this original workspace.
 
-## Local v0.1.1 follow-up
+## Historical v0.1.1 follow-up
 
 The HP RGB camera now passes physical capture after reboot with a user-confirmed
 usable preview. Its missing sensor driver and board description are packaged
@@ -265,7 +318,7 @@ in `packages/hp-camera/`; see [camera bring-up](docs/hp-camera-status.md).
 The [v0.1.1 candidate](docs/snapdragon-v0.1.1.md) includes that support, both
 machines' camera userspace and the matched Lenovo cDSP firmware used in the
 ThinkPad NPU test. It retains the existing HP, ThinkPad and ASUS additions.
-This work remains local pending explicit permission to push.
+Those hardware additions were carried forward into v0.1.2 and v0.2.0.
 
 HP EC access was identified from recovered firmware tables and a single
 hotkey-enable register read succeeded. Its enable bit was already set.

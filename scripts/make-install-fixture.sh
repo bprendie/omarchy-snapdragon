@@ -3,6 +3,8 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 project_root=$PWD
 iso=${OMA_SNAP_TEST_ISO:-dist/oma-snap-installer-arm64.iso}
+encrypted=${OMA_SNAP_VM_ENCRYPT:-0}
+[[ $encrypted == 0 || $encrypted == 1 ]] || { echo 'OMA_SNAP_VM_ENCRYPT must be 0 or 1' >&2; exit 1; }
 [[ $iso =~ ^dist/[A-Za-z0-9._-]+[.]iso$ ]] || { echo 'Fixture ISO must be directly in dist/' >&2; exit 1; }
 export OMARCHY_INTEGRATION_ISO="$project_root/$iso"
 # Reuse upstream's actual archinstall/cidata fixture generator, with ARM fields.
@@ -26,5 +28,20 @@ jq '.bootloader_config.bootloader = "Grub" |
     .kernels = ["oma-snap-kernel-ubuntu"] |
     .mirror_config = null' "$configuration" > "$configuration.arm"
 mv "$configuration.arm" "$configuration"
+if [[ $encrypted == 1 ]]; then
+  # Public disposable-VM passphrase; never used for a physical installation.
+  jq '.disk_config.disk_encryption = {
+      encryption_type: "luks", lvm_volumes: [], iter_time: 2000,
+      partitions: [.disk_config.device_modifications[].partitions[] |
+        select(.fs_type == "btrfs") | .obj_id],
+      encryption_password: "omarchy-vm-only"
+    }' "$configuration" > "$configuration.encrypted"
+  mv "$configuration.encrypted" "$configuration"
+  credentials="$BASE_DIR/cidata/user_credentials.json"
+  jq '.encryption_password = "omarchy-vm-only"' "$credentials" > "$credentials.encrypted"
+  mv "$credentials.encrypted" "$credentials"
+  echo true > "$BASE_DIR/cidata/user_encrypt_installation.txt"
+  mcopy -o -i "$CIDATA_IMG" "$credentials" "$BASE_DIR/cidata/user_encrypt_installation.txt" ::/
+fi
 mcopy -o -i "$CIDATA_IMG" "$configuration" ::/user_configuration.json
 printf 'Disposable VM fixture only: %s\n' "$CIDATA_IMG"

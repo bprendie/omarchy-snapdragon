@@ -1,0 +1,14 @@
+diff --git a/bin/omarchy-update-orphan-pkgs b/bin/omarchy-update-orphan-pkgs
+--- a/bin/omarchy-update-orphan-pkgs
++++ b/bin/omarchy-update-orphan-pkgs
+@@ -5,7 +5,9 @@
+ 
+ set -e
+ 
+-mapfile -t orphans < <(pacman -Qtdq 2>/dev/null || true)
++# Retained hardware packages require coordinated boot-entry retirement.
++mapfile -t orphans < <(pacman -Qtdq 2>/dev/null |
++  grep -Ev '^oma-snap-set-[a-f0-9]{64}$' || true)
+ (( ${#orphans[@]} )) || exit 0
+ 
+ echo -e "\e[32m\nOrphan system packages\e[0m"

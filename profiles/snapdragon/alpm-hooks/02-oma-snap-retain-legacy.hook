@@ -1,0 +1,19 @@
+[Trigger]
+Operation = Remove
+Operation = Upgrade
+Type = Package
+Target = oma-snap-kernel-ubuntu
+Target = oma-snap-camera-hp
+Target = oma-snap-audio-hp
+Target = oma-snap-firmware-ubuntu
+Target = oma-snap-firmware-hp
+Target = oma-snap-firmware-t14s-npu
+Target = oma-snap-firmware-asus-a14
+Target = oma-snap-boot
+
+[Action]
+Description = Protecting the released Snapdragon fallback boot...
+When = PreTransaction
+Exec = /usr/bin/oma-snap-kernel-retain --legacy
+AbortOnFail
+NeedsTargets

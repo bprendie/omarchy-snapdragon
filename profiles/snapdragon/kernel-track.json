@@ -1,0 +1,9 @@
+{
+  "archive": "https://archive.ubuntu.com/ubuntu",
+  "release": "resolute",
+  "architecture": "arm64",
+  "meta_package": "linux-generic",
+  "keyring": "/usr/share/keyrings/ubuntu-archive-keyring.gpg",
+  "signer": "F6ECB3762474EDA9D21B7022871920D1991BC93C",
+  "max_update_age_hours": 168
+}

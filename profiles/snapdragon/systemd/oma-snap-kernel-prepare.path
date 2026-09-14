@@ -1,0 +1,11 @@
+[Unit]
+Description=Watch for pending Snapdragon boot preparation
+After=local-fs.target
+
+[Path]
+PathExistsGlob=/var/lib/oma-snap/jobs/pending/*.json
+PathExistsGlob=/var/lib/oma-snap/jobs/running/*.json
+Unit=oma-snap-kernel-prepare.service
+
+[Install]
+WantedBy=multi-user.target

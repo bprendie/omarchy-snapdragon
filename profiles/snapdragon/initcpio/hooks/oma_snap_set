@@ -1,0 +1,45 @@
+#!/usr/bin/ash
+# The selected identity is embedded in this initramfs, not taken from the root
+# filesystem's newest package or inferred from uname (which revisions can share).
+oma_snap_set_fail() {
+    err "Snapdragon boot-set selection failed: $*"
+    launch_interactive_shell --exec
+    exit 1
+}
+
+run_latehook() {
+    local set_id release entry_id extra base kind source target
+    [ -f /etc/oma-snap/boot-set ] || oma_snap_set_fail 'missing embedded identity'
+    {
+        IFS= read -r set_id || oma_snap_set_fail 'missing set ID'
+        IFS= read -r release || oma_snap_set_fail 'missing kernel release'
+        IFS= read -r entry_id || oma_snap_set_fail 'missing boot entry ID'
+        if IFS= read -r extra; then oma_snap_set_fail 'extra identity data'; fi
+    } < /etc/oma-snap/boot-set
+    [ "${#set_id}" = 64 ] || oma_snap_set_fail 'invalid set ID length'
+    case "$set_id" in *[!a-f0-9]*) oma_snap_set_fail 'invalid set ID';; esac
+    [ "${#entry_id}" = 64 ] || oma_snap_set_fail 'invalid boot entry ID length'
+    case "$entry_id" in *[!a-f0-9]*) oma_snap_set_fail 'invalid boot entry ID';; esac
+    [ "$release" = "$(uname -r)" ] || oma_snap_set_fail 'running kernel differs from initramfs'
+    case "$release" in ''|*[!a-zA-Z0-9.+_-]*) oma_snap_set_fail 'invalid release';; esac
+    base="/new_root/usr/lib/oma-snap/sets/$set_id"
+    [ "$(readlink -f "$base")" = "$base" ] || oma_snap_set_fail 'substituted set directory'
+    [ -f "$base/set.json" ] || oma_snap_set_fail 'retained set is missing'
+    # Validate both mounts before modifying either. Staging creates the empty
+    # mountpoints; initramfs must also work with a read-only root filesystem.
+    for kind in modules firmware; do
+        source="$base/$kind/$release"
+        target="/new_root/usr/lib/$kind/$release"
+        [ -d "$source" ] && [ "$(readlink -f "$source")" = "$source" ] || oma_snap_set_fail "invalid $kind source"
+        [ -d "$target" ] && [ "$(readlink -f "$target")" = "$target" ] || oma_snap_set_fail "missing or substituted $kind mountpoint"
+    done
+    for kind in modules firmware; do
+        source="$base/$kind/$release"
+        target="/new_root/usr/lib/$kind/$release"
+        mount -o bind "$source" "$target" || oma_snap_set_fail "$kind bind mount"
+        mount -o remount,bind,ro "$target" || oma_snap_set_fail "$kind read-only remount"
+    done
+    mkdir -p /run/oma-snap || oma_snap_set_fail 'runtime state directory'
+    printf '%s\n' "$set_id" > /run/oma-snap/booted-set || oma_snap_set_fail 'runtime identity record'
+    printf '%s\n' "$entry_id" > /run/oma-snap/booted-entry || oma_snap_set_fail 'runtime boot entry record'
+}

@@ -1,0 +1,19 @@
+diff --git a/bin/omarchy-refresh-pacman b/bin/omarchy-refresh-pacman
+--- a/bin/omarchy-refresh-pacman
++++ b/bin/omarchy-refresh-pacman
+@@ -2,6 +2,8 @@
+ 
+ # omarchy:summary=Overwrite the package configuration for /etc/pacman with the Omarchy default of using its dedicated mirrors and repositories, then update all packages.
+ # omarchy:requires-sudo=true
++
++set -euo pipefail
+ 
+ sudo cp -f /etc/pacman.conf /etc/pacman.conf.bak
+ sudo cp -f /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+@@ -24,3 +26,6 @@
+ 
+ # Reset all package DBs and then update
+ sudo env OMARCHY_UPDATE_PACMAN=1 pacman -Syyuu --noconfirm
++
++# Channel changes can start another transaction immediately after this returns.
++omarchy-update-snapdragon-kernel

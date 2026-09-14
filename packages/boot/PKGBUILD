@@ -1,6 +1,6 @@
 pkgname=oma-snap-boot
 pkgver=0.1.0
-pkgrel=6
+pkgrel=7
 pkgdesc='Snapdragon boot finalization for the Quattro ARM installer prototype'
 arch=('aarch64')
 license=('custom')

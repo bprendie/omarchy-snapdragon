@@ -245,10 +245,9 @@ index d17cf2d..c5d5e3e 100644
 -run_logged "$OMARCHY_INSTALL/hardware/speaker-tuning.sh"
 +# Speaker tuning is deferred until the T14s audio baseline is verified.
  run_logged "$OMARCHY_INSTALL/hardware/pacman.sh"
-diff --git i/install/omarchy-base.packages w/install/omarchy-base.packages
-index c5013ba..9afefc0 100644
---- i/install/omarchy-base.packages
-+++ w/install/omarchy-base.packages
+diff --git a/install/omarchy-base.packages b/install/omarchy-base.packages
+--- a/install/omarchy-base.packages
++++ b/install/omarchy-base.packages
 @@ -1,9 +1,5 @@
 -# Omarchy core package list pacstrapped by the ISO.
 -# The ISO builder also reads this file when constructing the offline mirror.
@@ -259,7 +258,7 @@ index c5013ba..9afefc0 100644
  avahi
  bash-completion
  bat
-@@ -24,7 +20,6 @@ docker
+@@ -24,7 +20,6 @@
  docker-buildx
  docker-compose
  dosfstools
@@ -267,7 +266,7 @@ index c5013ba..9afefc0 100644
  dua-cli
  evince
  exfatprogs
-@@ -88,16 +83,13 @@ noto-fonts
+@@ -88,16 +83,13 @@
  noto-fonts-cjk
  noto-fonts-emoji
  nss-mdns
@@ -285,7 +284,7 @@ index c5013ba..9afefc0 100644
  plocate
  plymouth
  postgresql-libs
-@@ -105,7 +97,6 @@ power-profiles-daemon
+@@ -105,7 +97,6 @@
  python-gobject
  python-poetry-core
  ttfx
@@ -293,7 +292,7 @@ index c5013ba..9afefc0 100644
  qrencode
  qt6-imageformats
  quickshell
-@@ -148,3 +139,21 @@ yay
+@@ -148,3 +139,25 @@
  yt-dlp
  zbar
  zoxide
@@ -305,12 +304,16 @@ index c5013ba..9afefc0 100644
 +cryptsetup
 +efibootmgr
 +grub
++gst-plugin-libcamera
 +hyprtoolkit
++libcamera
++libcamera-tools
 +mesa
 +nodejs
 +omarchy-keyring
 +pipewire
 +pipewire-alsa
++pipewire-libcamera
 +pipewire-pulse
 +python
 +snapper

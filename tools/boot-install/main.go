@@ -149,5 +149,6 @@ menuentry 'Firmware settings' { fwsetup }
 	if *fallback {
 		fail(copyFile(filepath.Join(espRoot, "EFI/oma-snap/grubaa64.efi"), filepath.Join(espRoot, "EFI/BOOT/BOOTAA64.EFI")))
 	}
+	fail(initializeProvider(*target, *esp, run))
 	fmt.Println("Boot payload installed; existing firmware boot order unchanged.")
 }

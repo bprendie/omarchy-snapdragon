@@ -1,0 +1,11 @@
+[Unit]
+Description=Prepare queued Snapdragon boot entries
+ConditionDirectoryNotEmpty=|/var/lib/oma-snap/jobs/pending
+ConditionDirectoryNotEmpty=|/var/lib/oma-snap/jobs/running
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/oma-snap-kernel-queue --process
+TimeoutStartSec=1h

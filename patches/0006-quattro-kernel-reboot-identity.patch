@@ -1,0 +1,44 @@
+diff --git a/bin/omarchy-update-restart b/bin/omarchy-update-restart
+--- a/bin/omarchy-update-restart
++++ b/bin/omarchy-update-restart
+@@ -8,19 +8,28 @@
+   gum confirm "$1" && { omarchy-system-reboot; exit 0; }
+ }
+ 
+-running_kernel=$(uname -r)
+-kernel_updated=true
+-
+-for kernel in /usr/lib/modules/*/vmlinuz; do
+-  if [[ -f $kernel ]] && pacman -Qo "$kernel" &>/dev/null; then
+-    installed_kernel=$(basename "$(dirname "$kernel")")
+-
+-    if [[ $installed_kernel == $running_kernel ]]; then
+-      kernel_updated=false
+-      break
++if command -v oma-snap-boot-publish >/dev/null; then
++  boot_status=$(sudo oma-snap-boot-publish --reboot-status --wait-lock=30m) || exit 1
++  case "$boot_status" in
++    required) kernel_updated=true ;;
++    current) kernel_updated=false ;;
++    *) echo "Unexpected Snapdragon boot status: $boot_status" >&2; exit 1 ;;
++  esac
++else
++  running_kernel=$(uname -r)
++  kernel_updated=true
++
++  for kernel in /usr/lib/modules/*/vmlinuz; do
++    if [[ -f $kernel ]] && pacman -Qo "$kernel" &>/dev/null; then
++      installed_kernel=$(basename "$(dirname "$kernel")")
++
++      if [[ $installed_kernel == $running_kernel ]]; then
++        kernel_updated=false
++        break
++      fi
+     fi
+-  fi
+-done
++  done
++fi
+ 
+ if [[ $kernel_updated == "true" ]]; then
+   confirm_reboot "Linux kernel has been updated. Reboot?"

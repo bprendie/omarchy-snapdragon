@@ -13,20 +13,27 @@ The goal is to preserve as much of **stock Omarchy Quattro** as possible, contri
 For architecture, kernel extraction, ARM packaging, testing and remaining work,
 see the [maintainer handoff](maintainer-handoff.md).
 
+**Testing release: v0.2.0.** It adds the retained-kernel update
+pipeline and carries forward the v0.1.2 hardware support. The owner confirmed a
+successful HP installation, direct cameras on HP and ThinkPad, and an online Omarchy package update after connecting to Wi-Fi. See [release notes](docs/snapdragon-v0.2.0.md) and
+[what changed for maintainers](docs/v0.2-maintainability.md).
+
 ## What it installs
 
 A native ARM64 Omarchy desktop using **Arch Linux ARM userspace, Ubuntu's Snapdragon-capable kernel and firmware, and the stock-derived Quattro installer**. Quattro handles the installation flow, disk configuration, encryption, packages and user setup. This repository adds the hardware packages, early boot drivers and boot finalization needed for Snapdragon machines.
 
-Published image: **omarchy-snapdragon-v0.1.2.iso** — [download v0.1.2](https://github.com/bprendie/omarchy-snapdragon/releases/tag/v0.1.2) (7.50 GB), with a [SHA-256 checksum](omarchy-snapdragon-v0.1.2.iso.sha256). See the [release notes](docs/snapdragon-v0.1.2.md) for exact versions and validation.
+Published testing image: **omarchy-snapdragon-v0.2.0.iso** — [download v0.2.0](https://github.com/bprendie/omarchy-snapdragon/releases/tag/v0.2.0) (8.02 GB), with a [SHA-256 checksum](omarchy-snapdragon-v0.2.0.iso.sha256). See the [release notes](docs/snapdragon-v0.2.0.md) for versions, physical results and remaining validation.
 
-GitHub release assets have a 2 GiB per-file limit. Download all four
-`omarchy-snapdragon-v0.1.2.iso.part-*` files and the ISO checksum from the release,
-then reconstruct the original image:
+Download all four `omarchy-snapdragon-v0.2.0.iso.part-*` files and the ISO
+checksum from the release, then reconstruct the original image:
 
 ```bash
-cat omarchy-snapdragon-v0.1.2.iso.part-{00,01,02,03} > omarchy-snapdragon-v0.1.2.iso
-sha256sum -c omarchy-snapdragon-v0.1.2.iso.sha256
+cat omarchy-snapdragon-v0.2.0.iso.part-{00,01,02,03} > omarchy-snapdragon-v0.2.0.iso
+sha256sum -c omarchy-snapdragon-v0.2.0.iso.sha256
 ```
+
+The ISO is published as split release assets; build images, caches and VMs are
+not part of the Git source history.
 
 ## Hardware status
 
@@ -52,7 +59,7 @@ Existing ThinkPad and HP encrypted-unlock, audio, Wi-Fi and other fixes are reta
 
 | Source | Contribution to this project |
 | --- | --- |
-| [Omarchy](https://github.com/omacom/omarchy), [Quattro installer](https://github.com/omacom/omarchy-iso) and [Omarchy packages](https://github.com/omacom/omarchy-pkgs) | Desktop, installer orchestration, package selection, offline mirror workflow and user setup. The current image packages Omarchy 4.0.3-1.4 with targeted ARM changes. |
+| [Omarchy](https://github.com/omacom/omarchy), [Quattro installer](https://github.com/omacom/omarchy-iso) and [Omarchy packages](https://github.com/omacom/omarchy-pkgs) | Desktop, installer orchestration, package selection, offline mirror workflow and user setup. The current image packages Omarchy 4.0.3-1.9 with targeted ARM changes. |
 | [Arch Linux ARM](https://archlinuxarm.org/) | Native ARM64 base system, package repositories and signing keyring. Additional desktop packages come from Omarchy's ARM package repository. |
 | [Ubuntu 26.04 ARM64](https://cdimage.ubuntu.com/releases/26.04/release/) | Initial hardware/firmware baseline from the verified 26.04.1 desktop ISO. The current kernel and matching modules come from authenticated Ubuntu update packages: **7.0.0-31-generic**, package version **7.0.0-31.31**. These are repackaged for Arch without running Debian maintainer scripts. |
 | [Ubuntu Stubble](https://github.com/ubuntu/stubble) | The boot stub in Ubuntu's kernel image selects an embedded device tree for the machine. We retain the wrapped kernel image unchanged. |
@@ -70,18 +77,12 @@ Exact source revisions and input checksums are in [manifests/](manifests/), incl
 
 The current build requires a prepared Linux workspace with Docker, Go, Python 3, device-tree-compiler (fdtget), Git, GnuPG, xorriso and ARM64 execution through QEMU/binfmt. The scripts depend on retained inputs, an ARM build container and staged installer roots; this is not yet a one-command build from a clean checkout. See [reproducibility notes](docs/reproducibility.md).
 
-Prepare the camera and firmware inputs described in the [v0.1.1 notes](docs/snapdragon-v0.1.1.md), then, from that prepared workspace:
+For the current provider-based assembly procedure and required inputs, see the
+[maintainer handoff](maintainer-handoff.md) and
+[v0.2.0 notes](docs/snapdragon-v0.2.0.md). Verify the resulting image with:
 
 ```bash
-bash scripts/build-hp-hotkeys-package.sh
-bash scripts/build-snapdragon-installer.sh
-bash scripts/verify-snapdragon-offline.sh
-```
-
-The builder writes the versioned ISO at the repository root and refuses to overwrite an existing image or staging tree. Verify it with:
-
-```bash
-sha256sum -c omarchy-snapdragon-v0.1.2.iso.sha256
+sha256sum -c omarchy-snapdragon-v0.2.0.iso.sha256
 ```
 
 Build intermediates, old images, VMs, downloaded inputs and private target data stay outside Git. The root release ISO and checksum are explicitly allowed. Source recipes, patches, provenance and technical documentation remain available for review and upstream collaboration.
