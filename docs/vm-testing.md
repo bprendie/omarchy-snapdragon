@@ -1,5 +1,10 @@
 # Local ARM installer testing
 
+For the expanded developer handoff, including build environments, the test-suite
+loop, Limine snapshot fixtures and current limitations, see the
+[ARM VM testing guide](../arm-vm-testing-guide.md). The examples below retain
+their original historical installer paths.
+
 Only file-backed disposable disks are attached. The physical USB identified by
 the user as `/dev/sda` is reserved for a later hardware test and is not part of
 these commands. Re-identify it on the correct machine before any future write.

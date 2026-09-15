@@ -13,6 +13,10 @@ The goal is to preserve as much of **stock Omarchy Quattro** as possible, contri
 For architecture, kernel extraction, ARM packaging, testing and remaining work,
 see the [maintainer handoff](maintainer-handoff.md).
 
+For developers joining the Omarchy Dragon Project, the
+[ARM VM testing guide](arm-vm-testing-guide.md) explains the Docker/QEMU setup,
+component and installer fixtures, debugging loop, and snapshot-test lessons.
+
 **Physically tested X Elite baseline: v0.2.0.** It adds the retained-kernel update
 pipeline and carries forward the v0.1.2 hardware support. The owner confirmed a
 successful HP installation, direct cameras on HP and ThinkPad, and an online Omarchy package update after connecting to Wi-Fi. See [release notes](docs/snapdragon-v0.2.0.md) and
