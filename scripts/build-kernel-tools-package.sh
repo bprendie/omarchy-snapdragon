@@ -12,7 +12,7 @@ for tool in kernel-set boot-stage boot-publish kernel-retain kernel-queue kernel
   (cd "tools/$tool" && CGO_ENABLED=0 GOOS=linux GOARCH=arm64 \
     go build -trimpath -buildvcs=false -ldflags=-buildid= -o "$destination/oma-snap-$tool" .)
 done
-cp packages/kernel-tools/{PKGBUILD,kernel-tools.install,esp-path} "$dir/"
+cp packages/kernel-tools/{PKGBUILD,kernel-tools.install,esp-path,60-oma-snap-userns.conf} "$dir/"
 cp profiles/snapdragon/mkinitcpio-update.conf "$dir/"
 cp profiles/t14s-lcd/initcpio/oma_snap_qcom "$dir/oma_snap_qcom_update"
 cp profiles/snapdragon/initcpio/install/oma_snap_set "$dir/oma_snap_set_install"

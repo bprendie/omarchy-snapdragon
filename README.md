@@ -22,7 +22,22 @@ pipeline and carries forward the v0.1.2 hardware support. The owner confirmed a
 successful HP installation, direct cameras on HP and ThinkPad, and an online Omarchy package update after connecting to Wi-Fi. See [release notes](docs/snapdragon-v0.2.0.md) and
 [what changed for maintainers](docs/v0.2-maintainability.md).
 
-**Experimental release: v0.2.2 — ASUS A16 UX3607OA / Snapdragon X2.**
+**Maintenance release: v0.2.2-1.** Fixes Chromium failing to launch because
+the Ubuntu kernel restricts user namespaces without the corresponding AppArmor
+policy stack. The fix was tested on the physical HP with Chromium's renderer
+sandbox active. It is included in the live image and installed kernel-tools
+package, with build checks to retain it in subsequent releases. See
+[hotfix details](docs/snapdragon-v0.2.2-1.md) and
+[download v0.2.2-1](https://github.com/bprendie/omarchy-snapdragon/releases/tag/v0.2.2-1).
+The owner confirmed the HP browser fix works. Download its four ISO parts and
+checksum, then assemble and verify:
+
+```bash
+cat omarchy-snapdragon-v0.2.2-1.iso.part-{00,01,02,03} > omarchy-snapdragon-v0.2.2-1.iso
+sha256sum -c omarchy-snapdragon-v0.2.2-1.iso.sha256
+```
+
+**Published experimental release: v0.2.2 — ASUS A16 UX3607OA / Snapdragon X2.**
 [Download v0.2.2](https://github.com/bprendie/omarchy-snapdragon/releases/tag/v0.2.2).
 It moves from Ubuntu `7.0.0-31-generic` to Ubuntu Concept
 `7.2.0-18-qcom-x1e` (a **7.2-rc7** base), adds the exact A16 device tree,
@@ -31,9 +46,10 @@ power-domain support for display initialization. Omarchy remains 4.0.3 and the
 retained-kernel update architecture is preserved.
 
 The complete ISO reaches the Omarchy welcome screen in an ARM UEFI VM with
-zero failed services; all 976 offline installer packages resolve. **No physical
-machine has been validated on this new kernel.** HP and ThinkPad need regression
-testing, and v0.2.0 remains the physically tested baseline for those machines.
+zero failed services; all 976 offline installer packages resolve. The owner has
+since confirmed a fresh v0.2.2 HP installation boots and appears functional;
+the Chromium launch failure found there is fixed in v0.2.2-1. Full HP and ThinkPad
+regression testing remains open, and v0.2.0 remains the broader physically tested baseline.
 A VM cannot establish A16 feature parity.
 
 **A16 gaps:** the enabled webcam capture pipeline is missing. Wi-Fi, Bluetooth,

@@ -79,6 +79,10 @@ docker exec oma-snap-root pacman-key --gpgdir /output/snapdragon-v022/root/etc/p
 docker exec oma-snap-root pacman-key --gpgdir /output/snapdragon-v022/root/etc/pacman.d/gnupg --lsign-key "$key"
 # New live kernel and matching modules/firmware, separate from the legacy fallback.
 bash scripts/integrate-v022-live-kernel.sh "$name"
+docker run --rm --network none -v "$PWD:/project:ro" -v "$PWD/build:/work" oma-snap-builder:local \
+  install -Dm644 /project/packages/kernel-tools/60-oma-snap-userns.conf \
+  /work/snapdragon-v022/root/usr/lib/sysctl.d/60-oma-snap-userns.conf
+bash scripts/verify-userns-image.sh "$stage/root"
 docker run --rm --network none -v "$PWD/build:/work" oma-snap-builder:local bash -ec '
   stage=/work/snapdragon-v022
   rm "$stage/iso/oma_snap/aarch64/airootfs.sfs"

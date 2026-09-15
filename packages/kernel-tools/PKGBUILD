@@ -1,6 +1,6 @@
 pkgname=oma-snap-kernel-tools
 pkgver=0.2.2
-pkgrel=1
+pkgrel=2
 pkgdesc='Retained Snapdragon kernel preparation, boot selection and transaction tools'
 arch=('aarch64')
 license=('custom')
@@ -14,6 +14,7 @@ package() {
     install -Dm755 "$startdir/oma-snap-$tool" "$pkgdir/usr/bin/oma-snap-$tool"
   done
   install -Dm644 "$startdir/esp-path" "$pkgdir/etc/oma-snap/esp-path"
+  install -Dm644 "$startdir/60-oma-snap-userns.conf" "$pkgdir/usr/lib/sysctl.d/60-oma-snap-userns.conf"
   install -Dm644 "$startdir/mkinitcpio-update.conf" "$pkgdir/usr/share/oma-snap/kernel-update/mkinitcpio.conf"
   install -Dm755 "$startdir/oma_snap_qcom_update" "$pkgdir/usr/lib/initcpio/install/oma_snap_qcom_update"
   install -Dm755 "$startdir/oma_snap_set_install" "$pkgdir/usr/lib/initcpio/install/oma_snap_set"

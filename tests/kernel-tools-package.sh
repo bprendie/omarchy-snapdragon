@@ -18,6 +18,7 @@ done
 cmp profiles/snapdragon/alpm-hooks/60-depmod.hook "$scratch/etc/pacman.d/hooks/60-depmod.hook"
 cmp profiles/snapdragon/systemd/linux-modules-cleanup-oma-snap.conf "$scratch/usr/lib/systemd/system/linux-modules-cleanup.service.d/oma-snap.conf"
 cmp profiles/snapdragon/mkinitcpio-update.conf "$scratch/usr/share/oma-snap/kernel-update/mkinitcpio.conf"
+cmp packages/kernel-tools/60-oma-snap-userns.conf "$scratch/usr/lib/sysctl.d/60-oma-snap-userns.conf"
 cmp profiles/t14s-lcd/initcpio/oma_snap_qcom "$scratch/usr/lib/initcpio/install/oma_snap_qcom_update"
 cmp profiles/snapdragon/initcpio/hooks/oma_snap_set "$scratch/usr/lib/initcpio/hooks/oma_snap_set"
 cmp profiles/snapdragon/initcpio/install/oma_snap_set "$scratch/usr/lib/initcpio/install/oma_snap_set"
