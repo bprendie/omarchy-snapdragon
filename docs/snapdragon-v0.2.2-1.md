@@ -31,6 +31,12 @@ does not disable AppArmor as a whole. See the [diagnosis](chromium-userns-fix.md
   partitions. This is a focused repack of a hardware-booted baseline, not a new
   kernel validation. A fresh installation and reboot of the hotfix image have
   not yet been physically tested. ASUS hardware remains unvalidated.
+- The release ISO was rebuilt from the retained v0.2.2 baseline on 18 September
+  2026 after the cleanup migration. Its SHA-256 is
+  `e99a97e8d2f74c6e7b43b54b59dc58a06382fe8dc635561644de5cf8403c90bd`.
+  The earlier checksum was for a prior ISO replay; ISO metadata is not
+  byte-reproducible across build dates, while the payload and boot assets remain
+  unchanged.
 
 Output: `omarchy-snapdragon-v0.2.2-1.iso` and its `.sha256` file in the repository
 root. [GitHub release v0.2.2-1](https://github.com/bprendie/omarchy-snapdragon/releases/tag/v0.2.2-1)
