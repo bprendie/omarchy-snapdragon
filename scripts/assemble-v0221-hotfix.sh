@@ -16,7 +16,7 @@ gpg --homedir "$scratch" --batch --export "$key" > "$scratch/pinned.gpg"
 gpgv --keyring "$scratch/pinned.gpg" "build/$repository/SHA256SUMS.sig" "build/$repository/SHA256SUMS"
 (cd "build/$repository" && sha256sum -c SHA256SUMS)
 cmp build/kernel-repo-v022-a16-testing/approval.json "build/$repository/approval.json"
-bsdtar -xOf "build/$repository/oma-snap-kernel-tools-0.2.2-2-aarch64.pkg.tar.xz" \
+tar -xOf "build/$repository/oma-snap-kernel-tools-0.2.2-2-aarch64.pkg.tar.xz" \
   usr/lib/sysctl.d/60-oma-snap-userns.conf | cmp - packages/kernel-tools/60-oma-snap-userns.conf
 sed 's/v0\.2\.2 -/v0.2.2-1 -/' "$stage/grub.cfg" > "$stage/grub-hotfix.cfg"
 docker run --rm --network none -v "$PWD:/repo:ro" -v "$PWD/build:/work" oma-snap-builder:local bash -ec '
