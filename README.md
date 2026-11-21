@@ -148,4 +148,4 @@ Hardware reports are especially useful: include the exact model/SKU, image check
 
 ## WEAZL and WE4ZL branding
 
-Forking or reusing code does not grant permission to brand or market your own product with the WEAZL™ or WE4ZL™ wordmarks or the weazl head logo. See the [trademark and artwork notice](TRADEMARKS.md).
+Forking or reusing code does not grant permission to brand or market your own product with either the WEAZL™ or WE4ZL™ wordmark, the weazl head logo, or the tagline *Never Tax the Gig*™. See the [trademark and artwork notice](TRADEMARKS.md).
