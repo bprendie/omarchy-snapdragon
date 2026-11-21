@@ -8,4 +8,4 @@ You may truthfully identify the original project in credits, documentation, or a
 
 Except where an existing license or applicable law permits the use, obtain written permission before reproducing, adapting, distributing, or selling the weazl head artwork or stylized wordmark graphics. Preserve any attribution and license notices required for material you redistribute. This notice concerns only the WEAZL and WE4ZL branding and grants no additional software or artwork license.
 
-Direct permission requests to [Bob Prendergast (@bprendie)](https://github.com/bprendie).
+Direct permission requests to [Bob Prendergast (@we4zl)](https://github.com/we4zl).
